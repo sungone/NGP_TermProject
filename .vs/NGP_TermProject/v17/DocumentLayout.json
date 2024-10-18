@@ -5,6 +5,21 @@
     {
       "AbsoluteMoniker": "D:0:0:{C0616A85-DA4E-45AA-B7B8-8D975542D5A1}|Server\\Server.vcxproj|D:\\Files\\_Projects\\_University\\3_2 NGP\\NGP_TermProject\\Server\\Server.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{C0616A85-DA4E-45AA-B7B8-8D975542D5A1}|Server\\Server.vcxproj|solutionrelative:Server\\Server.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EF04C6C8-9B73-4F10-B29F-6B21635FE0D6}|Utility\\Utility.vcxproj|D:\\Files\\_Projects\\_University\\3_2 NGP\\NGP_TermProject\\Utility\\Packet.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{EF04C6C8-9B73-4F10-B29F-6B21635FE0D6}|Utility\\Utility.vcxproj|solutionrelative:Utility\\Packet.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EF04C6C8-9B73-4F10-B29F-6B21635FE0D6}|Utility\\Utility.vcxproj|D:\\Files\\_Projects\\_University\\3_2 NGP\\NGP_TermProject\\Utility\\Packet.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{EF04C6C8-9B73-4F10-B29F-6B21635FE0D6}|Utility\\Utility.vcxproj|solutionrelative:Utility\\Packet.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EF04C6C8-9B73-4F10-B29F-6B21635FE0D6}|Utility\\Utility.vcxproj|D:\\Files\\_Projects\\_University\\3_2 NGP\\NGP_TermProject\\Utility\\stdafx.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{EF04C6C8-9B73-4F10-B29F-6B21635FE0D6}|Utility\\Utility.vcxproj|solutionrelative:Utility\\stdafx.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.36.32532\\include\\vector||{3B902123-F8A7-4915-9F01-361F908088D0}|"
     }
   ],
   "DocumentGroupContainers": [
@@ -14,11 +29,51 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 4,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Packet.cpp",
+              "DocumentMoniker": "D:\\Files\\_Projects\\_University\\3_2 NGP\\NGP_TermProject\\Utility\\Packet.cpp",
+              "RelativeDocumentMoniker": "Utility\\Packet.cpp",
+              "ToolTip": "D:\\Files\\_Projects\\_University\\3_2 NGP\\NGP_TermProject\\Utility\\Packet.cpp",
+              "RelativeToolTip": "Utility\\Packet.cpp",
+              "ViewState": "AgIAAB0AAAAAAAAAAAAmwC4AAAAjAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-10-18T14:49:26.113Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
             {
               "$type": "Bookmark",
               "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "vector",
+              "DocumentMoniker": "D:\\Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.36.32532\\include\\vector",
+              "RelativeDocumentMoniker": "..\\..\\..\\..\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.36.32532\\include\\vector",
+              "ToolTip": "D:\\Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.36.32532\\include\\vector",
+              "RelativeToolTip": "..\\..\\..\\..\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.36.32532\\include\\vector",
+              "ViewState": "AgIAAEoHAAAAAAAAAAAmwFoHAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2024-10-18T16:10:28.804Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Packet.h",
+              "DocumentMoniker": "D:\\Files\\_Projects\\_University\\3_2 NGP\\NGP_TermProject\\Utility\\Packet.h",
+              "RelativeDocumentMoniker": "Utility\\Packet.h",
+              "ToolTip": "D:\\Files\\_Projects\\_University\\3_2 NGP\\NGP_TermProject\\Utility\\Packet.h",
+              "RelativeToolTip": "Utility\\Packet.h",
+              "ViewState": "AgIAABwAAAAAjsGxK64vwCgAAAALAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-10-18T14:50:12.911Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -28,9 +83,22 @@
               "RelativeDocumentMoniker": "Server\\Server.cpp",
               "ToolTip": "D:\\Files\\_Projects\\_University\\3_2 NGP\\NGP_TermProject\\Server\\Server.cpp",
               "RelativeToolTip": "Server\\Server.cpp",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAATAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAiAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2024-10-18T02:36:36.122Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "stdafx.h",
+              "DocumentMoniker": "D:\\Files\\_Projects\\_University\\3_2 NGP\\NGP_TermProject\\Utility\\stdafx.h",
+              "RelativeDocumentMoniker": "Utility\\stdafx.h",
+              "ToolTip": "D:\\Files\\_Projects\\_University\\3_2 NGP\\NGP_TermProject\\Utility\\stdafx.h",
+              "RelativeToolTip": "Utility\\stdafx.h",
+              "ViewState": "AgIAAA8AAAAAAAAAAAAAAB0AAAASAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-10-18T15:59:31.734Z",
               "EditorCaption": ""
             }
           ]

@@ -23,10 +23,11 @@
 #include <memory>
 #include <ranges>
 #include <functional>
-#include <numbers>
-#include <numeric>
 #include <string>
 #include <string_view>
+#include <iterator>
+#include <numbers>
+#include <numeric>
 #include <thread>
 
 #pragma comment(lib, "ws2_32") // ws2_32.lib ¸µÅ©

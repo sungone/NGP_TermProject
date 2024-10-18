@@ -2,10 +2,11 @@
 
 #include "stdafx.h"
 
+
 class Packet
 {
 public:
-	static unsigned long long int HEADER_SIZE;
+	using HEADER_TYPE = unsigned long long int;
 public:
 	std::vector<uint8_t> packetData;
 	int offset = 0;
@@ -37,8 +38,14 @@ public:
 
 	void PushData(const double& data);
 
-	template<class T, class = std::enable_if_t<std::is_base_of_v<std::input_iterator_tag, typename std::iterator_traits<T>::iterator_category>>>
-	void PushData(T begin, T end);
+	void PushData(std::string& data);
+
+	template<class T, class = std::enable_if_t<std::is_convertible_v<typename std::iterator_traits<T>::iterator_category, std::forward_iterator_tag>>>
+	void PushData(T begin, T end)
+	{
+		for (; begin != end; ++begin)
+			PushData(*begin);
+	}
 
 	void PushSize();
 
@@ -62,21 +69,49 @@ public:
 
 	void PopData(double& data);
 
-	template<class T>
-	T PopData();
+	void PopData(std::string& data);
 
-	template<class T>
-	T PeekData();
 
-	template<class T>
-	void PeekData(T& t);
+	template <class T>
+	T PopData()
+	{
+		T temp;
+		PopData(temp);
+		return temp;
+	}
+
+	template <class T>
+	T PeekData()
+	{
+		T temp;
+		int prevOffset = this->offset;
+		PopData(temp);
+		this->offset = prevOffset;
+		return temp;
+	}
+
+	template <class T>
+	void PeekData(T& t)
+	{
+		int prevOffset = this->offset;
+		PopData(t);
+		this->offset = prevOffset;
+	}
 
 	void PeekData(char* data, int offset, int& size);
 
 	void PopData(char* data, int offset, int& size);
 
 	template<class T, class = std::enable_if_t<std::is_base_of_v<std::input_iterator_tag, typename std::iterator_traits<T>::iterator_category>>>
-	void PopData(T iter, int& size);
+	void PopData(T iter, int& size)
+	{
+		for (int i = 0; i < size; i++)
+		{
+			*iter = PopData<T>();
+			offset += size;
+			++iter;
+		}
+	}
 
 	void Marking();
 
@@ -86,7 +121,7 @@ public:
 
 	int GetTotalSize() const;
 
-	int Offset();
+	int Offset(int setOffset = -1);
 
 	void CopyPeek(char* data, int offset, int& size);
 
@@ -99,4 +134,5 @@ public:
 	void RewindOffset(int size);
 
 	void GotoMarker();
+	void GotoBodyBegin();
 };
