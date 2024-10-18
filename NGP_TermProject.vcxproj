@@ -157,6 +157,11 @@
     <None Include="fragment.glsl" />
     <None Include="vertex.glsl" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="Utility\Utility.vcxproj">
+      <Project>{ef04c6c8-9b73-4f10-b29f-6b21635fe0d6}</Project>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
