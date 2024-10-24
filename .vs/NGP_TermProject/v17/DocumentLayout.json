@@ -1,22 +1,110 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "D:\\Files\\_Projects\\_University\\3_2 NGP\\NGP_TermProject\\",
+  "WorkspaceRootPath": "D:\\NGP_TermProject\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{C0616A85-DA4E-45AA-B7B8-8D975542D5A1}|Server\\Server.vcxproj|D:\\Files\\_Projects\\_University\\3_2 NGP\\NGP_TermProject\\Server\\Server.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{C0616A85-DA4E-45AA-B7B8-8D975542D5A1}|Server\\Server.vcxproj|solutionrelative:Server\\Server.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{C99835E2-297F-4EFD-96ED-0EF5EFD8B9DF}|NGP_TermProject.vcxproj|D:\\NGP_TermProject\\wall.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{C99835E2-297F-4EFD-96ED-0EF5EFD8B9DF}|NGP_TermProject.vcxproj|solutionrelative:wall.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{EF04C6C8-9B73-4F10-B29F-6B21635FE0D6}|Utility\\Utility.vcxproj|D:\\Files\\_Projects\\_University\\3_2 NGP\\NGP_TermProject\\Utility\\Packet.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "AbsoluteMoniker": "D:0:0:{C99835E2-297F-4EFD-96ED-0EF5EFD8B9DF}|NGP_TermProject.vcxproj|D:\\NGP_TermProject\\main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{C99835E2-297F-4EFD-96ED-0EF5EFD8B9DF}|NGP_TermProject.vcxproj|solutionrelative:main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C99835E2-297F-4EFD-96ED-0EF5EFD8B9DF}|NGP_TermProject.vcxproj|D:\\NGP_TermProject\\wall.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{C99835E2-297F-4EFD-96ED-0EF5EFD8B9DF}|NGP_TermProject.vcxproj|solutionrelative:wall.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C99835E2-297F-4EFD-96ED-0EF5EFD8B9DF}|NGP_TermProject.vcxproj|D:\\NGP_TermProject\\player.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{C99835E2-297F-4EFD-96ED-0EF5EFD8B9DF}|NGP_TermProject.vcxproj|solutionrelative:player.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C99835E2-297F-4EFD-96ED-0EF5EFD8B9DF}|NGP_TermProject.vcxproj|D:\\NGP_TermProject\\player.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{C99835E2-297F-4EFD-96ED-0EF5EFD8B9DF}|NGP_TermProject.vcxproj|solutionrelative:player.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C99835E2-297F-4EFD-96ED-0EF5EFD8B9DF}|NGP_TermProject.vcxproj|D:\\NGP_TermProject\\Map.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{C99835E2-297F-4EFD-96ED-0EF5EFD8B9DF}|NGP_TermProject.vcxproj|solutionrelative:Map.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C99835E2-297F-4EFD-96ED-0EF5EFD8B9DF}|NGP_TermProject.vcxproj|D:\\NGP_TermProject\\object.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{C99835E2-297F-4EFD-96ED-0EF5EFD8B9DF}|NGP_TermProject.vcxproj|solutionrelative:object.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C99835E2-297F-4EFD-96ED-0EF5EFD8B9DF}|NGP_TermProject.vcxproj|D:\\NGP_TermProject\\camera.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{C99835E2-297F-4EFD-96ED-0EF5EFD8B9DF}|NGP_TermProject.vcxproj|solutionrelative:camera.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C99835E2-297F-4EFD-96ED-0EF5EFD8B9DF}|NGP_TermProject.vcxproj|D:\\NGP_TermProject\\camera.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{C99835E2-297F-4EFD-96ED-0EF5EFD8B9DF}|NGP_TermProject.vcxproj|solutionrelative:camera.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C99835E2-297F-4EFD-96ED-0EF5EFD8B9DF}|NGP_TermProject.vcxproj|D:\\NGP_TermProject\\Map.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{C99835E2-297F-4EFD-96ED-0EF5EFD8B9DF}|NGP_TermProject.vcxproj|solutionrelative:Map.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C99835E2-297F-4EFD-96ED-0EF5EFD8B9DF}|NGP_TermProject.vcxproj|D:\\NGP_TermProject\\Image.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{C99835E2-297F-4EFD-96ED-0EF5EFD8B9DF}|NGP_TermProject.vcxproj|solutionrelative:Image.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C99835E2-297F-4EFD-96ED-0EF5EFD8B9DF}|NGP_TermProject.vcxproj|D:\\NGP_TermProject\\Image.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{C99835E2-297F-4EFD-96ED-0EF5EFD8B9DF}|NGP_TermProject.vcxproj|solutionrelative:Image.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C99835E2-297F-4EFD-96ED-0EF5EFD8B9DF}|NGP_TermProject.vcxproj|D:\\NGP_TermProject\\base.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{C99835E2-297F-4EFD-96ED-0EF5EFD8B9DF}|NGP_TermProject.vcxproj|solutionrelative:base.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C99835E2-297F-4EFD-96ED-0EF5EFD8B9DF}|NGP_TermProject.vcxproj|D:\\NGP_TermProject\\fragment.glsl||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{C99835E2-297F-4EFD-96ED-0EF5EFD8B9DF}|NGP_TermProject.vcxproj|solutionrelative:fragment.glsl||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C99835E2-297F-4EFD-96ED-0EF5EFD8B9DF}|NGP_TermProject.vcxproj|D:\\NGP_TermProject\\FileIn.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{C99835E2-297F-4EFD-96ED-0EF5EFD8B9DF}|NGP_TermProject.vcxproj|solutionrelative:FileIn.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C99835E2-297F-4EFD-96ED-0EF5EFD8B9DF}|NGP_TermProject.vcxproj|D:\\NGP_TermProject\\base.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{C99835E2-297F-4EFD-96ED-0EF5EFD8B9DF}|NGP_TermProject.vcxproj|solutionrelative:base.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EF04C6C8-9B73-4F10-B29F-6B21635FE0D6}|Utility\\Utility.vcxproj|D:\\NGP_TermProject\\Utility\\Packet.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{EF04C6C8-9B73-4F10-B29F-6B21635FE0D6}|Utility\\Utility.vcxproj|solutionrelative:Utility\\Packet.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{EF04C6C8-9B73-4F10-B29F-6B21635FE0D6}|Utility\\Utility.vcxproj|D:\\Files\\_Projects\\_University\\3_2 NGP\\NGP_TermProject\\Utility\\Packet.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{EF04C6C8-9B73-4F10-B29F-6B21635FE0D6}|Utility\\Utility.vcxproj|solutionrelative:Utility\\Packet.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{C0616A85-DA4E-45AA-B7B8-8D975542D5A1}|Server\\Server.vcxproj|D:\\NGP_TermProject\\Server\\Server.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{C0616A85-DA4E-45AA-B7B8-8D975542D5A1}|Server\\Server.vcxproj|solutionrelative:Server\\Server.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{EF04C6C8-9B73-4F10-B29F-6B21635FE0D6}|Utility\\Utility.vcxproj|D:\\Files\\_Projects\\_University\\3_2 NGP\\NGP_TermProject\\Utility\\stdafx.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{EF04C6C8-9B73-4F10-B29F-6B21635FE0D6}|Utility\\Utility.vcxproj|solutionrelative:Utility\\stdafx.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{C99835E2-297F-4EFD-96ED-0EF5EFD8B9DF}|NGP_TermProject.vcxproj|D:\\NGP_TermProject\\stdafx.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{C99835E2-297F-4EFD-96ED-0EF5EFD8B9DF}|NGP_TermProject.vcxproj|solutionrelative:stdafx.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C99835E2-297F-4EFD-96ED-0EF5EFD8B9DF}|NGP_TermProject.vcxproj|D:\\NGP_TermProject\\stb_image.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{C99835E2-297F-4EFD-96ED-0EF5EFD8B9DF}|NGP_TermProject.vcxproj|solutionrelative:stb_image.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C99835E2-297F-4EFD-96ED-0EF5EFD8B9DF}|NGP_TermProject.vcxproj|D:\\NGP_TermProject\\shader.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{C99835E2-297F-4EFD-96ED-0EF5EFD8B9DF}|NGP_TermProject.vcxproj|solutionrelative:shader.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C99835E2-297F-4EFD-96ED-0EF5EFD8B9DF}|NGP_TermProject.vcxproj|D:\\NGP_TermProject\\Light.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{C99835E2-297F-4EFD-96ED-0EF5EFD8B9DF}|NGP_TermProject.vcxproj|solutionrelative:Light.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C99835E2-297F-4EFD-96ED-0EF5EFD8B9DF}|NGP_TermProject.vcxproj|D:\\NGP_TermProject\\FileIn.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{C99835E2-297F-4EFD-96ED-0EF5EFD8B9DF}|NGP_TermProject.vcxproj|solutionrelative:FileIn.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C99835E2-297F-4EFD-96ED-0EF5EFD8B9DF}|NGP_TermProject.vcxproj|D:\\NGP_TermProject\\object.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{C99835E2-297F-4EFD-96ED-0EF5EFD8B9DF}|NGP_TermProject.vcxproj|solutionrelative:object.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C99835E2-297F-4EFD-96ED-0EF5EFD8B9DF}|NGP_TermProject.vcxproj|D:\\NGP_TermProject\\Light.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{C99835E2-297F-4EFD-96ED-0EF5EFD8B9DF}|NGP_TermProject.vcxproj|solutionrelative:Light.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C99835E2-297F-4EFD-96ED-0EF5EFD8B9DF}|NGP_TermProject.vcxproj|D:\\NGP_TermProject\\shaders.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{C99835E2-297F-4EFD-96ED-0EF5EFD8B9DF}|NGP_TermProject.vcxproj|solutionrelative:shaders.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.36.32532\\include\\vector||{3B902123-F8A7-4915-9F01-361F908088D0}|"
@@ -29,77 +117,355 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 5,
           "Children": [
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "Packet.cpp",
-              "DocumentMoniker": "D:\\Files\\_Projects\\_University\\3_2 NGP\\NGP_TermProject\\Utility\\Packet.cpp",
-              "RelativeDocumentMoniker": "Utility\\Packet.cpp",
-              "ToolTip": "D:\\Files\\_Projects\\_University\\3_2 NGP\\NGP_TermProject\\Utility\\Packet.cpp",
-              "RelativeToolTip": "Utility\\Packet.cpp",
-              "ViewState": "AgIAAB0AAAAAAAAAAAAmwC4AAAAjAAAAAAAAAA==",
+              "Title": "main.cpp",
+              "DocumentMoniker": "D:\\NGP_TermProject\\main.cpp",
+              "RelativeDocumentMoniker": "main.cpp",
+              "ToolTip": "D:\\NGP_TermProject\\main.cpp",
+              "RelativeToolTip": "main.cpp",
+              "ViewState": "AQIAAFUBAAAAAAAAAAAAAGQBAAAxAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-10-18T14:49:26.113Z",
-              "IsPinned": true,
+              "WhenOpened": "2024-10-18T17:59:16.215Z",
               "EditorCaption": ""
             },
             {
-              "$type": "Bookmark",
-              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Map.h",
+              "DocumentMoniker": "D:\\NGP_TermProject\\Map.h",
+              "RelativeDocumentMoniker": "Map.h",
+              "ToolTip": "D:\\NGP_TermProject\\Map.h",
+              "RelativeToolTip": "Map.h",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA4AAAAJAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-10-24T08:12:18.335Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "vector",
-              "DocumentMoniker": "D:\\Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.36.32532\\include\\vector",
-              "RelativeDocumentMoniker": "..\\..\\..\\..\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.36.32532\\include\\vector",
-              "ToolTip": "D:\\Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.36.32532\\include\\vector",
-              "RelativeToolTip": "..\\..\\..\\..\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.36.32532\\include\\vector",
-              "ViewState": "AgIAAEoHAAAAAAAAAAAmwFoHAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2024-10-18T16:10:28.804Z",
+              "DocumentIndex": 7,
+              "Title": "camera.cpp",
+              "DocumentMoniker": "D:\\NGP_TermProject\\camera.cpp",
+              "RelativeDocumentMoniker": "camera.cpp",
+              "ToolTip": "D:\\NGP_TermProject\\camera.cpp",
+              "RelativeToolTip": "camera.cpp",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABoAAAAWAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-10-18T17:58:52.728Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "object.h",
+              "DocumentMoniker": "D:\\NGP_TermProject\\object.h",
+              "RelativeDocumentMoniker": "object.h",
+              "ToolTip": "D:\\NGP_TermProject\\object.h",
+              "RelativeToolTip": "object.h",
+              "ViewState": "AQIAADkAAAAAAAAAAAAAAAQAAAAUAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-10-18T17:59:18.196Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "Packet.h",
-              "DocumentMoniker": "D:\\Files\\_Projects\\_University\\3_2 NGP\\NGP_TermProject\\Utility\\Packet.h",
-              "RelativeDocumentMoniker": "Utility\\Packet.h",
-              "ToolTip": "D:\\Files\\_Projects\\_University\\3_2 NGP\\NGP_TermProject\\Utility\\Packet.h",
-              "RelativeToolTip": "Utility\\Packet.h",
-              "ViewState": "AgIAABwAAAAAjsGxK64vwCgAAAALAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-10-18T14:50:12.911Z",
+              "Title": "wall.cpp",
+              "DocumentMoniker": "D:\\NGP_TermProject\\wall.cpp",
+              "RelativeDocumentMoniker": "wall.cpp",
+              "ToolTip": "D:\\NGP_TermProject\\wall.cpp",
+              "RelativeToolTip": "wall.cpp",
+              "ViewState": "AQIAAMMAAAAAAAAAAAAswNYAAAAUAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-10-18T17:58:01.236Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "Server.cpp",
-              "DocumentMoniker": "D:\\Files\\_Projects\\_University\\3_2 NGP\\NGP_TermProject\\Server\\Server.cpp",
-              "RelativeDocumentMoniker": "Server\\Server.cpp",
-              "ToolTip": "D:\\Files\\_Projects\\_University\\3_2 NGP\\NGP_TermProject\\Server\\Server.cpp",
-              "RelativeToolTip": "Server\\Server.cpp",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAiAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-10-18T02:36:36.122Z",
+              "Title": "wall.h",
+              "DocumentMoniker": "D:\\NGP_TermProject\\wall.h",
+              "RelativeDocumentMoniker": "wall.h",
+              "ToolTip": "D:\\NGP_TermProject\\wall.h",
+              "RelativeToolTip": "wall.h",
+              "ViewState": "AQIAABcAAAAAAAAAAAAswCYAAAAzAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-10-18T17:59:27.592Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "player.h",
+              "DocumentMoniker": "D:\\NGP_TermProject\\player.h",
+              "RelativeDocumentMoniker": "player.h",
+              "ToolTip": "D:\\NGP_TermProject\\player.h",
+              "RelativeToolTip": "player.h",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAAJAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-10-18T17:59:46.608Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "stdafx.h",
-              "DocumentMoniker": "D:\\Files\\_Projects\\_University\\3_2 NGP\\NGP_TermProject\\Utility\\stdafx.h",
-              "RelativeDocumentMoniker": "Utility\\stdafx.h",
-              "ToolTip": "D:\\Files\\_Projects\\_University\\3_2 NGP\\NGP_TermProject\\Utility\\stdafx.h",
-              "RelativeToolTip": "Utility\\stdafx.h",
-              "ViewState": "AgIAAA8AAAAAAAAAAAAAAB0AAAASAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-10-18T15:59:31.734Z",
+              "Title": "player.cpp",
+              "DocumentMoniker": "D:\\NGP_TermProject\\player.cpp",
+              "RelativeDocumentMoniker": "player.cpp",
+              "ToolTip": "D:\\NGP_TermProject\\player.cpp",
+              "RelativeToolTip": "player.cpp",
+              "ViewState": "AQIAAFMAAAAAAAAAAIAwwGIAAAASAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-10-18T17:59:24.921Z",
               "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "camera.h",
+              "DocumentMoniker": "D:\\NGP_TermProject\\camera.h",
+              "RelativeDocumentMoniker": "camera.h",
+              "ToolTip": "D:\\NGP_TermProject\\camera.h",
+              "RelativeToolTip": "camera.h",
+              "ViewState": "AQIAADkAAAAAAAAAAAAAAEYAAAAKAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-10-18T17:58:53.396Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "Map.cpp",
+              "DocumentMoniker": "D:\\NGP_TermProject\\Map.cpp",
+              "RelativeDocumentMoniker": "Map.cpp",
+              "ToolTip": "D:\\NGP_TermProject\\Map.cpp",
+              "RelativeToolTip": "Map.cpp",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAGAAAAAdAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-10-18T17:59:16.696Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "Image.cpp",
+              "DocumentMoniker": "D:\\NGP_TermProject\\Image.cpp",
+              "RelativeDocumentMoniker": "Image.cpp",
+              "ToolTip": "D:\\NGP_TermProject\\Image.cpp",
+              "RelativeToolTip": "Image.cpp",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABMAAAALAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-10-18T17:59:08.415Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "Image.h",
+              "DocumentMoniker": "D:\\NGP_TermProject\\Image.h",
+              "RelativeDocumentMoniker": "Image.h",
+              "ToolTip": "D:\\NGP_TermProject\\Image.h",
+              "RelativeToolTip": "Image.h",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA8AAAAGAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-10-18T17:59:10.227Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "base.h",
+              "DocumentMoniker": "D:\\NGP_TermProject\\base.h",
+              "RelativeDocumentMoniker": "base.h",
+              "ToolTip": "D:\\NGP_TermProject\\base.h",
+              "RelativeToolTip": "base.h",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABEAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-10-18T17:55:30.149Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "base.cpp",
+              "DocumentMoniker": "D:\\NGP_TermProject\\base.cpp",
+              "RelativeDocumentMoniker": "base.cpp",
+              "ToolTip": "D:\\NGP_TermProject\\base.cpp",
+              "RelativeToolTip": "base.cpp",
+              "ViewState": "AQIAAE4AAAAAAAAAAAAAAE8AAAApAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-10-18T17:55:31.108Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "Packet.cpp",
+              "DocumentMoniker": "D:\\NGP_TermProject\\Utility\\Packet.cpp",
+              "RelativeDocumentMoniker": "Utility\\Packet.cpp",
+              "ToolTip": "D:\\NGP_TermProject\\Utility\\Packet.cpp",
+              "RelativeToolTip": "Utility\\Packet.cpp",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA8AAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-10-18T17:57:54.46Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "Server.cpp",
+              "DocumentMoniker": "D:\\NGP_TermProject\\Server\\Server.cpp",
+              "RelativeDocumentMoniker": "Server\\Server.cpp",
+              "ToolTip": "D:\\NGP_TermProject\\Server\\Server.cpp",
+              "RelativeToolTip": "Server\\Server.cpp",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABEAAABIAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-10-18T17:57:19.262Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "stdafx.h",
+              "DocumentMoniker": "D:\\NGP_TermProject\\stdafx.h",
+              "RelativeDocumentMoniker": "stdafx.h",
+              "ToolTip": "D:\\NGP_TermProject\\stdafx.h",
+              "RelativeToolTip": "stdafx.h",
+              "ViewState": "AQIAAAYAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-10-18T17:59:58.928Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "stb_image.h",
+              "DocumentMoniker": "D:\\NGP_TermProject\\stb_image.h",
+              "RelativeDocumentMoniker": "stb_image.h",
+              "ToolTip": "D:\\NGP_TermProject\\stb_image.h",
+              "RelativeToolTip": "stb_image.h",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-10-24T09:01:06.573Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "FileIn.cpp",
+              "DocumentMoniker": "D:\\NGP_TermProject\\FileIn.cpp",
+              "RelativeDocumentMoniker": "FileIn.cpp",
+              "ToolTip": "D:\\NGP_TermProject\\FileIn.cpp",
+              "RelativeToolTip": "FileIn.cpp",
+              "ViewState": "AQIAABUAAAAAAAAAAAAAAAsAAAAaAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-10-18T17:57:10.191Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "fragment.glsl",
+              "DocumentMoniker": "D:\\NGP_TermProject\\fragment.glsl",
+              "RelativeDocumentMoniker": "fragment.glsl",
+              "ToolTip": "D:\\NGP_TermProject\\fragment.glsl",
+              "RelativeToolTip": "fragment.glsl",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2024-10-18T17:59:07.873Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "shader.cpp",
+              "DocumentMoniker": "D:\\NGP_TermProject\\shader.cpp",
+              "RelativeDocumentMoniker": "shader.cpp",
+              "ToolTip": "D:\\NGP_TermProject\\shader.cpp",
+              "RelativeToolTip": "shader.cpp",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-10-24T09:01:05.931Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "Light.h",
+              "DocumentMoniker": "D:\\NGP_TermProject\\Light.h",
+              "RelativeDocumentMoniker": "Light.h",
+              "ToolTip": "D:\\NGP_TermProject\\Light.h",
+              "RelativeToolTip": "Light.h",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-10-18T17:59:11.524Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "FileIn.h",
+              "DocumentMoniker": "D:\\NGP_TermProject\\FileIn.h",
+              "RelativeDocumentMoniker": "FileIn.h",
+              "ToolTip": "D:\\NGP_TermProject\\FileIn.h",
+              "RelativeToolTip": "FileIn.h",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-10-18T17:59:07.123Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "object.cpp",
+              "DocumentMoniker": "D:\\NGP_TermProject\\object.cpp",
+              "RelativeDocumentMoniker": "object.cpp",
+              "ToolTip": "D:\\NGP_TermProject\\object.cpp",
+              "RelativeToolTip": "object.cpp",
+              "ViewState": "AQIAABkAAAAAAAAAAIAwwCgAAAAUAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-10-18T17:59:39.064Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "Light.cpp",
+              "DocumentMoniker": "D:\\NGP_TermProject\\Light.cpp",
+              "RelativeDocumentMoniker": "Light.cpp",
+              "ToolTip": "D:\\NGP_TermProject\\Light.cpp",
+              "RelativeToolTip": "Light.cpp",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-10-18T17:59:10.967Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 25,
+              "Title": "shaders.h",
+              "DocumentMoniker": "D:\\NGP_TermProject\\shaders.h",
+              "RelativeDocumentMoniker": "shaders.h",
+              "ToolTip": "D:\\NGP_TermProject\\shaders.h",
+              "RelativeToolTip": "shaders.h",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-10-18T17:59:57.687Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 26,
+              "Title": "vector",
+              "DocumentMoniker": "D:\\Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.36.32532\\include\\vector",
+              "RelativeDocumentMoniker": "..\\Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.36.32532\\include\\vector",
+              "ToolTip": "D:\\Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.36.32532\\include\\vector",
+              "RelativeToolTip": "..\\Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.36.32532\\include\\vector",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2024-10-18T16:10:28.804Z"
             }
           ]
         }

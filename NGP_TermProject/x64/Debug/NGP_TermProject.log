@@ -1,24 +1,27 @@
-﻿  base.cpp
-D:\Files\_Projects\_University\3_2 NGP\NGP_TermProject\stdafx.h(8,10): fatal  error C1083: 포함 파일을 열 수 없습니다. 'gl/glew.h': No such file or directory
-  camera.cpp
-D:\Files\_Projects\_University\3_2 NGP\NGP_TermProject\stdafx.h(8,10): fatal  error C1083: 포함 파일을 열 수 없습니다. 'gl/glew.h': No such file or directory
-  FileIn.cpp
-D:\Files\_Projects\_University\3_2 NGP\NGP_TermProject\stdafx.h(8,10): fatal  error C1083: 포함 파일을 열 수 없습니다. 'gl/glew.h': No such file or directory
-  Image.cpp
-D:\Files\_Projects\_University\3_2 NGP\NGP_TermProject\stdafx.h(8,10): fatal  error C1083: 포함 파일을 열 수 없습니다. 'gl/glew.h': No such file or directory
-  Light.cpp
-D:\Files\_Projects\_University\3_2 NGP\NGP_TermProject\stdafx.h(8,10): fatal  error C1083: 포함 파일을 열 수 없습니다. 'gl/glew.h': No such file or directory
-  main.cpp
-D:\Files\_Projects\_University\3_2 NGP\NGP_TermProject\main.cpp(1,1): warning C4819: 현재 코드 페이지(949)에서 표시할 수 없는 문자가 파일에 들어 있습니다. 데이터가 손실되지 않게 하려면 해당 파일을 유니코드 형식으로 저장하십시오.
-D:\Files\_Projects\_University\3_2 NGP\NGP_TermProject\stdafx.h(8,10): fatal  error C1083: 포함 파일을 열 수 없습니다. 'gl/glew.h': No such file or directory
-  Map.cpp
-D:\Files\_Projects\_University\3_2 NGP\NGP_TermProject\stdafx.h(8,10): fatal  error C1083: 포함 파일을 열 수 없습니다. 'gl/glew.h': No such file or directory
-  object.cpp
-D:\Files\_Projects\_University\3_2 NGP\NGP_TermProject\stdafx.h(8,10): fatal  error C1083: 포함 파일을 열 수 없습니다. 'gl/glew.h': No such file or directory
-  player.cpp
-D:\Files\_Projects\_University\3_2 NGP\NGP_TermProject\stdafx.h(8,10): fatal  error C1083: 포함 파일을 열 수 없습니다. 'gl/glew.h': No such file or directory
-  shader.cpp
-D:\Files\_Projects\_University\3_2 NGP\NGP_TermProject\stdafx.h(8,10): fatal  error C1083: 포함 파일을 열 수 없습니다. 'gl/glew.h': No such file or directory
-  wall.cpp
-D:\Files\_Projects\_University\3_2 NGP\NGP_TermProject\stdafx.h(8,10): fatal  error C1083: 포함 파일을 열 수 없습니다. 'gl/glew.h': No such file or directory
-  코드를 생성하고 있습니다...
+﻿  main.cpp
+D:\NGP_TermProject\main.cpp(1,1): warning C4819: The file contains a character that cannot be represented in the current code page (949). Save the file in Unicode format to prevent data loss
+D:\NGP_TermProject\player.h(5,15): warning C4091: 'typedef ': ignored on left of 'Player' when no variable is declared
+D:\NGP_TermProject\main.cpp(69,6): warning C4326: return type of 'main' should be 'int' instead of 'void'
+D:\NGP_TermProject\main.cpp(294,33): warning C4244: 'argument': conversion from 'GLuint' to 'float', possible loss of data
+D:\NGP_TermProject\main.cpp(294,20): warning C4244: 'argument': conversion from 'GLuint' to 'float', possible loss of data
+D:\NGP_TermProject\main.cpp(355,89): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
+D:\NGP_TermProject\main.cpp(355,89): warning C4244:         with
+D:\NGP_TermProject\main.cpp(355,89): warning C4244:         [
+D:\NGP_TermProject\main.cpp(355,89): warning C4244:             T=float
+D:\NGP_TermProject\main.cpp(355,89): warning C4244:         ]
+D:\NGP_TermProject\main.cpp(355,69): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
+D:\NGP_TermProject\main.cpp(355,69): warning C4244:         with
+D:\NGP_TermProject\main.cpp(355,69): warning C4244:         [
+D:\NGP_TermProject\main.cpp(355,69): warning C4244:             T=float
+D:\NGP_TermProject\main.cpp(355,69): warning C4244:         ]
+D:\NGP_TermProject\main.cpp(417,92): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
+D:\NGP_TermProject\main.cpp(417,92): warning C4244:         with
+D:\NGP_TermProject\main.cpp(417,92): warning C4244:         [
+D:\NGP_TermProject\main.cpp(417,92): warning C4244:             T=float
+D:\NGP_TermProject\main.cpp(417,92): warning C4244:         ]
+D:\NGP_TermProject\main.cpp(417,72): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
+D:\NGP_TermProject\main.cpp(417,72): warning C4244:         with
+D:\NGP_TermProject\main.cpp(417,72): warning C4244:         [
+D:\NGP_TermProject\main.cpp(417,72): warning C4244:             T=float
+D:\NGP_TermProject\main.cpp(417,72): warning C4244:         ]
+  NGP_TermProject.vcxproj -> D:\NGP_TermProject\x64\Debug\NGP_TermProject.exe

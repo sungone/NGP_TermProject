@@ -6,11 +6,10 @@
 #include "Light.h"
 #include "Map.h"
 
-
 // 바닥
 Base base;
 
-// 벽
+// 벽 ( 큐브 객체도 Wall.h 에 존재)
 Wall wall;
 
 // 플레이어
@@ -23,12 +22,10 @@ CMap map;
 vector<Object*> objects;
 
 
-
 // 카메라
 Camera camera;
 void initCamera();
 CameraMode cameraMode{ THIRD_PERSON };
-
 
 //화면
 CImage screen;
@@ -49,15 +46,15 @@ void init();
 // gl 변수
 GLclampf g_color[4] = { 0.f, 0.f, 0.f, 1.f };
 
-
 // gl 함수
 GLvoid drawScene(GLvoid);
 GLvoid Reshape(int w, int h);
 GLvoid keyboard(unsigned char key, int x, int y);
 GLvoid KeyboardSpecial(int, int, int);
 GLvoid Mouse(int button, int state, int x, int y);
-GLvoid update(int value);
 
+// 게임 전체 플레이 로직
+GLvoid update(int value);
 
 // shader 변수
 GLuint shaderProgramID;
@@ -67,10 +64,7 @@ glm::mat4 projection;
 
 // 벽 이동 함수
 void wallUpdate();
-int wallUpdateSpeed = 20;
-
-
-
+int wallUpdateSpeed = 50;
 
 void main(int argc, char** argv)
 {
@@ -99,8 +93,6 @@ void main(int argc, char** argv)
 
 	// 초기화
 	init();
-
-
 	glutTimerFunc(wallUpdateSpeed, update, 50);
 	glutDisplayFunc(drawScene);
 	glutReshapeFunc(Reshape);
@@ -178,7 +170,7 @@ GLvoid keyboard(unsigned char key, int x, int y)
 		exit(-1);
 		break;
 
-	case '[':
+	case '[': // Game start , Game over 테스트 하기위함
 
 		if (1 == screen.status or 4 == screen.status or 5 == screen.status) {
 			screen.status = 2;
@@ -204,7 +196,6 @@ GLvoid keyboard(unsigned char key, int x, int y)
 
 		break;
 	}
-
 
 	glutPostRedisplay();
 }
@@ -275,7 +266,6 @@ GLvoid Mouse(int button, int state, int x, int y)
 	}
 }
 
-
 void init()
 {
 	initCamera();
@@ -325,16 +315,14 @@ GLvoid update(int value)
 		wallUpdate();
 
 	glutTimerFunc(wallUpdateSpeed, update, value);
-
 	glutPostRedisplay();
 }
 
 void wallUpdate()
 {
-	wall.moveWall();
+	wall.moveWall(); // 벽 움직이는 함수
 
-
-	if (30 == wall.cur_idx) {
+	if (30 == wall.cur_idx) { // 게임 승리
 		screen.status = 2;
 		PlaySound(L"sound/win.wav", NULL, SND_ASYNC | SND_LOOP);//sound
 
@@ -342,7 +330,7 @@ void wallUpdate()
 		camera.setCamera(shaderProgramID, 0, cameraMode, player.getPos());
 		screen.initTex();
 	}
-	else if (3 == wall.crashCnt) {
+	else if (3 == wall.crashCnt) { // 게임 오버
 		screen.status = 3;
 
 		PlaySound(L"sound/closing.wav", NULL, SND_ASYNC | SND_LOOP);//sound
@@ -351,18 +339,19 @@ void wallUpdate()
 		camera.setCamera(shaderProgramID, 0, cameraMode, player.getPos());
 		screen.initTex();
 	}
-	else if (2 == wall.crashCnt and !hpBarSet[1]) {
+	else if (2 == wall.crashCnt and !hpBarSet[1]) { // 2번 충돌하면 피 스크린 바꿈
 		screen.status = 5;
 		screen.initTex();
 		hpBarSet[1] = true;
 	}
-	else if (1 == wall.crashCnt and !hpBarSet[0]) {
+	else if (1 == wall.crashCnt and !hpBarSet[0]) { // 1번 충돌하면 피 스크린 바꿈
 		screen.status = 4;
 		screen.initTex();
 		hpBarSet[0] = true;
 	}
 
-	if (not wall.emptyIdx.empty()) {
+	if (not wall.emptyIdx.empty()) // 충돌처리 하는 로직이 들어있음
+	{
 		if (not player.crashOnce and 1.25f < wall.getCube(wall.emptyIdx[0].x, wall.emptyIdx[0].y).getPos().z) {
 			for (int i{}; i < wall.emptyIdx.size(); ++i) {
 				if ((player.getPos().x/*-0.01f*/ >= wall.emptyIdx[i].y * 0.3333f - 0.5f
@@ -425,8 +414,8 @@ void wallUpdate()
 		}
 	}
 
-	if (not wall.emptyIdx.empty() and 1.3f < wall.getCube(wall.emptyIdx[0].x, wall.emptyIdx[0].y).getPos().z) {
-
+	if (not wall.emptyIdx.empty() and 1.3f < wall.getCube(wall.emptyIdx[0].x, wall.emptyIdx[0].y).getPos().z) 
+	{
 		player.crashOnce = false;
 		wall.emptyIdx.clear();
 	}

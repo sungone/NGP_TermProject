@@ -186,7 +186,7 @@ void Wall::moveWall()
 
 				if (i == 2 && j == 2)
 				{
-					++cur_idx;
+					++cur_idx; // 현재 몇번 벽이 움직였는 지 세는 변수
 				}
 			}
 		}
@@ -196,84 +196,91 @@ void Wall::moveWall()
 void Wall::makeWall(int i, int j, int cur_idx)
 {
 
-	if (cur_idx >= 0 && cur_idx <= 9) // cur_idx 0 ~ 9 1단계
+	if (cur_idx >= 0 && cur_idx <= 9) // 1스테이지
 	{
 		if (random_num[i + cur_idx][j] % 2 == 0)
 		{
-			cube[i][j].changeEmpty();
-
-
+			cube[i][j].changeEmpty(); // 랜덤으로 cube 를 비움
 		}
-		else if (0 == i) {
-			if (2 == j) {
-				if (0 != random_num[i + cur_idx][0] % 2 and 0 != random_num[i + cur_idx][1] % 2) {
+		else if (0 == i) 
+		{
+			if (2 == j) 
+			{
+				if (0 != random_num[i + cur_idx][0] % 2 and 0 != random_num[i + cur_idx][1] % 2) 
+				{
 					int empty = dis2(gen);
 					cube[0][empty].changeEmpty();
 
-
 					emptyIdx.erase(emptyIdx.begin() + empty);
 					emptyIdx.push_back(vec2(0, 2));
-
 				}
 				else
+				{
 					emptyIdx.push_back(vec2(0, 2));
+				}
 			}
 			else
+			{
 				emptyIdx.push_back(vec2(0, j));
+			}
 		}
 	}
-	else if (cur_idx >= 10 && cur_idx <= 19) // cur_idx 10 ~ 19 2단계 - rgb
+	else if (cur_idx >= 10 && cur_idx <= 19) // 2스테이지
 	{
-		if (random_num[i + cur_idx][j] % 3 == 0)
+		if (random_num[i + cur_idx][j] % 3 == 0) // Red
 		{
-			cube[i][j].changeRed();
+			cube[i][j].changeRed(); 
 
 			if (0 == i)
 				emptyIdx.push_back(vec2(0, j));
 		}
-		else if (random_num[i + cur_idx][j] % 3 == 1)
+		else if (random_num[i + cur_idx][j] % 3 == 1) // Green
 		{
 			cube[i][j].changeGreen();
 
 			if (0 == i)
 				emptyIdx.push_back(vec2(1, j));
 		}
-		else if (random_num[i + cur_idx][j] % 3 == 2)
+		else if (random_num[i + cur_idx][j] % 3 == 2) // Blue
 		{
 			cube[i][j].changeBlue();
 
 			if (0 == i)
 				emptyIdx.push_back(vec2(2, j));
 		}
-
 	}
-	else if (cur_idx >= 20 && cur_idx <= 29) // cur_idx 20 ~ 29 3단계 - size
+	else if (cur_idx >= 20 && cur_idx <= 29) // 3스테이지
 	{
-		if (random_num[i + cur_idx][j] % 2 == 0)
+		if (random_num[i + cur_idx][j] % 2 == 0) // Cube Size 작게 만듬
 		{
 			cube[i][j].change_SmallSize();
 
 			if (0 == i)
 				emptyIdx.push_back(vec2(0, j));
 		}
-		else if (0 == i) {
+		else if (0 == i) 
+		{
 
-			if (2 == j) {
-				if (0 != random_num[i + cur_idx][0] % 2 and 0 != random_num[i + cur_idx][1] % 2) {
+			if (2 == j) 
+			{
+				if (0 != random_num[i + cur_idx][0] % 2 and 0 != random_num[i + cur_idx][1] % 2) 
+				{
 					int empty = dis2(gen);
 					cube[0][empty].change_SmallSize();
-
 
 					emptyIdx.erase(emptyIdx.begin() + empty);
 					emptyIdx.push_back(vec2(1, 2));
 
 				}
 				else
+				{
 					emptyIdx.push_back(vec2(1, 2));
+				}
 			}
 			else
+			{
 				emptyIdx.push_back(vec2(1, j));
-
+			}
 		}
 	}
 }
