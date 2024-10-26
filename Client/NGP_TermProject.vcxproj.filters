@@ -16,6 +16,9 @@
     <Filter Include="Utils">
       <UniqueIdentifier>{7fb111e4-e5c9-4510-bd67-2a28eda62020}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TextManager">
+      <UniqueIdentifier>{71b8f2d9-7108-44c7-b927-5250deb47d22}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="object.cpp">
@@ -48,6 +51,9 @@
     </ClCompile>
     <ClCompile Include="Image.cpp">
       <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="TextManager.cpp">
+      <Filter>TextManager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -86,6 +92,9 @@
     </ClInclude>
     <ClInclude Include="stdafx.h">
       <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="TextManager.h">
+      <Filter>TextManager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

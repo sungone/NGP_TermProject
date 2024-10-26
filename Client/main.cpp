@@ -5,6 +5,7 @@
 #include "Image.h"
 #include "Light.h"
 #include "Map.h"
+#include "TextManager.h"
 
 // 바닥
 Base base;
@@ -91,6 +92,7 @@ void main(int argc, char** argv)
 	shaderProgramID = initShader(vertexFile, fragmentFile);
 
 	// 초기화
+	TextManager::GetInstance()->Init();
 	init();
 	glutTimerFunc(wallUpdateSpeed, update, 50);
 	glutDisplayFunc(drawScene);
@@ -111,7 +113,6 @@ GLvoid drawScene()
 
 	// Camera
 	camera.setCamera(shaderProgramID, 0, cameraMode, player.getPos());
-
 	screen.render(shaderProgramID);
 
 	// Object Draw
@@ -124,6 +125,8 @@ GLvoid drawScene()
 
 		for (int i = 0; i < objects.size(); ++i)
 			(*objects[i]).render(shaderProgramID);
+
+		TextManager::GetInstance()->Render(0.0f, 0.0f, "test");
 	}
 
 	glutSwapBuffers();
