@@ -1,6 +1,7 @@
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
 #include "Image.h"
+#include "TextManager.h"
 
 CImage::CImage()
 {
@@ -31,11 +32,12 @@ void CImage::render(GLuint ID)
 	model = glm::scale(model, scale);
 
 	glUniformMatrix4fv(glGetUniformLocation(ID, "model"), 1, GL_FALSE, glm::value_ptr(model));
-
 	glBindVertexArray(vao);
 
 	glBindTexture(GL_TEXTURE_2D, texId);
 	glDrawArrays(GL_TRIANGLES, 0, vert.size());
+
+	TextManager::GetInstance()->Render(0.5f, 0.5f, "Test");
 }
 
 void CImage::initBuf()

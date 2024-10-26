@@ -126,7 +126,6 @@ GLvoid drawScene()
 		for (int i = 0; i < objects.size(); ++i)
 			(*objects[i]).render(shaderProgramID);
 
-		TextManager::GetInstance()->Render(0.0f, 0.0f, "test");
 	}
 
 	glutSwapBuffers();
