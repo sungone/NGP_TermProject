@@ -2,10 +2,11 @@
 #include <iostream>
 #include <Listener.h>
 #include <SessionManager.h>
-#include <thread>
-
+#include <ThreadManager.h>
 
 using namespace std;
+
+
 
 
 
@@ -18,29 +19,21 @@ int main()
 	SOCKADDR_IN clientaddr = { 0 };
 	int nAddrLen = sizeof(clientaddr);
 	SOCKET clientSocket;
-
+	 
 	while (true)
 	{
 		clientSocket = ::accept(listenSocket, (SOCKADDR*)&clientaddr, &nAddrLen);
-<<<<<<< Updated upstream
-		if (clientSocket == INVALID_SOCKET)
-			ErrorHandler("클라이언트 통신 소켓을 생성할 수 없습니다.");
-=======
-
 		if (clientSocket == INVALID_SOCKET) ErrorHandler("클라이언트 통신 소켓을 생성할 수 없습니다.");
->>>>>>> Stashed changes
 
-		cout << "클라이언트가 연결되었습니다." << "\n";
-		sessionManager.PrintClinetInfo(clientSocket);
+		sessionManager.PrintClinetInfo(clientSocket, "클라이언트가 연결되었습니다.");
 		sessionManager.PushClient(clientSocket);
 
-		thread t(&SessionManager::PacketDecode, &sessionManager, clientSocket);
-		t.detach();
+		ThreadManager::Launch([&sessionManager, &clientSocket]()
+			{
+			sessionManager.PacketDecode(clientSocket);
+			});
+
 	}
 
-<<<<<<< Updated upstream
 
-
-=======
->>>>>>> Stashed changes
 }

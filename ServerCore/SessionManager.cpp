@@ -1,7 +1,12 @@
 #include "pch.h"
 #include "SessionManager.h"
 
-void SessionManager::PrintClinetInfo(SOCKET socket)
+#include <random>
+std::random_device rd;
+std::mt19937 gen(rd());
+std::uniform_int_distribution<int> dis(0, 99);
+
+void SessionManager::PrintClinetInfo(SOCKET socket, string message)
 {
 	struct sockaddr_in clientaddr;
 	char addr[256];
@@ -11,46 +16,25 @@ void SessionManager::PrintClinetInfo(SOCKET socket)
 	::getpeername(socket, (struct sockaddr*)&clientaddr, &addrlen);
 	inet_ntop(AF_INET, &clientaddr.sin_addr, addr, sizeof(addr));
 
-	cout<<"클라이언트 : IP 주소:"<<addr <<"포트 번호 : " << ntohs(clientaddr.sin_port) <<"\n";
-
+	cout << "클라이언트 : IP 주소:" << addr << "포트 번호 : " << ntohs(clientaddr.sin_port) << " ";
+	cout << message << "\n";
 }
 
 void SessionManager::PushClient(SOCKET socket)
 {
-<<<<<<< Updated upstream
 	lock_guard<mutex> guard(_mutex);
 	_listClient.push_back(socket);
-=======
-	_clientQueue.push(socket);
->>>>>>> Stashed changes
 }
 
 void SessionManager::DeleteClient(SOCKET socket)
 {
-<<<<<<< Updated upstream
 	lock_guard<mutex> guard(_mutex);
 	_listClient.remove(socket);
 	::closesocket(socket);
-=======
-
-	if (_clientQueue.try_pop(socket)) {
-		::closesocket(socket);
-	}
-	else {
-		assert(false);
-	}
-}
-
-int SessionManager::GetClinetCount()
-{
-	lock_guard<mutex> guard(_queueLock);
-	return _clientQueue.unsafe_size();
->>>>>>> Stashed changes
 }
 
 void SessionManager::PacketDecode(SOCKET socket)
 {
-	
 	MYCMD cmd;
 
 	while (::recv(socket, (char*)&cmd, sizeof(MYCMD), MSG_WAITALL) > 0)
@@ -60,9 +44,14 @@ void SessionManager::PacketDecode(SOCKET socket)
 		case ClientInfoData:
 			break;
 		case BlockData:
+
+			if (GetClinetCount())
+			{
+				MakeBlockRandomSeed();
+			}
 			break;
 		case ChattingData:
-			SendMessageToAllclinet(socket);
+			SendMessageToAllclinet(socket); 
 			break;
 		default:
 			ErrorHandler("알수없는 명령어 수신했습니다.");
@@ -75,34 +64,14 @@ void SessionManager::PacketDecode(SOCKET socket)
 
 void SessionManager::SendMessageToAllclinet(SOCKET socket)
 {
-<<<<<<< Updated upstream
-	lock_guard<mutex> guard(_mutex);
-=======
+
 	PrintClinetInfo(socket,"으로부터 Chat요청 입력받음");
->>>>>>> Stashed changes
+
 	char Message[256] = { 0 };
 
 	::recv(socket, Message, sizeof(Message), 0);
-	int nLength = strlen(Message);
 
-<<<<<<< Updated upstream
 	for (auto it = _listClient.begin(); it != _listClient.end(); ++it)
-		::send(*it, Message, sizeof(char) * (nLength), 0);
-=======
-
-	std::vector<SOCKET> clientList;
-
-	{
-		std::lock_guard<std::mutex> guard(_queueLock);
-
-		for (auto it = _clientQueue.unsafe_begin(); it != _clientQueue.unsafe_end(); ++it) 
-		{
-			clientList.push_back(*it);
-		}
-	}
-
-
-	for (auto it = clientList.begin(); it != clientList.end(); ++it)
 	{
 		//자기자신에게 쏠필요가없음
 		if (*it == socket)
@@ -111,7 +80,22 @@ void SessionManager::SendMessageToAllclinet(SOCKET socket)
 		::send(*it, Message, sizeof(Message), 0);
 	}
 
->>>>>>> Stashed changes
 }
+
+void SessionManager::MakeBlockRandomSeed()
+{
+	char randomNum[108];
+	int col = 36;
+	int row = 3;
+
+	for (int i = 0; i < (col * row); ++i)
+	{
+		randomNum[i] = dis(gen);
+	}
+
+	for (auto it = _listClient.begin(); it != _listClient.end(); ++it)
+		::send(*it, randomNum, sizeof(randomNum), 0);
+}
+
 
 
