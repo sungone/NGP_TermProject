@@ -7,7 +7,7 @@
 #include <thread>
 #include <mutex>
 #include <string>
-
+#include <functional>
 #include <winsock2.h>
 #include <mswsock.h>
 #include <ws2tcpip.h>

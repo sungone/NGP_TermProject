@@ -10,8 +10,8 @@
     <Filter Include="Clinet">
       <UniqueIdentifier>{df02ea14-9fa4-473d-a7e1-d2f6ee912e5a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="NetAdress">
-      <UniqueIdentifier>{6566aa0d-d9cb-4a9e-ab8a-658cae058d9b}</UniqueIdentifier>
+    <Filter Include="ThreadManager">
+      <UniqueIdentifier>{62070111-292d-453a-82ba-7df325d05bcc}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -36,6 +36,9 @@
     <ClInclude Include="GlobalMacro.h">
       <Filter>Utils</Filter>
     </ClInclude>
+    <ClInclude Include="ThreadManager.h">
+      <Filter>ThreadManager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -52,6 +55,9 @@
     </ClCompile>
     <ClCompile Include="ErrorHandler.cpp">
       <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="ThreadManager.cpp">
+      <Filter>ThreadManager</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

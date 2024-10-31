@@ -9,7 +9,7 @@ class SessionManager
 {
 public:
 	
-	void	PrintClinetInfo(SOCKET socket, string Message = {});
+	void	PrintClinetInfo(SOCKET socket, string Message);
 	
 	void	PushClient(SOCKET socket);
 	void	DeleteClient(SOCKET socket);

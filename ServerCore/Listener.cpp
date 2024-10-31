@@ -5,7 +5,6 @@ Listener::~Listener()
 {
 	::closesocket(_listenSocket);
 	::WSACleanup();
-	cout << "서버 종료합니다." << "\n";
 }
 
 
