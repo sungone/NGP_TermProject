@@ -66,6 +66,7 @@ glm::mat4 projection;
 void wallUpdate();
 int wallUpdateSpeed = 20;
 
+// hi
 
 void main(int argc, char** argv)
 {

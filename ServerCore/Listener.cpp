@@ -7,6 +7,9 @@ Listener::~Listener()
 	::WSACleanup();
 }
 
+
+
+
 SOCKET Listener::Init()
 {
 	WSADATA wsa;

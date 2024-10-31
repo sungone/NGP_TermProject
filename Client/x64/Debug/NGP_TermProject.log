@@ -1,1 +1,122 @@
-﻿  NGP_TermProject.vcxproj -> C:\Users\pakhe\Desktop\NGPTermProject\x64\Debug\Client.exe
+﻿  base.cpp
+D:\NGP_TermProject\Client\base.cpp(94,45): warning C4267: 'argument': conversion from 'size_t' to 'GLsizei', possible loss of data
+  camera.cpp
+D:\NGP_TermProject\Client\camera.cpp(48,11): warning C4305: '=': truncation from 'double' to 'T'
+D:\NGP_TermProject\Client\camera.cpp(48,11): warning C4305:         with
+D:\NGP_TermProject\Client\camera.cpp(48,11): warning C4305:         [
+D:\NGP_TermProject\Client\camera.cpp(48,11): warning C4305:             T=float
+D:\NGP_TermProject\Client\camera.cpp(48,11): warning C4305:         ]
+  FileIn.cpp
+D:\NGP_TermProject\Client\FileIn.cpp(76,44): warning C4244: 'argument': conversion from 'float' to '_Ty', possible loss of data
+D:\NGP_TermProject\Client\FileIn.cpp(76,44): warning C4244:         with
+D:\NGP_TermProject\Client\FileIn.cpp(76,44): warning C4244:         [
+D:\NGP_TermProject\Client\FileIn.cpp(76,44): warning C4244:             _Ty=GLubyte
+D:\NGP_TermProject\Client\FileIn.cpp(76,44): warning C4244:         ]
+D:\NGP_TermProject\Client\FileIn.cpp(77,44): warning C4244: 'argument': conversion from 'float' to '_Ty', possible loss of data
+D:\NGP_TermProject\Client\FileIn.cpp(77,44): warning C4244:         with
+D:\NGP_TermProject\Client\FileIn.cpp(77,44): warning C4244:         [
+D:\NGP_TermProject\Client\FileIn.cpp(77,44): warning C4244:             _Ty=GLubyte
+D:\NGP_TermProject\Client\FileIn.cpp(77,44): warning C4244:         ]
+D:\NGP_TermProject\Client\FileIn.cpp(78,44): warning C4244: 'argument': conversion from 'float' to '_Ty', possible loss of data
+D:\NGP_TermProject\Client\FileIn.cpp(78,44): warning C4244:         with
+D:\NGP_TermProject\Client\FileIn.cpp(78,44): warning C4244:         [
+D:\NGP_TermProject\Client\FileIn.cpp(78,44): warning C4244:             _Ty=GLubyte
+D:\NGP_TermProject\Client\FileIn.cpp(78,44): warning C4244:         ]
+D:\NGP_TermProject\Client\FileIn.cpp(81,37): warning C4244: 'argument': conversion from 'float' to '_Ty', possible loss of data
+D:\NGP_TermProject\Client\FileIn.cpp(81,37): warning C4244:         with
+D:\NGP_TermProject\Client\FileIn.cpp(81,37): warning C4244:         [
+D:\NGP_TermProject\Client\FileIn.cpp(81,37): warning C4244:             _Ty=GLubyte
+D:\NGP_TermProject\Client\FileIn.cpp(81,37): warning C4244:         ]
+D:\NGP_TermProject\Client\FileIn.cpp(82,37): warning C4244: 'argument': conversion from 'float' to '_Ty', possible loss of data
+D:\NGP_TermProject\Client\FileIn.cpp(82,37): warning C4244:         with
+D:\NGP_TermProject\Client\FileIn.cpp(82,37): warning C4244:         [
+D:\NGP_TermProject\Client\FileIn.cpp(82,37): warning C4244:             _Ty=GLubyte
+D:\NGP_TermProject\Client\FileIn.cpp(82,37): warning C4244:         ]
+D:\NGP_TermProject\Client\FileIn.cpp(83,37): warning C4244: 'argument': conversion from 'float' to '_Ty', possible loss of data
+D:\NGP_TermProject\Client\FileIn.cpp(83,37): warning C4244:         with
+D:\NGP_TermProject\Client\FileIn.cpp(83,37): warning C4244:         [
+D:\NGP_TermProject\Client\FileIn.cpp(83,37): warning C4244:             _Ty=GLubyte
+D:\NGP_TermProject\Client\FileIn.cpp(83,37): warning C4244:         ]
+D:\NGP_TermProject\Client\FileIn.cpp(95,44): warning C4244: 'argument': conversion from 'float' to '_Ty', possible loss of data
+D:\NGP_TermProject\Client\FileIn.cpp(95,44): warning C4244:         with
+D:\NGP_TermProject\Client\FileIn.cpp(95,44): warning C4244:         [
+D:\NGP_TermProject\Client\FileIn.cpp(95,44): warning C4244:             _Ty=GLubyte
+D:\NGP_TermProject\Client\FileIn.cpp(95,44): warning C4244:         ]
+D:\NGP_TermProject\Client\FileIn.cpp(96,44): warning C4244: 'argument': conversion from 'float' to '_Ty', possible loss of data
+D:\NGP_TermProject\Client\FileIn.cpp(96,44): warning C4244:         with
+D:\NGP_TermProject\Client\FileIn.cpp(96,44): warning C4244:         [
+D:\NGP_TermProject\Client\FileIn.cpp(96,44): warning C4244:             _Ty=GLubyte
+D:\NGP_TermProject\Client\FileIn.cpp(96,44): warning C4244:         ]
+D:\NGP_TermProject\Client\FileIn.cpp(97,44): warning C4244: 'argument': conversion from 'float' to '_Ty', possible loss of data
+D:\NGP_TermProject\Client\FileIn.cpp(97,44): warning C4244:         with
+D:\NGP_TermProject\Client\FileIn.cpp(97,44): warning C4244:         [
+D:\NGP_TermProject\Client\FileIn.cpp(97,44): warning C4244:             _Ty=GLubyte
+D:\NGP_TermProject\Client\FileIn.cpp(97,44): warning C4244:         ]
+D:\NGP_TermProject\Client\FileIn.cpp(99,44): warning C4244: 'argument': conversion from 'float' to '_Ty', possible loss of data
+D:\NGP_TermProject\Client\FileIn.cpp(99,44): warning C4244:         with
+D:\NGP_TermProject\Client\FileIn.cpp(99,44): warning C4244:         [
+D:\NGP_TermProject\Client\FileIn.cpp(99,44): warning C4244:             _Ty=GLubyte
+D:\NGP_TermProject\Client\FileIn.cpp(99,44): warning C4244:         ]
+D:\NGP_TermProject\Client\FileIn.cpp(100,44): warning C4244: 'argument': conversion from 'float' to '_Ty', possible loss of data
+D:\NGP_TermProject\Client\FileIn.cpp(100,44): warning C4244:         with
+D:\NGP_TermProject\Client\FileIn.cpp(100,44): warning C4244:         [
+D:\NGP_TermProject\Client\FileIn.cpp(100,44): warning C4244:             _Ty=GLubyte
+D:\NGP_TermProject\Client\FileIn.cpp(100,44): warning C4244:         ]
+D:\NGP_TermProject\Client\FileIn.cpp(101,44): warning C4244: 'argument': conversion from 'float' to '_Ty', possible loss of data
+D:\NGP_TermProject\Client\FileIn.cpp(101,44): warning C4244:         with
+D:\NGP_TermProject\Client\FileIn.cpp(101,44): warning C4244:         [
+D:\NGP_TermProject\Client\FileIn.cpp(101,44): warning C4244:             _Ty=GLubyte
+D:\NGP_TermProject\Client\FileIn.cpp(101,44): warning C4244:         ]
+D:\NGP_TermProject\Client\FileIn.cpp(121,49): warning C4244: 'argument': conversion from '_Ty' to 'const unsigned __int64', possible loss of data
+D:\NGP_TermProject\Client\FileIn.cpp(121,49): warning C4244:         with
+D:\NGP_TermProject\Client\FileIn.cpp(121,49): warning C4244:         [
+D:\NGP_TermProject\Client\FileIn.cpp(121,49): warning C4244:             _Ty=float
+D:\NGP_TermProject\Client\FileIn.cpp(121,49): warning C4244:         ]
+D:\NGP_TermProject\Client\FileIn.cpp(122,47): warning C4244: 'argument': conversion from '_Ty' to 'const unsigned __int64', possible loss of data
+D:\NGP_TermProject\Client\FileIn.cpp(122,47): warning C4244:         with
+D:\NGP_TermProject\Client\FileIn.cpp(122,47): warning C4244:         [
+D:\NGP_TermProject\Client\FileIn.cpp(122,47): warning C4244:             _Ty=float
+D:\NGP_TermProject\Client\FileIn.cpp(122,47): warning C4244:         ]
+  Image.cpp
+D:\NGP_TermProject\Client\Image.cpp(38,41): warning C4267: 'argument': conversion from 'size_t' to 'GLsizei', possible loss of data
+  Light.cpp
+  main.cpp
+D:\NGP_TermProject\Client\main.cpp(1,1): warning C4819: The file contains a character that cannot be represented in the current code page (949). Save the file in Unicode format to prevent data loss
+D:\NGP_TermProject\Client\player.h(5,15): warning C4091: 'typedef ': ignored on left of 'Player' when no variable is declared
+D:\NGP_TermProject\Client\main.cpp(71,6): warning C4326: return type of 'main' should be 'int' instead of 'void'
+D:\NGP_TermProject\Client\main.cpp(326,33): warning C4244: 'argument': conversion from 'GLuint' to 'float', possible loss of data
+D:\NGP_TermProject\Client\main.cpp(326,20): warning C4244: 'argument': conversion from 'GLuint' to 'float', possible loss of data
+D:\NGP_TermProject\Client\main.cpp(391,89): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
+D:\NGP_TermProject\Client\main.cpp(391,89): warning C4244:         with
+D:\NGP_TermProject\Client\main.cpp(391,89): warning C4244:         [
+D:\NGP_TermProject\Client\main.cpp(391,89): warning C4244:             T=float
+D:\NGP_TermProject\Client\main.cpp(391,89): warning C4244:         ]
+D:\NGP_TermProject\Client\main.cpp(391,69): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
+D:\NGP_TermProject\Client\main.cpp(391,69): warning C4244:         with
+D:\NGP_TermProject\Client\main.cpp(391,69): warning C4244:         [
+D:\NGP_TermProject\Client\main.cpp(391,69): warning C4244:             T=float
+D:\NGP_TermProject\Client\main.cpp(391,69): warning C4244:         ]
+D:\NGP_TermProject\Client\main.cpp(431,92): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
+D:\NGP_TermProject\Client\main.cpp(431,92): warning C4244:         with
+D:\NGP_TermProject\Client\main.cpp(431,92): warning C4244:         [
+D:\NGP_TermProject\Client\main.cpp(431,92): warning C4244:             T=float
+D:\NGP_TermProject\Client\main.cpp(431,92): warning C4244:         ]
+D:\NGP_TermProject\Client\main.cpp(431,72): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
+D:\NGP_TermProject\Client\main.cpp(431,72): warning C4244:         with
+D:\NGP_TermProject\Client\main.cpp(431,72): warning C4244:         [
+D:\NGP_TermProject\Client\main.cpp(431,72): warning C4244:             T=float
+D:\NGP_TermProject\Client\main.cpp(431,72): warning C4244:         ]
+  Map.cpp
+D:\NGP_TermProject\Client\Map.cpp(68,45): warning C4267: 'argument': conversion from 'size_t' to 'GLsizei', possible loss of data
+D:\NGP_TermProject\Client\Map.cpp(79,45): warning C4267: 'argument': conversion from 'size_t' to 'GLsizei', possible loss of data
+  object.cpp
+  player.cpp
+D:\NGP_TermProject\Client\player.h(5,15): warning C4091: 'typedef ': ignored on left of 'Player' when no variable is declared
+D:\NGP_TermProject\Client\player.cpp(109,45): warning C4267: 'argument': conversion from 'size_t' to 'GLsizei', possible loss of data
+  shader.cpp
+  TextManager.cpp
+D:\NGP_TermProject\Client\TextManager.cpp(40,20): warning C4267: 'argument': conversion from 'size_t' to 'GLsizei', possible loss of data
+  wall.cpp
+  Generating Code...
+D:\NGP_TermProject\Client\FileIn.cpp(134,1): warning C4715: 'CFileIn::readObj': not all control paths return a value
+  NGP_TermProject.vcxproj -> D:\NGP_TermProject\x64\Debug\Client.exe
