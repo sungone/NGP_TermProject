@@ -1,5 +1,4 @@
 #pragma once
-#include "stdafx.h"
 
 void makeVertexShaders(char* file);
 void makeFragmentShaders(char* file);

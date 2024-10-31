@@ -1,5 +1,4 @@
 #pragma once
-#include "stdafx.h"
 #include "object.h"
 #include "FileIn.h"
 
