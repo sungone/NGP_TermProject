@@ -59,10 +59,9 @@ void SessionManager::SendMessageToAllclinet(SOCKET socket)
 	char Message[256] = { 0 };
 
 	::recv(socket, Message, sizeof(Message), 0);
-	int nLength = strlen(Message);
 
 	for (auto it = _listClient.begin(); it != _listClient.end(); ++it)
-		::send(*it, Message, sizeof(char) * (nLength), 0);
+		::send(*it, Message, sizeof(Message), 0);
 }
 
 

@@ -1,12 +1,10 @@
 #include "pch.h"
 
-
-
 void ThreadFunc(SOCKET hSocket)
 {
 	char szBuffer[256] = { 0 };
-
-	while (::recv(hSocket, szBuffer, sizeof(szBuffer), 0) > 0)
+	
+	while (::recv(hSocket, szBuffer, sizeof(szBuffer), MSG_WAITALL) > 0)
 	{
 		printf("-> %s\n", szBuffer);
 		memset(szBuffer, 0, sizeof(szBuffer));
@@ -61,7 +59,8 @@ int main()
 	{
 		memset(szBuffer, 0, sizeof(szBuffer));
 		gets_s(szBuffer);
-		if (strcmp(szBuffer, "EXIT") == 0)		break;
+		if (strcmp(szBuffer, "EXIT") == 0)	
+			break;
 
 		//명령어 입력.
 		::send(hSocket, (char*)&cmd,sizeof(cmd), 0);
