@@ -1,3 +1,4 @@
+#include "pch.h"
 #include "ViewerPlayer.h"
 
 void ViewerPlayer::drawP(GLuint shaderProgramID)

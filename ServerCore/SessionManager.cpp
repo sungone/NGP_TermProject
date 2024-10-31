@@ -22,13 +22,13 @@ void SessionManager::PrintClinetInfo(SOCKET socket, string message)
 
 void SessionManager::PushClient(SOCKET socket)
 {
-	lock_guard<mutex> guard(_acceptLock);
+	lock_guard<mutex> guard(_mutex);
 	_listClient.push_back(socket);
 }
 
 void SessionManager::DeleteClient(SOCKET socket)
 {
-	lock_guard<mutex> guard(_acceptLock);
+	lock_guard<mutex> guard(_mutex);
 	_listClient.remove(socket);
 	::closesocket(socket);
 }

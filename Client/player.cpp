@@ -1,3 +1,4 @@
+#include "pch.h"
 #include "player.h"
 #define CUBE_INDEX_COUNT 36
 

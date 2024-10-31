@@ -1,8 +1,10 @@
+#pragma once
+#define _CRT_SECURE_NO_WARNINGS
 #pragma comment(lib, "glew32.lib")
 #pragma comment(lib, "freeglut.lib")
 #pragma comment(lib, "ServerCore.lib")
 
-#pragma once
+
 #pragma warning(disable : 4996)
 
 #include <iostream>

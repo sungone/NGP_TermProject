@@ -1,3 +1,4 @@
+#include "pch.h"
 #include "wall.h"
 #define CUBE_INDEX_COUNT 36
 
