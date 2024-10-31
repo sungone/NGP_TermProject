@@ -27,8 +27,7 @@ int main()
 		if (clientSocket == INVALID_SOCKET)
 			ErrorHandler("클라이언트 통신 소켓을 생성할 수 없습니다.");
 
-		cout << "클라이언트가 연결되었습니다." << "\n";
-		sessionManager.PrintClinetInfo(clientSocket);
+		sessionManager.PrintClinetInfo(clientSocket, "클라이언트가 연결되었습니다.");
 		sessionManager.PushClient(clientSocket);
 
 		thread t(&SessionManager::PacketDecode, &sessionManager, clientSocket);
