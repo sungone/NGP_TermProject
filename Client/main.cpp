@@ -2,6 +2,7 @@
 #include "base.h"
 #include "wall.h"
 #include "player.h"
+#include "ViewerPlayer.h"
 #include "Image.h"
 #include "Light.h"
 #include "Map.h"
@@ -15,6 +16,10 @@ Wall wall;
 
 // 플레이어
 Player player;
+
+// 뷰어 플레이어 테스트용
+ViewerPlayer vPlayer1;
+ViewerPlayer vPlayer2;
 
 //맵
 CMap backgroundmap;
@@ -71,8 +76,6 @@ int wallUpdateSpeed = 20;
 void main(int argc, char** argv)
 {
 	PlaySound(L"sound/opening.wav", NULL, SND_ASYNC | SND_LOOP);//sound
-
-	
 
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA);
@@ -312,8 +315,16 @@ void init()
 
 	player.init();
 	objects.push_back(&player);
-	backgroundmap.init();
 
+	vPlayer1.init();
+	vPlayer1.setPosX(0.15f);
+	objects.push_back(&vPlayer1);
+
+	vPlayer2.init();
+	vPlayer2.setPosX(-0.15f);
+	objects.push_back(&vPlayer2);
+		
+	backgroundmap.init();
 
 	screen.initBuf();
 	screen.initTex();
