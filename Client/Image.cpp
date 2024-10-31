@@ -89,10 +89,14 @@ void CImage::initTex()
 		data = stbi_load("texture/over.jpg", &width, &height, &channel, 0);
 	else if (4 == status)
 		data = stbi_load("texture/b2.png", &width, &height, &channel, 0);
-	else
+	else if (5 == status)
 		data = stbi_load("texture/b3.png", &width, &height, &channel, 0);
+	else  // 게임 매칭 대기창
+		data = stbi_load("texture/matching.jpg", &width, &height, &channel, 0);
 
-	glTexImage2D(GL_TEXTURE_2D, 0, 3, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+
+	int format = (channel == 4) ? GL_RGBA : GL_RGB;
+	glTexImage2D(GL_TEXTURE_2D, 0, format, width, height, 0, format, GL_UNSIGNED_BYTE, data);
 
 	stbi_image_free(data);
 }

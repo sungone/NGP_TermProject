@@ -173,19 +173,23 @@ GLvoid keyboard(unsigned char key, int x, int y)
 
 	case '[': // Game start , Game over 테스트 하기위함
 
-		if (1 == screen.status or 4 == screen.status or 5 == screen.status) {
+		if (1 == screen.status or 4 == screen.status or 5 == screen.status) 
+		{
 			screen.status = 2;
-
 			PlaySound(L"sound/win.wav", NULL, SND_ASYNC | SND_LOOP);//sound
 		}
-		else if (2 == screen.status) {
+		else if (2 == screen.status) 
+		{
 			screen.status = 3;
-
 			PlaySound(L"sound/closing.wav", NULL, SND_ASYNC | SND_LOOP);//sound
 		}
-		else if (3 == screen.status) {
+		else if (3 == screen.status) 
+		{
+			screen.status = 6;
+		}
+		else if (6 == screen.status)
+		{
 			screen.status = 1;
-
 			PlaySound(L"sound/inGame.wav", NULL, SND_ASYNC | SND_LOOP);//sound
 		}
 
@@ -238,8 +242,10 @@ GLvoid Mouse(int button, int state, int x, int y)
 		/*cout << "x : " << x << endl;
 		cout << "y : " << y << endl << endl << endl;*/
 
-		if (0 == screen.status) {
-			if (not full) {
+		if (0 == screen.status) 
+		{
+			if (not full) 
+			{
 				if (513 <= x && 616 >= x and 528 <= y && 583 >= y) {//play
 					screen.status = 1;
 					screen.initTex();
@@ -247,11 +253,16 @@ GLvoid Mouse(int button, int state, int x, int y)
 				}
 				else if (507 <= x && 603 >= x and 595 <= y && 648 >= y)//exit
 					exit(-1);
-				else if (505 <= x && 673 >= x and 663 <= y && 711 >= y) {//settings
-
-				}
+				else if (505 <= x && 673 >= x and 663 <= y && 711 >= y) 
+				{
+					// 임시로 로비 입장 버튼이 setting 버튼으로 해놓음
+					screen.status = 6;
+					screen.initTex();
+					PlaySound(L"sound/inGame.wav", NULL, SND_ASYNC | SND_LOOP);//sound
+				}		
 			}
-			else {
+			else 
+			{
 				if (1242 <= x && 1490 >= x and 719 <= y && 786 >= y) {//play
 					screen.status = 1;
 					screen.initTex();
@@ -259,8 +270,24 @@ GLvoid Mouse(int button, int state, int x, int y)
 				}
 				else if (1228 <= x && 1446 >= x and 807 <= y && 873 >= y)//exit
 					exit(-1);
-				else if (1216 <= x && 1618 >= x and 899 <= y && 957 >= y) {//settings
-
+				else if (1216 <= x && 1618 >= x and 899 <= y && 957 >= y) 
+				{
+					// 임시로 로비 입장 버튼이 setting 버튼으로 해놓음
+					screen.status = 6;
+					screen.initTex();
+					PlaySound(L"sound/inGame.wav", NULL, SND_ASYNC | SND_LOOP);//sound
+				}
+			}
+		}
+		else if (screen.status == 6) // 매칭 화면 일때 - 3명을 기다리는 방
+		{
+			if (not full)
+			{
+				if (711 <= y && 799 >= y and 300 <= x && 500 >= x) // 매칭 취소 버튼 설정
+				{
+					screen.status = 0;
+					screen.initTex();
+					PlaySound(L"sound/opening.wav", NULL, SND_ASYNC | SND_LOOP);//sound
 				}
 			}
 		}
@@ -323,7 +350,8 @@ void wallUpdate()
 {
 	wall.moveWall(); // 벽 움직이는 함수
 
-	if (30 == wall.cur_idx) { // 게임 승리
+	if (30 == wall.cur_idx) // 게임 승리
+	{ 
 		screen.status = 2;
 		PlaySound(L"sound/win.wav", NULL, SND_ASYNC | SND_LOOP);//sound
 
@@ -331,7 +359,8 @@ void wallUpdate()
 		camera.setCamera(shaderProgramID, 0, cameraMode, player.getPos());
 		screen.initTex();
 	}
-	else if (3 == wall.crashCnt) { // 게임 오버
+	else if (3 == wall.crashCnt) // 3번 충돌  < 게임 오버 >
+	{ 
 		screen.status = 3;
 
 		PlaySound(L"sound/closing.wav", NULL, SND_ASYNC | SND_LOOP);//sound
@@ -340,12 +369,14 @@ void wallUpdate()
 		camera.setCamera(shaderProgramID, 0, cameraMode, player.getPos());
 		screen.initTex();
 	}
-	else if (2 == wall.crashCnt and !hpBarSet[1]) { // 2번 충돌하면 피 스크린 바꿈
+	else if (2 == wall.crashCnt and !hpBarSet[1]) // 2번 충돌
+	{ 
 		screen.status = 5;
 		screen.initTex();
 		hpBarSet[1] = true;
 	}
-	else if (1 == wall.crashCnt and !hpBarSet[0]) { // 1번 충돌하면 피 스크린 바꿈
+	else if (1 == wall.crashCnt and !hpBarSet[0]) // 1번 충돌
+	{ 
 		screen.status = 4;
 		screen.initTex();
 		hpBarSet[0] = true;
@@ -365,9 +396,6 @@ void wallUpdate()
 
 						++wall.crashCnt;
 						player.crashOnce = true;
-
-						//cout << "1 crash : " << wall.crashCnt << endl;
-						//cout << "1 size : " << wall.emptyIdx.size() << endl;
 						break;
 					}
 					else if (1 == (wall.cur_idx - 1) / 10) {
@@ -377,14 +405,8 @@ void wallUpdate()
 
 							++wall.crashCnt;
 							player.crashOnce = true;
-
-							//cout << "2 crash : " << wall.crashCnt << endl;
-							//cout << "2 size : " << wall.emptyIdx.size() << endl;
 							break;
 						}
-						/*else {
-							cout << "2 color x" << endl << endl;
-						}*/
 					}
 					else if (2 == (wall.cur_idx - 1) / 10) {
 						if (0 == wall.emptyIdx[i].x and not plSizeChange
@@ -392,25 +414,12 @@ void wallUpdate()
 
 							++wall.crashCnt;
 							player.crashOnce = true;
-
-							//cout << "3 crash : " << wall.crashCnt << endl;
-							//cout << "3 size : " << wall.emptyIdx.size() << endl;
 							break;
 						}
-						/*else {
-							cout << "3 size x" << endl << endl;
-						}*/
+
 					}
 				}
-				//else if (0 == (wall.cur_idx - 1) / 10) {
-				//	cout << "1 pos x" << endl << endl;
-				//}
-				//else if (1 == (wall.cur_idx - 1) / 10) {
-				//	cout << "2 pos x" << endl << endl;//
-				//}
-				//else if (2 == (wall.cur_idx - 1) / 10) {
-				//	cout << "3 pos x" << endl << endl;//
-				//}
+
 			}
 		}
 	}
