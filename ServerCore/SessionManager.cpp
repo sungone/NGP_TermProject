@@ -30,7 +30,7 @@ void SessionManager::DeleteClient(SOCKET socket)
 
 void SessionManager::PacketDecode(SOCKET socket)
 {
-	
+	lock_guard<mutex> guard(_mutex); //여러쓰레드가 동시접근하면 cmd 값이 달라질수있어 lock
 	MYCMD cmd;
 
 	while (::recv(socket, (char*)&cmd, sizeof(MYCMD), MSG_WAITALL) > 0)
