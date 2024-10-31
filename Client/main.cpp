@@ -17,7 +17,7 @@ Wall wall;
 Player player;
 
 //맵
-CMap map;
+CMap backgroundmap;
 
 // 오브젝트들
 vector<Object*> objects;
@@ -124,7 +124,7 @@ GLvoid drawScene()
 		// 마우스 커서 숨기기
 		ShowCursor(FALSE);
 
-		map.render(shaderProgramID);
+		backgroundmap.render(shaderProgramID);
 
 		for (int i = 0; i < objects.size(); ++i)
 			(*objects[i]).render(shaderProgramID);
@@ -311,7 +311,7 @@ void init()
 
 	player.init();
 	objects.push_back(&player);
-	map.init();
+	backgroundmap.init();
 
 
 	screen.initBuf();
