@@ -10,11 +10,9 @@ class SessionManager
 public:
 	
 	void	PrintClinetInfo(SOCKET socket, string Message);
-	
 	void	PushClient(SOCKET socket);
 	void	DeleteClient(SOCKET socket);
-	
-	int		GetClinetCount() { return _listClient.size(); }
+	int		GetClinetCount();
 
 public:
 	//실질적인 함수구현부
@@ -24,9 +22,8 @@ public:
 	// 서버에서 랜덤값을 만들어서 클라이언트로 보내는 함수 -> 클라이언트는 이 랜덤값을 가지고 블럭들을 생성함 , 서버에서는 랜덤값만 보냄
 	void MakeBlockRandomSeed();
 
-
 private:
 	mutex _mutex;
-	std::list<SOCKET> _listClient;
+	concurrent_queue<SOCKET> _listClient;
 };
 

@@ -22,15 +22,21 @@ void SessionManager::PrintClinetInfo(SOCKET socket, string message)
 
 void SessionManager::PushClient(SOCKET socket)
 {
-	lock_guard<mutex> guard(_mutex);
-	_listClient.push_back(socket);
+	_listClient.push(socket);
 }
 
 void SessionManager::DeleteClient(SOCKET socket)
 {
-	lock_guard<mutex> guard(_mutex);
-	_listClient.remove(socket);
-	::closesocket(socket);
+	if (_listClient.try_pop(socket))
+	{
+		::closesocket(socket);
+	}
+}
+
+int SessionManager::GetClinetCount()
+{
+	lock_guard<mutex> lock(mutex);
+	return _listClient.unsafe_size();
 }
 
 void SessionManager::PacketDecode(SOCKET socket)
@@ -71,7 +77,7 @@ void SessionManager::SendMessageToAllclinet(SOCKET socket)
 
 	::recv(socket, Message, sizeof(Message), 0);
 
-	for (auto it = _listClient.begin(); it != _listClient.end(); ++it)
+	for (auto it = _listClient.unsafe_begin(); it != _listClient.unsafe_end(); ++it)
 	{
 		//자기자신에게 쏠필요가없음
 		if (*it == socket)
@@ -93,7 +99,7 @@ void SessionManager::MakeBlockRandomSeed()
 		randomNum[i] = dis(gen);
 	}
 
-	for (auto it = _listClient.begin(); it != _listClient.end(); ++it)
+	for (auto it = _listClient.unsafe_begin(); it != _listClient.unsafe_begin(); ++it)
 		::send(*it, randomNum, sizeof(randomNum), 0);
 }
 
