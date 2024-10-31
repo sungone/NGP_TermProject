@@ -5,9 +5,6 @@
 std::random_device rd;
 std::mt19937 gen(rd());
 std::uniform_int_distribution<int> dis(0, 99);
-std::uniform_int_distribution<int> dis2(0, 1);
-
-
 
 void Cube::init()
 {
@@ -210,7 +207,7 @@ void Wall::makeWall(int i, int j, int cur_idx)
 			{
 				if (0 != random_num[i + cur_idx][0] % 2 and 0 != random_num[i + cur_idx][1] % 2) 
 				{
-					int empty = dis2(gen);
+					int empty = 0;
 					cube[0][empty].changeEmpty();
 
 					emptyIdx.erase(emptyIdx.begin() + empty);
@@ -271,7 +268,7 @@ void Wall::makeWall(int i, int j, int cur_idx)
 			{
 				if (0 != random_num[i + cur_idx][0] % 2 and 0 != random_num[i + cur_idx][1] % 2) 
 				{
-					int empty = dis2(gen);
+					int empty = 0;
 					cube[0][empty].change_SmallSize();
 
 					emptyIdx.erase(emptyIdx.begin() + empty);
