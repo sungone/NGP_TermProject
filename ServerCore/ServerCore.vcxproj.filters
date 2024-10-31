@@ -10,6 +10,9 @@
     <Filter Include="Clinet">
       <UniqueIdentifier>{df02ea14-9fa4-473d-a7e1-d2f6ee912e5a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="NetAdress">
+      <UniqueIdentifier>{6566aa0d-d9cb-4a9e-ab8a-658cae058d9b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">

@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "SessionManager.h"
 
-void SessionManager::PrintClinetInfo(SOCKET socket)
+void SessionManager::PrintClinetInfo(SOCKET socket, string message)
 {
 	struct sockaddr_in clientaddr;
 	char addr[256];
@@ -11,8 +11,8 @@ void SessionManager::PrintClinetInfo(SOCKET socket)
 	::getpeername(socket, (struct sockaddr*)&clientaddr, &addrlen);
 	inet_ntop(AF_INET, &clientaddr.sin_addr, addr, sizeof(addr));
 
-	cout<<"클라이언트 : IP 주소:"<<addr <<"포트 번호 : " << ntohs(clientaddr.sin_port) <<"\n";
-
+	cout << "클라이언트 : IP 주소:" << addr << "포트 번호 : " << ntohs(clientaddr.sin_port) << " ";
+	cout << message << "\n";
 }
 
 void SessionManager::PushClient(SOCKET socket)
@@ -55,12 +55,21 @@ void SessionManager::PacketDecode(SOCKET socket)
 void SessionManager::SendMessageToAllclinet(SOCKET socket)
 {
 	lock_guard<mutex> guard(_mutex);
+
+	PrintClinetInfo(socket,"으로부터 Chat요청 입력받음");
+
 	char Message[256] = { 0 };
 
 	::recv(socket, Message, sizeof(Message), 0);
 
 	for (auto it = _listClient.begin(); it != _listClient.end(); ++it)
+	{
+		//자기자신에게 쏠필요가없음
+		if (*it == socket)
+			continue;
+
 		::send(*it, Message, sizeof(Message), 0);
+	}
 }
 
 
