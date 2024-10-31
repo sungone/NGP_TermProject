@@ -21,6 +21,10 @@ public:
 	void PacketDecode(SOCKET socket); //Packet의 정보를 확인하여 실질적인 함수부를 실행해줌.
 	void SendMessageToAllclinet(SOCKET socket); //채팅
 
+	// 서버에서 랜덤값을 만들어서 클라이언트로 보내는 함수 -> 클라이언트는 이 랜덤값을 가지고 블럭들을 생성함 , 서버에서는 랜덤값만 보냄
+	void MakeBlockRandomSeed();
+
+
 private:
 	mutex _mutex;
 	std::list<SOCKET> _listClient;

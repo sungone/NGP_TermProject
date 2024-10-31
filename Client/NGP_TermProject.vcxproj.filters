@@ -55,6 +55,9 @@
     <ClCompile Include="TextManager.cpp">
       <Filter>TextManager</Filter>
     </ClCompile>
+    <ClCompile Include="ViewerPlayer.cpp">
+      <Filter>Object</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="object.h">
@@ -95,6 +98,9 @@
     </ClInclude>
     <ClInclude Include="TextManager.h">
       <Filter>TextManager</Filter>
+    </ClInclude>
+    <ClInclude Include="ViewerPlayer.h">
+      <Filter>Object</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

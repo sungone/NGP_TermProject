@@ -158,6 +158,7 @@
     <ClCompile Include="player.cpp" />
     <ClCompile Include="shader.cpp" />
     <ClCompile Include="TextManager.cpp" />
+    <ClCompile Include="ViewerPlayer.cpp" />
     <ClCompile Include="wall.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -173,6 +174,7 @@
     <ClInclude Include="stb_image.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="TextManager.h" />
+    <ClInclude Include="ViewerPlayer.h" />
     <ClInclude Include="wall.h" />
   </ItemGroup>
   <ItemGroup>

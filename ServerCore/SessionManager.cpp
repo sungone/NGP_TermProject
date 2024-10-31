@@ -1,6 +1,11 @@
 #include "pch.h"
 #include "SessionManager.h"
 
+#include <random>
+std::random_device rd;
+std::mt19937 gen(rd());
+std::uniform_int_distribution<int> dis(0, 99);
+
 void SessionManager::PrintClinetInfo(SOCKET socket, string message)
 {
 	struct sockaddr_in clientaddr;
@@ -39,6 +44,11 @@ void SessionManager::PacketDecode(SOCKET socket)
 		case ClientInfoData:
 			break;
 		case BlockData:
+
+			if (GetClinetCount())
+			{
+				MakeBlockRandomSeed();
+			}
 			break;
 		case ChattingData:
 			SendMessageToAllclinet(socket); 
@@ -71,5 +81,21 @@ void SessionManager::SendMessageToAllclinet(SOCKET socket)
 	}
 
 }
+
+void SessionManager::MakeBlockRandomSeed()
+{
+	char randomNum[108];
+	int col = 36;
+	int row = 3;
+
+	for (int i = 0; i < (col * row); ++i)
+	{
+		randomNum[i] = dis(gen);
+	}
+
+	for (auto it = _listClient.begin(); it != _listClient.end(); ++it)
+		::send(*it, randomNum, sizeof(randomNum), 0);
+}
+
 
 
