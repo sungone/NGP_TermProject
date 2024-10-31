@@ -8,10 +8,17 @@
 class SessionManager
 {
 public:
+<<<<<<< Updated upstream
 	void	PrintClinetInfo(SOCKET socket);
 	void	PushClient(SOCKET socket);
 	void	DeleteClient(SOCKET socket);
 	int		GetClinetCount() { return _listClient.size(); }
+=======
+	void	PrintClinetInfo(SOCKET socket, string Message);
+	void	PushClient(SOCKET socket);
+	void	DeleteClient(SOCKET socket);
+	int		GetClinetCount();
+>>>>>>> Stashed changes
 
 public:
 	//실질적인 함수구현부
@@ -21,7 +28,7 @@ public:
 
 
 private:
-	mutex _mutex;
-	std::list<SOCKET> _listClient;
+	mutex _queueLock; 
+	concurrent_queue<SOCKET> _clientQueue; 
 };
 

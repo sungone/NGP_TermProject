@@ -22,8 +22,13 @@ int main()
 	while (true)
 	{
 		clientSocket = ::accept(listenSocket, (SOCKADDR*)&clientaddr, &nAddrLen);
+<<<<<<< Updated upstream
 		if (clientSocket == INVALID_SOCKET)
 			ErrorHandler("클라이언트 통신 소켓을 생성할 수 없습니다.");
+=======
+
+		if (clientSocket == INVALID_SOCKET) ErrorHandler("클라이언트 통신 소켓을 생성할 수 없습니다.");
+>>>>>>> Stashed changes
 
 		cout << "클라이언트가 연결되었습니다." << "\n";
 		sessionManager.PrintClinetInfo(clientSocket);
@@ -33,6 +38,9 @@ int main()
 		t.detach();
 	}
 
+<<<<<<< Updated upstream
 
 
+=======
+>>>>>>> Stashed changes
 }
