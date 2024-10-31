@@ -12,7 +12,7 @@ using namespace std;
 
 int main()
 {
-	SessionManager sessionManager;
+	ServerManager sessionManager;
 	Listener listener;
 	SOCKET listenSocket = listener.Init();
 

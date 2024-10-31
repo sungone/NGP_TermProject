@@ -4,14 +4,14 @@
     <Filter Include="Utils">
       <UniqueIdentifier>{7fa4e19b-9e86-40dc-b4ec-09835a32eb13}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Listener">
-      <UniqueIdentifier>{81516da8-0eed-4631-9777-9ce356d534dc}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Clinet">
       <UniqueIdentifier>{df02ea14-9fa4-473d-a7e1-d2f6ee912e5a}</UniqueIdentifier>
     </Filter>
     <Filter Include="ThreadManager">
       <UniqueIdentifier>{62070111-292d-453a-82ba-7df325d05bcc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Server">
+      <UniqueIdentifier>{81516da8-0eed-4631-9777-9ce356d534dc}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -22,10 +22,7 @@
       <Filter>Utils</Filter>
     </ClInclude>
     <ClInclude Include="Listener.h">
-      <Filter>Listener</Filter>
-    </ClInclude>
-    <ClInclude Include="SessionManager.h">
-      <Filter>Clinet</Filter>
+      <Filter>Server</Filter>
     </ClInclude>
     <ClInclude Include="PacketStructer.h">
       <Filter>Utils</Filter>
@@ -39,16 +36,19 @@
     <ClInclude Include="ThreadManager.h">
       <Filter>ThreadManager</Filter>
     </ClInclude>
+    <ClInclude Include="ServerManager.h">
+      <Filter>Server</Filter>
+    </ClInclude>
+    <ClInclude Include="ClientManager.h">
+      <Filter>Clinet</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
       <Filter>Utils</Filter>
     </ClCompile>
     <ClCompile Include="Listener.cpp">
-      <Filter>Listener</Filter>
-    </ClCompile>
-    <ClCompile Include="SessionManager.cpp">
-      <Filter>Clinet</Filter>
+      <Filter>Server</Filter>
     </ClCompile>
     <ClCompile Include="PacketStructer.cpp">
       <Filter>Utils</Filter>
@@ -58,6 +58,12 @@
     </ClCompile>
     <ClCompile Include="ThreadManager.cpp">
       <Filter>ThreadManager</Filter>
+    </ClCompile>
+    <ClCompile Include="ServerManager.cpp">
+      <Filter>Server</Filter>
+    </ClCompile>
+    <ClCompile Include="ClientManager.cpp">
+      <Filter>Clinet</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

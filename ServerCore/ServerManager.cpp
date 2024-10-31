@@ -1,12 +1,11 @@
 #include "pch.h"
-#include "SessionManager.h"
-
+#include "ServerManager.h"
 #include <random>
 std::random_device rd;
 std::mt19937 gen(rd());
 std::uniform_int_distribution<int> dis(0, 99);
 
-void SessionManager::PrintClinetInfo(SOCKET socket, string message)
+void ServerManager::PrintClinetInfo(SOCKET socket, string message)
 {
 	struct sockaddr_in clientaddr;
 	char addr[256];
@@ -20,12 +19,12 @@ void SessionManager::PrintClinetInfo(SOCKET socket, string message)
 	cout << message << "\n";
 }
 
-void SessionManager::PushClient(SOCKET socket)
+void ServerManager::PushClient(SOCKET socket)
 {
 	_listClient.push(socket);
 }
 
-void SessionManager::DeleteClient(SOCKET socket)
+void ServerManager::DeleteClient(SOCKET socket)
 {
 	if (_listClient.try_pop(socket))
 	{
@@ -33,13 +32,13 @@ void SessionManager::DeleteClient(SOCKET socket)
 	}
 }
 
-int SessionManager::GetClinetCount()
+int ServerManager::GetClinetCount()
 {
 	lock_guard<mutex> lock(mutex);
 	return _listClient.unsafe_size();
 }
 
-void SessionManager::PacketDecode(SOCKET socket)
+void ServerManager::PacketDecode(SOCKET socket)
 {
 	MYCMD cmd;
 
@@ -50,11 +49,6 @@ void SessionManager::PacketDecode(SOCKET socket)
 		case ClientInfoData:
 			break;
 		case BlockData:
-
-			if (GetClinetCount())
-			{
-				MakeBlockRandomSeed();
-			}
 			break;
 		case ChattingData:
 			SendMessageToAllclinet(socket); 
@@ -68,7 +62,7 @@ void SessionManager::PacketDecode(SOCKET socket)
 
 }
 
-void SessionManager::SendMessageToAllclinet(SOCKET socket)
+void ServerManager::SendMessageToAllclinet(SOCKET socket)
 {
 
 	PrintClinetInfo(socket,"으로부터 Chat요청 입력받음");
@@ -88,7 +82,7 @@ void SessionManager::SendMessageToAllclinet(SOCKET socket)
 
 }
 
-void SessionManager::MakeBlockRandomSeed()
+void ServerManager::MakeBlockRandomSeed()
 {
 	char randomNum[108];
 	int col = 36;
