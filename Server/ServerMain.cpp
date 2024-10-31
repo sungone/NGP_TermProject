@@ -18,7 +18,7 @@ int main()
 	SOCKADDR_IN clientaddr = { 0 };
 	int nAddrLen = sizeof(clientaddr);
 	SOCKET clientSocket;
-
+	 
 	while (true)
 	{
 		clientSocket = ::accept(listenSocket, (SOCKADDR*)&clientaddr, &nAddrLen);
