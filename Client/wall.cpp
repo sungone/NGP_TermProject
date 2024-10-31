@@ -11,7 +11,8 @@ std::uniform_int_distribution<int> dis2(0, 1);
 
 void Cube::init()
 {
-	const vector<float> CubeVertices = {
+	const vector<float> CubeVertices = 
+	{
 
 		-0.5f, 0.f, -1.f,
 		-0.2f, 0.f, -1.f,
@@ -23,6 +24,7 @@ void Cube::init()
 		-0.5f , 0.3f , -.7f,
 		-0.2f , 0.3f , -.7f,
 	};
+
 
 	vector<float> CubeColors;
 	for (int i = 0; i < 8; i++)
@@ -225,6 +227,8 @@ void Wall::makeWall(int i, int j, int cur_idx)
 			}
 		}
 	}
+
+
 	else if (cur_idx >= 10 && cur_idx <= 19) // 2스테이지
 	{
 		if (random_num[i + cur_idx][j] % 3 == 0) // Red
@@ -249,6 +253,7 @@ void Wall::makeWall(int i, int j, int cur_idx)
 				emptyIdx.push_back(vec2(2, j));
 		}
 	}
+
 	else if (cur_idx >= 20 && cur_idx <= 29) // 3스테이지
 	{
 		if (random_num[i + cur_idx][j] % 2 == 0) // Cube Size 작게 만듬
@@ -258,6 +263,7 @@ void Wall::makeWall(int i, int j, int cur_idx)
 			if (0 == i)
 				emptyIdx.push_back(vec2(0, j));
 		}
+
 		else if (0 == i) 
 		{
 

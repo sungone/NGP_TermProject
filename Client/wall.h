@@ -4,7 +4,7 @@
 typedef class Cube : public Object
 {
 private:
-	glm::mat4 cModel;
+	glm::mat4 cModel; 
 	glm::vec3 color;
 
 public:
@@ -43,8 +43,6 @@ public:
 	void init();
 	void render(GLuint shaderProgramID) override;
 	Cube getCube(int i, int j);
-
-
 
 	// 벽을 움직이는 함수들 , 게임을 플레이하는데 핵심 함수
 	// 맨 처음 오는 벽은 그냥 게임을 시작했다는 것을 알리기 위해서 충돌하지않고 그냥 지나감

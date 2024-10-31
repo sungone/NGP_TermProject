@@ -66,9 +66,12 @@ glm::mat4 projection;
 void wallUpdate();
 int wallUpdateSpeed = 20;
 
+
 void main(int argc, char** argv)
 {
 	PlaySound(L"sound/opening.wav", NULL, SND_ASYNC | SND_LOOP);//sound
+
+	
 
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA);

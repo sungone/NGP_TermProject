@@ -1,5 +1,6 @@
 #pragma comment(lib, "glew32.lib")
 #pragma comment(lib, "freeglut.lib")
+#pragma comment(lib, "ServerCore.lib")
 
 #pragma once
 #pragma warning(disable : 4996)
@@ -25,7 +26,7 @@
 #include <glm/glm.hpp>
 #include <glm/ext.hpp>
 #include <glm/gtc/matrix_transform.hpp>
-
+#include "ServerPch.h"
 using namespace std;
 using namespace glm;
 
