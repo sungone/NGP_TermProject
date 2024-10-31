@@ -17,13 +17,13 @@ void SessionManager::PrintClinetInfo(SOCKET socket, string message)
 
 void SessionManager::PushClient(SOCKET socket)
 {
-	lock_guard<mutex> guard(_mutex);
+	lock_guard<mutex> guard(_acceptLock);
 	_listClient.push_back(socket);
 }
 
 void SessionManager::DeleteClient(SOCKET socket)
 {
-	lock_guard<mutex> guard(_mutex);
+	lock_guard<mutex> guard(_acceptLock);
 	_listClient.remove(socket);
 	::closesocket(socket);
 }
@@ -41,7 +41,7 @@ void SessionManager::PacketDecode(SOCKET socket)
 		case BlockData:
 			break;
 		case ChattingData:
-			SendMessageToAllclinet(socket);
+			SendMessageToAllclinet(socket); 
 			break;
 		default:
 			ErrorHandler("알수없는 명령어 수신했습니다.");
@@ -54,7 +54,6 @@ void SessionManager::PacketDecode(SOCKET socket)
 
 void SessionManager::SendMessageToAllclinet(SOCKET socket)
 {
-	lock_guard<mutex> guard(_mutex);
 
 	PrintClinetInfo(socket,"으로부터 Chat요청 입력받음");
 
@@ -70,6 +69,7 @@ void SessionManager::SendMessageToAllclinet(SOCKET socket)
 
 		::send(*it, Message, sizeof(Message), 0);
 	}
+
 }
 
 
