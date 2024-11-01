@@ -25,7 +25,7 @@ int main()
 
 	ThreadManager::Launch([&client]()
 		{
-			client.SendMessageToAllclinet();
+			client.Update();
 		});
 
 	//메인쓰레드에서 수신 할지 / 게임루프랑 따로 뺴서 쓰레드하나더뺄지 고민중

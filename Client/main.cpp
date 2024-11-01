@@ -8,76 +8,42 @@
 #include "Light.h"
 #include "Map.h"
 #include "TextManager.h"
+#include "ThreadManager.h"
+#include "ClientData.h"
 
-// 바닥
-Base base;
-
-// 벽 ( 큐브 객체도 Wall.h 에 존재)
-Wall wall;
-
-// 플레이어
-Player player;
-
-//맵
-CMap backgroundmap;
-
-// 오브젝트들
-vector<Object*> objects;
-
-// 카메라
-Camera camera;
-void initCamera();
-CameraMode cameraMode{ THIRD_PERSON };
-
-//화면
-CImage screen;
-GLuint windowWidth{ 800 };
-GLuint windowHeight{ 800 };
-bool full{};
-bool hpBarSet[2]{};
-
-//충돌
-bool plSizeChange{};
-
-//조명
-CLight light;
-
-// 테스트용 조명
-CLight light2;
-CLight light3;
+/*****************************************
+* 변수들 전역변수 공용으로 사용하기위해  *
+* ServerCore 의 ClinetData 로 이동       *
+******************************************/
 
 // 초기화
 void init();
-
-// gl 변수
-GLclampf g_color[4] = { 0.f, 0.f, 0.f, 1.f };
-
 // gl 함수
 GLvoid drawScene(GLvoid);
 GLvoid Reshape(int w, int h);
 GLvoid keyboard(unsigned char key, int x, int y);
 GLvoid KeyboardSpecial(int, int, int);
 GLvoid Mouse(int button, int state, int x, int y);
-
+// 벽 이동 함수
+void wallUpdate();
 // 게임 전체 플레이 로직
 GLvoid update(int value);
 
-// shader 변수
-GLuint shaderProgramID;
-glm::mat4 model;
-glm::mat4 view;
-glm::mat4 projection;
+void initCamera();
 
-// 벽 이동 함수
-void wallUpdate();
-int wallUpdateSpeed = 20;
-
+//서버통신소켓 생성
+Client client;
 
 void main(int argc, char** argv)
 {
-	PlaySound(L"sound/opening.wav", NULL, SND_ASYNC | SND_LOOP);//sound
+	client.Init();
 
-	
+	ThreadManager::Launch([]()
+		{
+			client.PacketDecode();
+		});
+
+	PlaySound(L"sound/opening.wav", NULL, SND_ASYNC | SND_LOOP);//sound
 
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA);
@@ -114,6 +80,7 @@ void main(int argc, char** argv)
 
 GLvoid drawScene()
 {
+
 	glClearColor(g_color[0], g_color[1], g_color[2], g_color[3]);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glUseProgram(shaderProgramID);
@@ -262,10 +229,13 @@ GLvoid Mouse(int button, int state, int x, int y)
 				}
 				else if (507 <= x && 603 >= x and 595 <= y && 648 >= y)//exit
 					exit(-1);
+
 				else if (505 <= x && 673 >= x and 663 <= y && 711 >= y)
 				{
 					// 임시로 로비 입장 버튼이 setting 버튼으로 해놓음
 					screen.status = 6;
+					cout << "Lobby Enter" << endl;
+					client.SendMatchingStart();
 					screen.initTex();
 					PlaySound(L"sound/inGame.wav", NULL, SND_ASYNC | SND_LOOP);//sound
 				}
@@ -277,11 +247,16 @@ GLvoid Mouse(int button, int state, int x, int y)
 					screen.initTex();
 					PlaySound(L"sound/inGame.wav", NULL, SND_ASYNC | SND_LOOP);//sound
 				}
-				else if (1228 <= x && 1446 >= x and 807 <= y && 873 >= y)//exit
+
+				else if (1228 <= x && 1446 >= x and 807 <= y && 873 >= y)
+				{//exit
 					exit(-1);
+				}
+
 				else if (1216 <= x && 1618 >= x and 899 <= y && 957 >= y)
 				{
 					// 임시로 로비 입장 버튼이 setting 버튼으로 해놓음
+				/*	client.SendMatchingStart();*/
 					screen.status = 6;
 					screen.initTex();
 					PlaySound(L"sound/inGame.wav", NULL, SND_ASYNC | SND_LOOP);//sound
@@ -358,6 +333,9 @@ void initCamera()
 
 GLvoid update(int value)
 {
+
+	cout << screen.status << endl;
+
 	if (1 == screen.status or 4 == screen.status or 5 == screen.status)
 		wallUpdate();
 

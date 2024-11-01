@@ -7,9 +7,6 @@
     <Filter Include="Camera">
       <UniqueIdentifier>{70960557-54f1-4cc6-bf7f-6764752a7916}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Shader">
-      <UniqueIdentifier>{b65c726f-4fb0-40f7-94bb-464cc62f4f2e}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Utils">
       <UniqueIdentifier>{7fb111e4-e5c9-4510-bd67-2a28eda62020}</UniqueIdentifier>
     </Filter>
@@ -18,6 +15,9 @@
     </Filter>
     <Filter Include="Light">
       <UniqueIdentifier>{97cf44f7-b6f9-43a7-9a8a-89081ceb772c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TextManager\Shader">
+      <UniqueIdentifier>{b65c726f-4fb0-40f7-94bb-464cc62f4f2e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -40,7 +40,7 @@
       <Filter>Light</Filter>
     </ClCompile>
     <ClCompile Include="shader.cpp">
-      <Filter>Shader</Filter>
+      <Filter>TextManager\Shader</Filter>
     </ClCompile>
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Map.cpp">
@@ -82,7 +82,7 @@
       <Filter>Light</Filter>
     </ClInclude>
     <ClInclude Include="shaders.h">
-      <Filter>Shader</Filter>
+      <Filter>TextManager\Shader</Filter>
     </ClInclude>
     <ClInclude Include="Map.h">
       <Filter>Object</Filter>
@@ -108,10 +108,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="fragment.glsl">
-      <Filter>Shader</Filter>
+      <Filter>TextManager\Shader</Filter>
     </None>
     <None Include="vertex.glsl">
-      <Filter>Shader</Filter>
+      <Filter>TextManager\Shader</Filter>
     </None>
   </ItemGroup>
 </Project>

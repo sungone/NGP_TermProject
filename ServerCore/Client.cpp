@@ -1,5 +1,7 @@
 #include "pch.h"
 #include "Client.h"
+#include "Packet.h"
+#include "ClientData.h"
 
 Client::~Client()
 {
@@ -10,7 +12,6 @@ Client::~Client()
 
 void Client::Init()
 {
-
 
 	WSADATA wsa = { 0 };
 	if (::WSAStartup(MAKEWORD(2, 2), &wsa) != 0)
@@ -45,16 +46,20 @@ void Client::Init()
 		ErrorHandler("ERROR: 서버에 연결할 수 없습니다.");
 	}
 
-};
+}
 
 void Client::PacketDecode()
 {
 	MYCMD cmd;
-	 
+
 	while (::recv(_connectedSocket, (char*)&cmd, sizeof(MYCMD), MSG_WAITALL) > 0)
 	{
 		switch (cmd.Code) // 명령부의 해석에 따라 
 		{
+		case MatcingStartReady: //3명이 모임
+			std::cout << "매칭 준비가 완료되었습니다!" << std::endl;
+			screen.status = 1;
+			break;
 		case ClientInfoData:
 
 			break;
@@ -98,8 +103,17 @@ void Client::SendMessageToAllclinet()
 
 		//명령어 입력.
 		::send(_connectedSocket, (char*)&cmd, sizeof(cmd), 0);
-
 		//사용자가 입력한 문자열을 서버에 전송한다.
 		::send(_connectedSocket, Message, cmd.Size, 0);
 	}
 }
+
+void Client::SendMatchingStart()
+{
+	MYCMD cmd;
+	cmd.Code = MatcingStartReady;
+	cmd.Size = 0;
+	::send(_connectedSocket, (char*)&cmd, sizeof(cmd), 0);
+}
+
+
