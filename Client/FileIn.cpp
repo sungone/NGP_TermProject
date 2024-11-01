@@ -1,3 +1,4 @@
+#include "pch.h"
 #include "FileIn.h"
 
 int CFileIn::readObj(const char* fileName)
