@@ -96,8 +96,6 @@ void ServerManager::MatchingAccept(SOCKET socket)
 		cmd.Code = MatcingStartReady;
 		cmd.Size = 0;
 		
-		lock_guard<mutex> lock(_mutex);
-
 		for (auto it = _listClient.unsafe_begin(); it != _listClient.unsafe_end(); ++it)
 		{
 			::send(*it, (char*)&cmd, sizeof(cmd), 0);
