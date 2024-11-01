@@ -1,8 +1,5 @@
-<<<<<<< Updated upstream
-=======
 
 #include "pch.h"
->>>>>>> Stashed changes
 #include "shaders.h"
 #include "base.h"
 #include "wall.h"
@@ -320,18 +317,16 @@ void init()
 
 	player.init();
 	objects.push_back(&player);
-<<<<<<< Updated upstream
-=======
 
-	vPlayer1.init();
-	vPlayer1.setPosX(0.15f);
-	objects.push_back(&vPlayer1);
 
-	vPlayer2.init();
-	vPlayer2.setPosX(-0.15f);
-	objects.push_back(&vPlayer2);
+	//vPlayer1.init();
+	//vPlayer1.setPosX(0.15f);
+	//objects.push_back(&vPlayer1);
 
->>>>>>> Stashed changes
+	//vPlayer2.init();
+	//vPlayer2.setPosX(-0.15f);
+	//objects.push_back(&vPlayer2);
+
 	backgroundmap.init();
 
 
