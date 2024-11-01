@@ -4,6 +4,7 @@
 
 void ServerManager::PrintClinetInfo(SOCKET socket, string message)
 {
+#ifdef _DEBUG  // 디버그 모드에서만 실행
 	struct sockaddr_in clientaddr;
 	char addr[32];
 	int addrlen;
@@ -14,6 +15,7 @@ void ServerManager::PrintClinetInfo(SOCKET socket, string message)
 
 	cout << "클라이언트 : IP 주소:" << addr << "포트 번호 : " << ntohs(clientaddr.sin_port) << " ";
 	cout << message << "\n";
+#endif
 }
 
 void ServerManager::PushClient(SOCKET socket)
@@ -68,6 +70,8 @@ void ServerManager::PacketDecode(SOCKET socket)
 
 void ServerManager::ConnectClient(SOCKET socket)
 {
+	PrintClinetInfo(socket, "으로부터 Connection 요청 입력받음");
+
 	MYCMD cmd;
 	cmd.Code = Connect;
 	cmd.Size = 0;
@@ -81,6 +85,7 @@ void ServerManager::MatchingAccept(SOCKET socket)
 {
 	PrintClinetInfo(socket, "으로부터 Mathcing 요청 입력받음");
 
+	lock_guard<mutex> guard(_mutex);
 	_readyCount++;
 	cout << "_readyCount :" << _readyCount << "\n";
 
@@ -103,7 +108,6 @@ void ServerManager::MatchingAccept(SOCKET socket)
 void ServerManager::MathcingOff(SOCKET socket)
 {
 	PrintClinetInfo(socket, "으로부터 Mathcing 취소요청 입력받음");
-
 	_readyCount--;
 	cout << "_readyCount :" << _readyCount << "\n";
 
