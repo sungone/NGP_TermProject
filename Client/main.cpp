@@ -302,6 +302,7 @@ void init()
 	player.init();
 	objects.push_back(&player);
 
+	
 	//vPlayer1.init();
 	//vPlayer1.setPosX(0.15f);
 	//objects.push_back(&vPlayer1);
