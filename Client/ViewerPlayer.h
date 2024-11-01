@@ -20,7 +20,6 @@ public :
 		const glm::vec3& newColor,
 		const glm::vec3& newScale);
 
-	void initBuf();
 	void render(GLuint shaderProgramID) override;
 
 	void setPosX(float newPosX);

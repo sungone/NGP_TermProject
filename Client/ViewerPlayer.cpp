@@ -1,10 +1,17 @@
 #include "pch.h"
 #include "ViewerPlayer.h"
+#define CUBE_INDEX_COUNT 36
 
 void ViewerPlayer::drawP(GLuint shaderProgramID)
 {
+	pModel = glm::mat4(1.f);
+	pModel = glm::translate(pModel, glm::vec3(0.f, 0.f, 0.f));
+	pModel = glm::scale(pModel, glm::vec3(scale.x, scale.y, scale.z));
+	model = model * pModel;
+
 	glUniform3f(glGetUniformLocation(shaderProgramID, "fColor"), color.r, color.g, color.b);
 	glUniformMatrix4fv(glGetUniformLocation(shaderProgramID, "model"), 1, GL_FALSE, glm::value_ptr(model));
+	glDrawElements(GL_TRIANGLES, CUBE_INDEX_COUNT, GL_UNSIGNED_BYTE, 0);
 }
 
 void ViewerPlayer::init()
@@ -74,10 +81,7 @@ void ViewerPlayer::init()
 	//initModel(pv, playerColors, pi);
 
 	initModel(playerVertices, playerColors, playerIndices);
-	color.r = 1.0f;
-	color.g = 0.0f;
-	color.b = 0.0f;
-	initBuf();
+	initBuffer();
 }
 
 void ViewerPlayer::updateViewerPlayer(float newPosX, const glm::vec3& newColor, const glm::vec3& newScale)
@@ -90,37 +94,6 @@ void ViewerPlayer::updateViewerPlayer(float newPosX, const glm::vec3& newColor, 
 
 	scale.x = newScale.x;
 	scale.y = newScale.y;
-}
-
-void ViewerPlayer::initBuf()
-{
-	glGenVertexArrays(1, &vao);
-	glBindVertexArray(vao);
-
-	glGenBuffers(1, &vbo);
-	glBindBuffer(GL_ARRAY_BUFFER, vbo);
-	glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(float), &vertices[0], GL_STATIC_DRAW);
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), 0);
-	glEnableVertexAttribArray(0);
-
-	glGenBuffers(1, &normBo);
-	glBindBuffer(GL_ARRAY_BUFFER, normBo);
-	glBufferData(GL_ARRAY_BUFFER, normals.size() * sizeof(glm::vec3), &normals[0], GL_STATIC_DRAW);
-	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), 0);
-	glEnableVertexAttribArray(1);
-
-	glGenBuffers(1, &cbo);
-	glBindBuffer(GL_ARRAY_BUFFER, cbo);
-	glBufferData(GL_ARRAY_BUFFER, colors.size() * sizeof(float), &colors[0], GL_STATIC_DRAW);
-	glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), 0);
-	glEnableVertexAttribArray(1);
-
-	if (!indices.empty())
-	{
-		glGenBuffers(1, &ebo);
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo);
-		glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size(), &indices[0], GL_STATIC_DRAW);
-	}
 }
 
 void ViewerPlayer::render(GLuint shaderProgramID)
