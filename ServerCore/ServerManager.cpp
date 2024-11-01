@@ -46,6 +46,9 @@ void ServerManager::PacketDecode(SOCKET socket)
 	{
 		switch (cmd.Code) // 명령부의 해석에 따라 
 		{
+		case MatcingStartReady:
+			MatchingAccept(socket);
+			break;
 		case ClientInfoData:
 			break;
 		case BlockData:
@@ -60,6 +63,27 @@ void ServerManager::PacketDecode(SOCKET socket)
 
 	}
 
+}
+
+void ServerManager::MatchingAccept(SOCKET socket)
+{
+	PrintClinetInfo(socket, "으로부터 Mathcing 요청 입력받음");
+
+	_readyCount++;
+	cout << _readyCount << endl;
+
+	if (_readyCount == 2)
+	{
+		MYCMD cmd;
+
+		cmd.Code = MatcingStartReady;
+		cmd.Size = 0;
+		
+		for (auto it = _listClient.unsafe_begin(); it != _listClient.unsafe_end(); ++it)
+		{
+			::send(*it, (char*)&cmd, sizeof(cmd), 0);
+		}
+	}
 }
 
 void ServerManager::SendMessageToAllclinet(SOCKET socket,int size)

@@ -13,6 +13,9 @@
     <Filter Include="Server">
       <UniqueIdentifier>{81516da8-0eed-4631-9777-9ce356d534dc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Packet">
+      <UniqueIdentifier>{2a7e7cd7-55b8-44e0-8dba-c94ba7f03900}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
@@ -23,9 +26,6 @@
     </ClInclude>
     <ClInclude Include="Listener.h">
       <Filter>Server</Filter>
-    </ClInclude>
-    <ClInclude Include="PacketStructer.h">
-      <Filter>Utils</Filter>
     </ClInclude>
     <ClInclude Include="ErrorHandler.h">
       <Filter>Utils</Filter>
@@ -42,6 +42,15 @@
     <ClInclude Include="Client.h">
       <Filter>Clinet</Filter>
     </ClInclude>
+    <ClInclude Include="PacketStructer.h">
+      <Filter>Packet</Filter>
+    </ClInclude>
+    <ClInclude Include="Packet.h">
+      <Filter>Packet</Filter>
+    </ClInclude>
+    <ClInclude Include="ClientData.h">
+      <Filter>Clinet</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -49,9 +58,6 @@
     </ClCompile>
     <ClCompile Include="Listener.cpp">
       <Filter>Server</Filter>
-    </ClCompile>
-    <ClCompile Include="PacketStructer.cpp">
-      <Filter>Utils</Filter>
     </ClCompile>
     <ClCompile Include="ErrorHandler.cpp">
       <Filter>Utils</Filter>
@@ -63,6 +69,15 @@
       <Filter>Server</Filter>
     </ClCompile>
     <ClCompile Include="Client.cpp">
+      <Filter>Clinet</Filter>
+    </ClCompile>
+    <ClCompile Include="PacketStructer.cpp">
+      <Filter>Packet</Filter>
+    </ClCompile>
+    <ClCompile Include="Packet.cpp">
+      <Filter>Packet</Filter>
+    </ClCompile>
+    <ClCompile Include="ClientData.cpp">
       <Filter>Clinet</Filter>
     </ClCompile>
   </ItemGroup>
