@@ -1,9 +1,6 @@
 #include "pch.h"
 #include "ServerManager.h"
-#include <random>
-std::random_device rd;
-std::mt19937 gen(rd());
-std::uniform_int_distribution<int> dis(0, 99);
+
 
 void ServerManager::PrintClinetInfo(SOCKET socket, string message)
 {
@@ -56,8 +53,6 @@ void ServerManager::PacketDecode(SOCKET socket)
 			MathcingOff(socket);
 			break;
 		case ClientInfoData:
-			break;
-		case BlockData:
 			break;
 		case ChattingData:
 			SendMessageToAllclinet(socket,cmd.Size); 
@@ -139,21 +134,5 @@ void ServerManager::SendMessageToAllclinet(SOCKET socket,int size)
 	}
 
 }
-
-void ServerManager::MakeBlockRandomSeed()
-{
-	char randomNum[108];
-	int col = 36;
-	int row = 3;
-
-	for (int i = 0; i < (col * row); ++i)
-	{
-		randomNum[i] = dis(gen);
-	}
-
-	for (auto it = _listClient.unsafe_begin(); it != _listClient.unsafe_begin(); ++it)
-		::send(*it, randomNum, sizeof(randomNum), 0);
-}
-
 
 

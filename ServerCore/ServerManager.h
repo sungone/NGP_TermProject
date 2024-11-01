@@ -21,7 +21,6 @@ public:
 	void MatchingAccept(SOCKET socket); // Matching 요청 받아서 처리해줌.
 	void MathcingOff(SOCKET socket); //MachingCancle 요청 받아서 처리해줌
 	void SendMessageToAllclinet(SOCKET socket,int size); //채팅
-	void MakeBlockRandomSeed(); // 서버에서 랜덤값을 만들어서 클라이언트로 보내는 함수 -> 클라이언트는 이 랜덤값을 가지고 블럭들을 생성함 , 서버에서는 랜덤값만 보냄
 
 private:
 	mutex _mutex;

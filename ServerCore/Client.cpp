@@ -122,6 +122,7 @@ void Client::SendMessageToAllclinet()
 		cmd.Size = strlen(Message);
 		cmd.ClientID = _clientID;
 		//명령어 입력.
+
 		::send(_connectedSocket, (char*)&cmd, sizeof(cmd), 0);
 		//사용자가 입력한 문자열을 서버에 전송한다.
 		::send(_connectedSocket, Message, cmd.Size, 0);
