@@ -70,7 +70,7 @@ void ServerManager::MatchingAccept(SOCKET socket)
 	PrintClinetInfo(socket, "으로부터 Mathcing 요청 입력받음");
 
 	_readyCount++;
-	cout << _readyCount << endl;
+	cout << "_readyCount :" << _readyCount << "\n";
 
 	if (_readyCount == 2)
 	{
@@ -79,6 +79,8 @@ void ServerManager::MatchingAccept(SOCKET socket)
 		cmd.Code = MatcingStartReady;
 		cmd.Size = 0;
 		
+		lock_guard<mutex> lock(_mutex);
+
 		for (auto it = _listClient.unsafe_begin(); it != _listClient.unsafe_end(); ++it)
 		{
 			::send(*it, (char*)&cmd, sizeof(cmd), 0);
@@ -103,8 +105,8 @@ void ServerManager::SendMessageToAllclinet(SOCKET socket,int size)
 	for (auto it = _listClient.unsafe_begin(); it != _listClient.unsafe_end(); ++it)
 	{
 		//자기자신에게 쏠필요가없음
-	/*	if (*it == socket)
-			continue;*/
+		if (*it == socket)
+			continue;
 		
 		::send(*it, (char*)&cmd, sizeof(cmd),0);
 		::send(*it, Message, cmd.Size, 0);

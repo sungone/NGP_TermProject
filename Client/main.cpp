@@ -340,8 +340,6 @@ void initCamera()
 GLvoid update(int value)
 {
 
-	cout << screen.status << endl;
-
 	if (1 == screen.status or 4 == screen.status or 5 == screen.status)
 		wallUpdate();
 
