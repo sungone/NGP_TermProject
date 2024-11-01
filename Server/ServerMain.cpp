@@ -6,10 +6,6 @@
 
 using namespace std;
 
-
-
-
-
 int main()
 {
 	ServerManager sessionManager;

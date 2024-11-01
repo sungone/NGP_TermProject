@@ -68,15 +68,20 @@ void ServerManager::SendMessageToAllclinet(SOCKET socket)
 	PrintClinetInfo(socket,"으로부터 Chat요청 입력받음");
 
 	char Message[256] = { 0 };
+	MYCMD cmd;
 
-	::recv(socket, Message, sizeof(Message), 0);
+	cmd.Code = ChattingData;
+	cmd.Size = 256;
+
+	::recv(socket, Message, sizeof(Message), MSG_WAITALL);
 
 	for (auto it = _listClient.unsafe_begin(); it != _listClient.unsafe_end(); ++it)
 	{
 		//자기자신에게 쏠필요가없음
-		if (*it == socket)
-			continue;
-
+	/*	if (*it == socket)
+			continue;*/
+		
+		::send(*it, (char*)&cmd, sizeof(cmd),0);
 		::send(*it, Message, sizeof(Message), 0);
 	}
 

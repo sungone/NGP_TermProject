@@ -10,6 +10,9 @@ enum CMDCODE
 
 };
 
+
+
+
 struct MYCMD
 {
 	int Code;			//명령코드
