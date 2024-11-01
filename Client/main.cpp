@@ -48,6 +48,7 @@ CLight light;
 
 // 테스트용 조명
 CLight light2;
+CLight light3;
 
 // 초기화
 void init();
