@@ -1,9 +1,9 @@
+
 #include "pch.h"
 #include "shaders.h"
 #include "base.h"
 #include "wall.h"
 #include "player.h"
-#include "ViewerPlayer.h"
 #include "Image.h"
 #include "Light.h"
 #include "Map.h"
@@ -17,10 +17,6 @@ Wall wall;
 
 // 플레이어
 Player player;
-
-// 뷰어 플레이어 테스트용
-ViewerPlayer vPlayer1;
-ViewerPlayer vPlayer2;
 
 //맵
 CMap backgroundmap;
@@ -76,12 +72,12 @@ glm::mat4 projection;
 void wallUpdate();
 int wallUpdateSpeed = 20;
 
-// hi
-// hihi
 
 void main(int argc, char** argv)
 {
 	PlaySound(L"sound/opening.wav", NULL, SND_ASYNC | SND_LOOP);//sound
+
+	
 
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA);
@@ -186,17 +182,17 @@ GLvoid keyboard(unsigned char key, int x, int y)
 
 	case '[': // Game start , Game over 테스트 하기위함
 
-		if (1 == screen.status or 4 == screen.status or 5 == screen.status) 
+		if (1 == screen.status or 4 == screen.status or 5 == screen.status)
 		{
 			screen.status = 2;
 			PlaySound(L"sound/win.wav", NULL, SND_ASYNC | SND_LOOP);//sound
 		}
-		else if (2 == screen.status) 
+		else if (2 == screen.status)
 		{
 			screen.status = 3;
 			PlaySound(L"sound/closing.wav", NULL, SND_ASYNC | SND_LOOP);//sound
 		}
-		else if (3 == screen.status) 
+		else if (3 == screen.status)
 		{
 			screen.status = 6;
 		}
@@ -255,9 +251,9 @@ GLvoid Mouse(int button, int state, int x, int y)
 		/*cout << "x : " << x << endl;
 		cout << "y : " << y << endl << endl << endl;*/
 
-		if (0 == screen.status) 
+		if (0 == screen.status)
 		{
-			if (not full) 
+			if (not full)
 			{
 				if (513 <= x && 616 >= x and 528 <= y && 583 >= y) {//play
 					screen.status = 1;
@@ -266,15 +262,15 @@ GLvoid Mouse(int button, int state, int x, int y)
 				}
 				else if (507 <= x && 603 >= x and 595 <= y && 648 >= y)//exit
 					exit(-1);
-				else if (505 <= x && 673 >= x and 663 <= y && 711 >= y) 
+				else if (505 <= x && 673 >= x and 663 <= y && 711 >= y)
 				{
 					// 임시로 로비 입장 버튼이 setting 버튼으로 해놓음
 					screen.status = 6;
 					screen.initTex();
 					PlaySound(L"sound/inGame.wav", NULL, SND_ASYNC | SND_LOOP);//sound
-				}		
+				}
 			}
-			else 
+			else
 			{
 				if (1242 <= x && 1490 >= x and 719 <= y && 786 >= y) {//play
 					screen.status = 1;
@@ -283,7 +279,7 @@ GLvoid Mouse(int button, int state, int x, int y)
 				}
 				else if (1228 <= x && 1446 >= x and 807 <= y && 873 >= y)//exit
 					exit(-1);
-				else if (1216 <= x && 1618 >= x and 899 <= y && 957 >= y) 
+				else if (1216 <= x && 1618 >= x and 899 <= y && 957 >= y)
 				{
 					// 임시로 로비 입장 버튼이 setting 버튼으로 해놓음
 					screen.status = 6;
@@ -322,15 +318,17 @@ void init()
 	player.init();
 	objects.push_back(&player);
 
-	vPlayer1.init();
-	vPlayer1.setPosX(0.15f);
-	objects.push_back(&vPlayer1);
 
-	vPlayer2.init();
-	vPlayer2.setPosX(-0.15f);
-	objects.push_back(&vPlayer2);
-		
+	//vPlayer1.init();
+	//vPlayer1.setPosX(0.15f);
+	//objects.push_back(&vPlayer1);
+
+	//vPlayer2.init();
+	//vPlayer2.setPosX(-0.15f);
+	//objects.push_back(&vPlayer2);
+
 	backgroundmap.init();
+
 
 	screen.initBuf();
 	screen.initTex();
@@ -372,7 +370,7 @@ void wallUpdate()
 	wall.moveWall(); // 벽 움직이는 함수
 
 	if (30 == wall.cur_idx) // 게임 승리
-	{ 
+	{
 		screen.status = 2;
 		PlaySound(L"sound/win.wav", NULL, SND_ASYNC | SND_LOOP);//sound
 
@@ -381,7 +379,7 @@ void wallUpdate()
 		screen.initTex();
 	}
 	else if (3 == wall.crashCnt) // 3번 충돌  < 게임 오버 >
-	{ 
+	{
 		screen.status = 3;
 
 		PlaySound(L"sound/closing.wav", NULL, SND_ASYNC | SND_LOOP);//sound
@@ -391,13 +389,13 @@ void wallUpdate()
 		screen.initTex();
 	}
 	else if (2 == wall.crashCnt and !hpBarSet[1]) // 2번 충돌
-	{ 
+	{
 		screen.status = 5;
 		screen.initTex();
 		hpBarSet[1] = true;
 	}
 	else if (1 == wall.crashCnt and !hpBarSet[0]) // 1번 충돌
-	{ 
+	{
 		screen.status = 4;
 		screen.initTex();
 		hpBarSet[0] = true;
@@ -445,7 +443,7 @@ void wallUpdate()
 		}
 	}
 
-	if (not wall.emptyIdx.empty() and 1.3f < wall.getCube(wall.emptyIdx[0].x, wall.emptyIdx[0].y).getPos().z) 
+	if (not wall.emptyIdx.empty() and 1.3f < wall.getCube(wall.emptyIdx[0].x, wall.emptyIdx[0].y).getPos().z)
 	{
 		player.crashOnce = false;
 		wall.emptyIdx.clear();

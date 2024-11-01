@@ -39,7 +39,7 @@
     <ClInclude Include="ServerManager.h">
       <Filter>Server</Filter>
     </ClInclude>
-    <ClInclude Include="ClientManager.h">
+    <ClInclude Include="Client.h">
       <Filter>Clinet</Filter>
     </ClInclude>
   </ItemGroup>
@@ -62,7 +62,7 @@
     <ClCompile Include="ServerManager.cpp">
       <Filter>Server</Filter>
     </ClCompile>
-    <ClCompile Include="ClientManager.cpp">
+    <ClCompile Include="Client.cpp">
       <Filter>Clinet</Filter>
     </ClCompile>
   </ItemGroup>

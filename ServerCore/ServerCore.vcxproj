@@ -163,7 +163,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="ClientManager.h" />
+    <ClInclude Include="Client.h" />
     <ClInclude Include="GlobalMacro.h" />
     <ClInclude Include="PacketStructer.h" />
     <ClInclude Include="ServerManager.h" />
@@ -174,7 +174,7 @@
     <ClInclude Include="ThreadManager.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="ClientManager.cpp" />
+    <ClCompile Include="Client.cpp" />
     <ClCompile Include="PacketStructer.cpp" />
     <ClCompile Include="ServerManager.cpp" />
     <ClCompile Include="ErrorHandler.cpp" />
