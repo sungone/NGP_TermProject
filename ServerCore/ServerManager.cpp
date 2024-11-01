@@ -70,7 +70,7 @@ void ServerManager::MatchingAccept(SOCKET socket)
 	PrintClinetInfo(socket, "으로부터 Mathcing 요청 입력받음");
 
 	_readyCount++;
-	cout << _readyCount << endl;
+	cout << "_readyCount :" << _readyCount << "\n";
 
 	if (_readyCount == 2)
 	{
