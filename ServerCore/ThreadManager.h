@@ -14,5 +14,6 @@ public:
 	static void	Join();
 
 private:
+	static mutex _lock;
 	static vector<thread>	_threads;
 };

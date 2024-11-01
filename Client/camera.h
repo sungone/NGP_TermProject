@@ -1,5 +1,4 @@
 #pragma once
-#include "stdafx.h"
 
 // 카메라 모드
 enum CameraMode {

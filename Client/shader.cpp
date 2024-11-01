@@ -1,4 +1,6 @@
+#include "pch.h"
 #include "shaders.h"
+
 GLuint vertexShader;
 GLuint fragmentShader;
 

@@ -1,3 +1,4 @@
+#include "pch.h"
 #include "player.h"
 #define CUBE_INDEX_COUNT 36
 
@@ -46,6 +47,7 @@ void Player::init()
 	};
 
 	color = glm::vec3(1.0f, 0.0f, 0.0f);
+	
 	vector<float> pv;
 	vector< GLubyte>pi;
 
@@ -66,6 +68,7 @@ void Player::init()
 	initModel(pv, playerColors, pi);
 	initBuf();
 }
+
 void Player::initBuf()
 {
 	glGenVertexArrays(1, &vao);

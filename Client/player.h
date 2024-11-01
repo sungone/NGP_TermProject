@@ -17,6 +17,7 @@ public:
 
 	void init() override;
 	void render(GLuint shaderProgramID) override;
+	void initBuf();
 
 	// 플레이어 이동
 	void moveLeft();
@@ -29,6 +30,4 @@ public:
 
 	// 플레이어 크기 변경
 	void changeSize();
-
-	void initBuf();
 };

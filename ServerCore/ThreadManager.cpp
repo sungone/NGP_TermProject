@@ -6,6 +6,8 @@
 -------------------*/
 
 std::vector<std::thread> ThreadManager::_threads;
+std::mutex ThreadManager::_lock;
+
 
 ThreadManager::~ThreadManager()
 {
@@ -14,6 +16,8 @@ ThreadManager::~ThreadManager()
 
 void ThreadManager::Launch(function<void(void)> callback)
 {
+	lock_guard<mutex> guard(_lock);
+
 	_threads.push_back(thread([=]()
 		{
 			callback();

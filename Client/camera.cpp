@@ -1,3 +1,4 @@
+#include "pch.h"
 #include "camera.h"
 
 // Camera defualt constructor
