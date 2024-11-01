@@ -16,6 +16,13 @@
 * ServerCore 의 ClinetData 로 이동       *
 ******************************************/
 
+
+/******************************************
+            <Screen Status>
+ 0 : 메인 화면 1 : 인게임 스크린 (HP : 66 % ) 2 : 게임 승리 3 : 게임 오버 
+ 4 : 인게임 스크린 (HP 100) 5 : 인게임 스크린 (HP 33) 6 : 매칭 화면
+******************************************/
+
 // 초기화
 void init();
 // gl 함수
@@ -149,7 +156,7 @@ GLvoid keyboard(unsigned char key, int x, int y)
 
 	case '[': // Game start , Game over 테스트 하기위함
 
-		if (1 == screen.status or 4 == screen.status or 5 == screen.status)
+		if (1 == screen.status or 4 == screen.status or 5 == screen.status) 
 		{
 			screen.status = 2;
 			PlaySound(L"sound/win.wav", NULL, SND_ASYNC | SND_LOOP);//sound
