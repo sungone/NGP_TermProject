@@ -28,15 +28,8 @@ int main()
 			client.SendMessageToAllclinet();
 		});
 
-	ThreadManager::Launch([&client]()
-		{
-			client.PacketDecode();
-		});
-
-	while (1)
-	{
-
-	}
+	//메인쓰레드에서 수신 할지 / 게임루프랑 따로 뺴서 쓰레드하나더뺄지 고민중
+	client.PacketDecode();
 
 	return 0;
 }

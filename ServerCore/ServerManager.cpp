@@ -8,7 +8,7 @@ std::uniform_int_distribution<int> dis(0, 99);
 void ServerManager::PrintClinetInfo(SOCKET socket, string message)
 {
 	struct sockaddr_in clientaddr;
-	char addr[256];
+	char addr[32];
 	int addrlen;
 	addrlen = sizeof(clientaddr);
 
@@ -51,7 +51,7 @@ void ServerManager::PacketDecode(SOCKET socket)
 		case BlockData:
 			break;
 		case ChattingData:
-			SendMessageToAllclinet(socket); 
+			SendMessageToAllclinet(socket,cmd.Size); 
 			break;
 		default:
 			ErrorHandler("알수없는 명령어 수신했습니다.");
@@ -62,18 +62,19 @@ void ServerManager::PacketDecode(SOCKET socket)
 
 }
 
-void ServerManager::SendMessageToAllclinet(SOCKET socket)
+void ServerManager::SendMessageToAllclinet(SOCKET socket,int size)
 {
 
 	PrintClinetInfo(socket,"으로부터 Chat요청 입력받음");
 
 	char Message[256] = { 0 };
+
 	MYCMD cmd;
 
 	cmd.Code = ChattingData;
-	cmd.Size = 256;
+	cmd.Size = size; 
 
-	::recv(socket, Message, sizeof(Message), MSG_WAITALL);
+	::recv(socket, Message, cmd.Size, MSG_WAITALL);
 
 	for (auto it = _listClient.unsafe_begin(); it != _listClient.unsafe_end(); ++it)
 	{
@@ -82,7 +83,7 @@ void ServerManager::SendMessageToAllclinet(SOCKET socket)
 			continue;*/
 		
 		::send(*it, (char*)&cmd, sizeof(cmd),0);
-		::send(*it, Message, sizeof(Message), 0);
+		::send(*it, Message, cmd.Size, 0);
 	}
 
 }

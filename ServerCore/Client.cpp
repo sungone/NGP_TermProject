@@ -10,6 +10,8 @@ Client::~Client()
 
 void Client::Init()
 {
+
+
 	WSADATA wsa = { 0 };
 	if (::WSAStartup(MAKEWORD(2, 2), &wsa) != 0)
 	{
@@ -24,6 +26,14 @@ void Client::Init()
 
 	}
 
+	int nOpt = 1;
+
+	if (::setsockopt(_connectedSocket, IPPROTO_TCP, TCP_NODELAY, (char*)&nOpt, sizeof(nOpt)) == SOCKET_ERROR)
+	{
+		ErrorHandler("네이글 알고리즘 OFF 실패 .");
+	}
+
+
 	//포트 바인딩 및 연결
 	SOCKADDR_IN	svraddr = { 0 };
 	svraddr.sin_family = AF_INET;
@@ -35,7 +45,7 @@ void Client::Init()
 		ErrorHandler("ERROR: 서버에 연결할 수 없습니다.");
 	}
 
-}
+};
 
 void Client::PacketDecode()
 {
@@ -43,8 +53,6 @@ void Client::PacketDecode()
 	 
 	while (::recv(_connectedSocket, (char*)&cmd, sizeof(MYCMD), MSG_WAITALL) > 0)
 	{
-		cout << cmd.Code << "\n";
-
 		switch (cmd.Code) // 명령부의 해석에 따라 
 		{
 		case ClientInfoData:
@@ -54,7 +62,7 @@ void Client::PacketDecode()
 
 			break;
 		case ChattingData:
-			RecvMessageFromServer();
+			RecvMessageFromServer(cmd.Size);
 			break;
 		default:
 			ErrorHandler("알수없는 명령어 수신했습니다.");
@@ -67,10 +75,10 @@ void Client::PacketDecode()
 
 }
 
-void Client::RecvMessageFromServer()
+void Client::RecvMessageFromServer(int size)
 {
 	char Message[256] = { 0 };
-	int len = ::recv(_connectedSocket, Message, sizeof(Message), MSG_WAITALL);
+	int len = ::recv(_connectedSocket, Message, size, MSG_WAITALL);
 	cout << Message << "\n";
 }
 
@@ -81,17 +89,17 @@ void Client::SendMessageToAllclinet()
 		char Message[256] = { 0 };
 
 		memset(Message, 0, sizeof(Message));
-		gets_s(Message);
+		cin >> Message;
 
 		MYCMD cmd;
 
 		cmd.Code = ChattingData;
-		cmd.Size = 256;
+		cmd.Size = strlen(Message);
 
 		//명령어 입력.
 		::send(_connectedSocket, (char*)&cmd, sizeof(cmd), 0);
 
 		//사용자가 입력한 문자열을 서버에 전송한다.
-		::send(_connectedSocket, Message, sizeof(Message), 0);
+		::send(_connectedSocket, Message, cmd.Size, 0);
 	}
 }
