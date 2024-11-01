@@ -55,3 +55,6 @@ extern glm::mat4 view;
 extern glm::mat4 projection;
 
 extern int wallUpdateSpeed;
+
+//辑滚烹脚家南 积己
+extern Client client;

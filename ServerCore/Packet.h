@@ -1,5 +1,5 @@
 
-//TMEP 안씀
+//TMEP  => 안쓸수도
 class Packet
 {
 public:

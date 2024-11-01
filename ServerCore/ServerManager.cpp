@@ -46,6 +46,9 @@ void ServerManager::PacketDecode(SOCKET socket)
 	{
 		switch (cmd.Code) // 명령부의 해석에 따라 
 		{
+		case Connect:
+			ConnectClient(socket);
+			break;
 		case MatcingStartReady:
 			MatchingAccept(socket);
 			break;
@@ -67,6 +70,17 @@ void ServerManager::PacketDecode(SOCKET socket)
 	}
 
 }
+
+void ServerManager::ConnectClient(SOCKET socket)
+{
+	MYCMD cmd;
+	cmd.Code = Connect;
+	cmd.Size = 0;
+	cmd.ClientID = IDGenator++;
+
+	::send(socket, (char*)&cmd , sizeof(cmd), 0);
+}
+
 
 void ServerManager::MatchingAccept(SOCKET socket)
 {

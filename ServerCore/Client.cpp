@@ -56,8 +56,11 @@ void Client::PacketDecode()
 	{
 		switch (cmd.Code) // 명령부의 해석에 따라 
 		{
+		case Connect:
+			ClientID = cmd.ClientID;
+			break;
 		case MatcingStartReady: //3명이 모임
-			std::cout << "매칭 준비가 완료되었습니다!" << std::endl;
+			std::cout << "매칭 준비가 완료되었습니다!" << "\n";
 			screen.status = 4;
 			break;
 		case ClientInfoData:
@@ -78,6 +81,14 @@ void Client::PacketDecode()
 
 	puts("수신 스레드가 끝났습니다.");
 
+}
+
+void Client::SendConnectServer()
+{
+	MYCMD cmd;
+	cmd.Code = Connect;
+	cmd.Size = 0;
+	::send(_connectedSocket, (char*)&cmd, sizeof(cmd), 0);
 }
 
 void Client::RecvMessageFromServer(int size)
