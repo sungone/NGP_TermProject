@@ -163,9 +163,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="ClientManager.h" />
     <ClInclude Include="GlobalMacro.h" />
     <ClInclude Include="PacketStructer.h" />
-    <ClInclude Include="SessionManager.h" />
+    <ClInclude Include="ServerManager.h" />
     <ClInclude Include="ErrorHandler.h" />
     <ClInclude Include="Listener.h" />
     <ClInclude Include="pch.h" />
@@ -173,8 +174,9 @@
     <ClInclude Include="ThreadManager.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="ClientManager.cpp" />
     <ClCompile Include="PacketStructer.cpp" />
-    <ClCompile Include="SessionManager.cpp" />
+    <ClCompile Include="ServerManager.cpp" />
     <ClCompile Include="ErrorHandler.cpp" />
     <ClCompile Include="Listener.cpp" />
     <ClCompile Include="pch.cpp">

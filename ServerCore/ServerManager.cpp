@@ -1,12 +1,11 @@
 #include "pch.h"
-#include "SessionManager.h"
-
+#include "ServerManager.h"
 #include <random>
 std::random_device rd;
 std::mt19937 gen(rd());
 std::uniform_int_distribution<int> dis(0, 99);
 
-void SessionManager::PrintClinetInfo(SOCKET socket, string message)
+void ServerManager::PrintClinetInfo(SOCKET socket, string message)
 {
 	struct sockaddr_in clientaddr;
 	char addr[256];
@@ -20,20 +19,26 @@ void SessionManager::PrintClinetInfo(SOCKET socket, string message)
 	cout << message << "\n";
 }
 
-void SessionManager::PushClient(SOCKET socket)
+void ServerManager::PushClient(SOCKET socket)
 {
-	lock_guard<mutex> guard(_mutex);
-	_listClient.push_back(socket);
+	_listClient.push(socket);
 }
 
-void SessionManager::DeleteClient(SOCKET socket)
+void ServerManager::DeleteClient(SOCKET socket)
 {
-	lock_guard<mutex> guard(_mutex);
-	_listClient.remove(socket);
-	::closesocket(socket);
+	if (_listClient.try_pop(socket))
+	{
+		::closesocket(socket);
+	}
 }
 
-void SessionManager::PacketDecode(SOCKET socket)
+int ServerManager::GetClinetCount()
+{
+	lock_guard<mutex> lock(mutex);
+	return _listClient.unsafe_size();
+}
+
+void ServerManager::PacketDecode(SOCKET socket)
 {
 	MYCMD cmd;
 
@@ -44,11 +49,6 @@ void SessionManager::PacketDecode(SOCKET socket)
 		case ClientInfoData:
 			break;
 		case BlockData:
-
-			if (GetClinetCount())
-			{
-				MakeBlockRandomSeed();
-			}
 			break;
 		case ChattingData:
 			SendMessageToAllclinet(socket); 
@@ -62,7 +62,7 @@ void SessionManager::PacketDecode(SOCKET socket)
 
 }
 
-void SessionManager::SendMessageToAllclinet(SOCKET socket)
+void ServerManager::SendMessageToAllclinet(SOCKET socket)
 {
 
 	PrintClinetInfo(socket,"으로부터 Chat요청 입력받음");
@@ -71,7 +71,7 @@ void SessionManager::SendMessageToAllclinet(SOCKET socket)
 
 	::recv(socket, Message, sizeof(Message), 0);
 
-	for (auto it = _listClient.begin(); it != _listClient.end(); ++it)
+	for (auto it = _listClient.unsafe_begin(); it != _listClient.unsafe_end(); ++it)
 	{
 		//자기자신에게 쏠필요가없음
 		if (*it == socket)
@@ -82,7 +82,7 @@ void SessionManager::SendMessageToAllclinet(SOCKET socket)
 
 }
 
-void SessionManager::MakeBlockRandomSeed()
+void ServerManager::MakeBlockRandomSeed()
 {
 	char randomNum[108];
 	int col = 36;
@@ -93,7 +93,7 @@ void SessionManager::MakeBlockRandomSeed()
 		randomNum[i] = dis(gen);
 	}
 
-	for (auto it = _listClient.begin(); it != _listClient.end(); ++it)
+	for (auto it = _listClient.unsafe_begin(); it != _listClient.unsafe_begin(); ++it)
 		::send(*it, randomNum, sizeof(randomNum), 0);
 }
 

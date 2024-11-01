@@ -14,9 +14,10 @@
 #pragma comment(lib, "ws2_32.lib")
 
 #include <windows.h>
-
+#include <concurrent_queue.h>
 #include "ErrorHandler.h"
 #include "PacketStructer.h"
 #include "GlobalMacro.h"
-using namespace std;
 
+using namespace std;
+using namespace concurrency;
