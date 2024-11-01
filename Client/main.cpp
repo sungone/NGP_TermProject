@@ -46,6 +46,9 @@ bool plSizeChange{};
 //조명
 CLight light;
 
+// 테스트용 조명
+CLight light2;
+
 // 초기화
 void init();
 
