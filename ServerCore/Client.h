@@ -6,6 +6,7 @@ public:
 	~Client();
 
 	void Init();
+	void Send();
 
 public:
 	void PacketDecode(); //서버로부터 패킷을 받아서 실질적인 해석하여 실질적인 함수부를 구현.
@@ -17,7 +18,7 @@ public:
 
 
 public:
-	int ClientID;
+	int _clientID;
 private:
 
 	SOCKET _connectedSocket;

@@ -48,6 +48,13 @@ void Client::Init()
 
 }
 
+void Client::Send()
+{
+	// 여러요청들을 서버에게 보낼거임. 자기위치정보 보내기등등..
+
+
+}
+
 void Client::PacketDecode()
 {
 	MYCMD cmd;
@@ -57,7 +64,7 @@ void Client::PacketDecode()
 		switch (cmd.Code) // 명령부의 해석에 따라 
 		{
 		case Connect:
-			ClientID = cmd.ClientID;
+			_clientID = cmd.ClientID;
 			break;
 		case MatcingStartReady: //3명이 모임
 			std::cout << "매칭 준비가 완료되었습니다!" << "\n";
@@ -88,6 +95,8 @@ void Client::SendConnectServer()
 	MYCMD cmd;
 	cmd.Code = Connect;
 	cmd.Size = 0;
+	cmd.ClientID = _clientID;
+
 	::send(_connectedSocket, (char*)&cmd, sizeof(cmd), 0);
 }
 
@@ -111,7 +120,7 @@ void Client::SendMessageToAllclinet()
 
 		cmd.Code = ChattingData;
 		cmd.Size = strlen(Message);
-
+		cmd.ClientID = _clientID;
 		//명령어 입력.
 		::send(_connectedSocket, (char*)&cmd, sizeof(cmd), 0);
 		//사용자가 입력한 문자열을 서버에 전송한다.
@@ -124,6 +133,8 @@ void Client::SendMatchingStart()
 	MYCMD cmd;
 	cmd.Code = MatcingStartReady;
 	cmd.Size = 0;
+	cmd.ClientID = _clientID;
+
 	::send(_connectedSocket, (char*)&cmd, sizeof(cmd), 0);
 }
 
@@ -132,6 +143,8 @@ void Client::SendMatchignCancle()
 	MYCMD cmd;
 	cmd.Code = MatchingCancle;
 	cmd.Size = 0;
+	cmd.ClientID = _clientID;
+
 	::send(_connectedSocket, (char*)&cmd, sizeof(cmd), 0);
 }
 

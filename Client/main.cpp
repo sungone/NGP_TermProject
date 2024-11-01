@@ -50,8 +50,6 @@ void main(int argc, char** argv)
 
 	client.SendConnectServer();
 
-
-
 	PlaySound(L"sound/opening.wav", NULL, SND_ASYNC | SND_LOOP);//sound
 
 	glutInit(&argc, argv);
@@ -89,7 +87,7 @@ void main(int argc, char** argv)
 
 GLvoid drawScene()
 {
-
+	client.Send();
 
 	glClearColor(g_color[0], g_color[1], g_color[2], g_color[3]);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
