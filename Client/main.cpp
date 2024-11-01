@@ -270,12 +270,14 @@ GLvoid Mouse(int button, int state, int x, int y)
 				}
 			}
 		}
+
 		else if (screen.status == 6) // 매칭 화면 일때 - 3명을 기다리는 방
 		{
 			if (not full)
 			{
 				if (711 <= y && 799 >= y and 300 <= x && 500 >= x) // 매칭 취소 버튼 설정
 				{
+					client.SendMatchignCancle();
 					screen.status = 0;
 					screen.initTex();
 					PlaySound(L"sound/opening.wav", NULL, SND_ASYNC | SND_LOOP);//sound

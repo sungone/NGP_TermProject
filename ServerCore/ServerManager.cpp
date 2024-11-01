@@ -49,6 +49,9 @@ void ServerManager::PacketDecode(SOCKET socket)
 		case MatcingStartReady:
 			MatchingAccept(socket);
 			break;
+		case MatchingCancle:
+			MathcingOff(socket);
+			break;
 		case ClientInfoData:
 			break;
 		case BlockData:
@@ -86,6 +89,15 @@ void ServerManager::MatchingAccept(SOCKET socket)
 			::send(*it, (char*)&cmd, sizeof(cmd), 0);
 		}
 	}
+}
+
+void ServerManager::MathcingOff(SOCKET socket)
+{
+	PrintClinetInfo(socket, "으로부터 Mathcing 취소요청 입력받음");
+
+	_readyCount--;
+	cout << "_readyCount :" << _readyCount << "\n";
+
 }
 
 void ServerManager::SendMessageToAllclinet(SOCKET socket,int size)

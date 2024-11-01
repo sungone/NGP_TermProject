@@ -58,7 +58,7 @@ void Client::PacketDecode()
 		{
 		case MatcingStartReady: //3명이 모임
 			std::cout << "매칭 준비가 완료되었습니다!" << std::endl;
-			screen.status = 1;
+			screen.status = 4;
 			break;
 		case ClientInfoData:
 
@@ -112,6 +112,14 @@ void Client::SendMatchingStart()
 {
 	MYCMD cmd;
 	cmd.Code = MatcingStartReady;
+	cmd.Size = 0;
+	::send(_connectedSocket, (char*)&cmd, sizeof(cmd), 0);
+}
+
+void Client::SendMatchignCancle()
+{
+	MYCMD cmd;
+	cmd.Code = MatchingCancle;
 	cmd.Size = 0;
 	::send(_connectedSocket, (char*)&cmd, sizeof(cmd), 0);
 }

@@ -12,6 +12,8 @@ public:
 	void RecvMessageFromServer(int size);
 	void SendMessageToAllclinet(); //Ã¤ÆÃ
 	void SendMatchingStart();
+	void SendMatchignCancle();
+
 
 private:
 	
