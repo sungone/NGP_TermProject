@@ -137,4 +137,25 @@ void ServerManager::SendMessageToAllclinet(SOCKET socket,int size)
 
 }
 
+void ServerManager::BlockCollision()
+{
+}
 
+
+void ServerManager::MakeBlockSend(SOCKET socket)
+{
+}
+
+void ServerManager::PlayerInfo(SOCKET socket)
+{
+}
+
+
+void ServerManager::Restart(SOCKET socket)
+{
+}
+
+
+void ServerManager::ReturnMenu(SOCKET socket)
+{
+}

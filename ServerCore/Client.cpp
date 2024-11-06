@@ -70,12 +70,6 @@ void Client::PacketDecode()
 			std::cout << "매칭 준비가 완료되었습니다!" << "\n";
 			screen.status = 4;
 			break;
-		case ClientInfoData:
-
-			break;
-		case BlockData:
-
-			break;
 		case ChattingData:
 			RecvMessageFromServer(cmd.Size);
 			break;
@@ -147,6 +141,14 @@ void Client::SendMatchignCancle()
 	cmd.ClientID = _clientID;
 
 	::send(_connectedSocket, (char*)&cmd, sizeof(cmd), 0);
+}
+
+void Client::BlockCollision()
+{
+}
+
+void Client::PlayerInfo()
+{
 }
 
 

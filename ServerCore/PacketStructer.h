@@ -10,6 +10,8 @@ enum CMDCODE
 	ChattingData, // 채팅에 대한정보
 	MatcingStartReady, //클라이언트에서 Matching 준비완료가 됬다는 신호 / 서버에서 3명이 되서 Matching 이 준비가 완료됬다는 신호
 	MatchingCancle // 클라이언트에서 Matching 을 취소하겠다는 신호를 서버에게 보냄.
+	
+	//필요한것을 추가할예정
 };
 
 struct MYCMD
