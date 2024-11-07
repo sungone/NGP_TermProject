@@ -37,7 +37,6 @@ private:
 
 public:
 	vector<vec2> emptyIdx /*= { {0,0},{0,1},{0,2} }*/;
-	int crashCnt{};
 	int cur_idx{};
 public:
 	void init();

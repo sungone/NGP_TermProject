@@ -135,6 +135,13 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <PostBuildEvent>
+      <Command>xcopy /Y /E "$(ProjectDir)shader\*" "$(OutDir)shader\"
+xcopy /Y /E "$(ProjectDir)dlls\*" "$(OutDir)dlls\"
+xcopy /Y /E "$(ProjectDir)sound\*" "$(OutDir)sound\"
+xcopy /Y /E "$(ProjectDir)texture\*" "$(OutDir)texture\"
+xcopy /Y /E "$(ProjectDir)object\*" "$(OutDir)object\"</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -212,6 +219,11 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ServerCore\ServerCore.vcxproj">
+      <Project>{ceb883d0-6292-4caa-9a97-4d2c7932b59f}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
