@@ -133,7 +133,7 @@ void Client::SendMatchingStart()
 	::send(_connectedSocket, (char*)&cmd, sizeof(cmd), 0);
 }
 
-void Client::SendMatchignCancle()
+void Client::SendMatchingCancel()
 {
 	MYCMD cmd;
 	cmd.Code = MatchingCancle;

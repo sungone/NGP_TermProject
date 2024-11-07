@@ -25,6 +25,7 @@
 
 // 초기화
 void init();
+void gameExit();
 // gl 함수
 GLvoid drawScene(GLvoid);
 GLvoid Reshape(int w, int h);
@@ -87,6 +88,7 @@ void main(int argc, char** argv)
 	glutSpecialFunc(KeyboardSpecial);
 	glutMouseFunc(Mouse);
 	glutMainLoop();
+	atexit(gameExit);
 }
 
 GLvoid drawScene()
@@ -238,7 +240,7 @@ GLvoid Mouse(int button, int state, int x, int y)
 					screen.initTex();
 					PlaySound(L"sound/inGame.wav", NULL, SND_ASYNC | SND_LOOP);//sound
 				}
-				else if (507 <= x && 603 >= x and 595 <= y && 648 >= y)//exit
+				else if (507 <= x && 603 >= x and 595 <= y && 648 >= y)//gameExit
 					exit(-1);
 
 				else if (505 <= x && 673 >= x and 663 <= y && 711 >= y)
@@ -260,7 +262,7 @@ GLvoid Mouse(int button, int state, int x, int y)
 				}
 
 				else if (1228 <= x && 1446 >= x and 807 <= y && 873 >= y)
-				{//exit
+				{//gameExit
 					exit(-1);
 				}
 
@@ -281,7 +283,7 @@ GLvoid Mouse(int button, int state, int x, int y)
 			{
 				if (711 <= y && 799 >= y and 300 <= x && 500 >= x) // 매칭 취소 버튼 설정
 				{
-					client.SendMatchignCancle();
+					client.SendMatchingCancel();
 					screen.status = 0;
 					screen.initTex();
 					PlaySound(L"sound/opening.wav", NULL, SND_ASYNC | SND_LOOP);//sound
@@ -323,6 +325,15 @@ void init()
 
 	light.InitBuffer(shaderProgramID, camera);
 }
+void gameExit()
+{
+	cout << "Game gameExit" << endl;
+	client.SendMatchingCancel();
+	if (screen.status == 6)
+	{
+	}
+}
+
 
 void initCamera()
 {

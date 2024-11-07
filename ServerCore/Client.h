@@ -14,7 +14,7 @@ public:
 	void RecvMessageFromServer(int size); //채팅
 	void SendMessageToAllclinet(); //채팅
 	void SendMatchingStart(); //서버에게 Maching 요청
-	void SendMatchignCancle();//서버에게 Maching 취소요청
+	void SendMatchingCancel();//서버에게 Maching 취소요청
 
 	//아래는 구현해야함
 	void BlockCollision();
