@@ -73,8 +73,8 @@ void main(int argc, char** argv)
 
 	glEnable(GL_DEPTH_TEST);
 
-	char vertexFile[] = "vertex.glsl";
-	char fragmentFile[] = "fragment.glsl";
+	char vertexFile[] = "shader/vertex.glsl";
+	char fragmentFile[] = "shader/fragment.glsl";
 	shaderProgramID = initShader(vertexFile, fragmentFile);
 
 	// 초기화
@@ -354,6 +354,33 @@ GLvoid update(int value)
 	glutPostRedisplay();
 }
 
+void hpUpdate(int hpData)
+{
+	hp = hpData;
+	if (3 == hp) // 3번 충돌  < 게임 오버 >
+	{
+		screen.status = 3;
+
+		PlaySound(L"sound/closing.wav", NULL, SND_ASYNC | SND_LOOP);//sound
+
+		player.init();
+		camera.setCamera(shaderProgramID, 0, cameraMode, player.getPos());
+		screen.initTex();
+	}
+	else if (2 == hp and !hpBarSet[1]) // 2번 충돌
+	{
+		screen.status = 5;
+		screen.initTex();
+		hpBarSet[1] = true;
+	}
+	else if (1 == hp and !hpBarSet[0]) // 1번 충돌
+	{
+		screen.status = 4;
+		screen.initTex();
+		hpBarSet[0] = true;
+	}
+}
+
 void wallUpdate()
 {
 	wall.moveWall(); // 벽 움직이는 함수
@@ -366,28 +393,6 @@ void wallUpdate()
 		player.init();
 		camera.setCamera(shaderProgramID, 0, cameraMode, player.getPos());
 		screen.initTex();
-	}
-	else if (3 == wall.crashCnt) // 3번 충돌  < 게임 오버 >
-	{
-		screen.status = 3;
-
-		PlaySound(L"sound/closing.wav", NULL, SND_ASYNC | SND_LOOP);//sound
-
-		player.init();
-		camera.setCamera(shaderProgramID, 0, cameraMode, player.getPos());
-		screen.initTex();
-	}
-	else if (2 == wall.crashCnt and !hpBarSet[1]) // 2번 충돌
-	{
-		screen.status = 5;
-		screen.initTex();
-		hpBarSet[1] = true;
-	}
-	else if (1 == wall.crashCnt and !hpBarSet[0]) // 1번 충돌
-	{
-		screen.status = 4;
-		screen.initTex();
-		hpBarSet[0] = true;
 	}
 
 	if (not wall.emptyIdx.empty()) // 충돌처리 하는 로직이 들어있음
@@ -402,7 +407,7 @@ void wallUpdate()
 
 					if (0 == (wall.cur_idx - 1) / 10) {
 
-						++wall.crashCnt;
+						hpUpdate(hp + 1);
 						player.crashOnce = true;
 						break;
 					}
@@ -411,7 +416,7 @@ void wallUpdate()
 							or 1 == player.getColor().y and 1 == wall.emptyIdx[i].x
 							or 1 == player.getColor().z and 2 == wall.emptyIdx[i].x)) {
 
-							++wall.crashCnt;
+							hpUpdate(hp + 1);
 							player.crashOnce = true;
 							break;
 						}
@@ -420,7 +425,7 @@ void wallUpdate()
 						if (0 == wall.emptyIdx[i].x and not plSizeChange
 							or 1 == wall.emptyIdx[i].x) {
 
-							++wall.crashCnt;
+							hpUpdate(hp + 1);
 							player.crashOnce = true;
 							break;
 						}
