@@ -26,7 +26,7 @@ struct ClientInfoPacket
 };
 
 // 블록을 생성할 때 사용하는 랜덤 시드값
-struct BlockRamdomSeedPacket
+struct BlockCreateInfo
 {
 	int random_seed[36][3];
 };
@@ -40,7 +40,7 @@ struct MYCMD
 	union
 	{
 		ClientInfoPacket clientInfoPacket;
-		BlockRamdomSeedPacket blockRamdomSeedPacket;
+		BlockCreateInfo blockRamdomSeedPacket;
 	};
 };
 

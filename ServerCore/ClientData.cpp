@@ -26,7 +26,7 @@ GLuint windowWidth{ 800 };
 GLuint windowHeight{ 800 };
 bool full{};
 bool hpBarSet[2]{};
-int hp = 2;
+int hp = 0;
 
 // Ãæµ¹
 bool plSizeChange{};

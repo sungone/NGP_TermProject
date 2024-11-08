@@ -149,7 +149,52 @@ void Client::SendMatchingCancel()
 
 void Client::BlockCollision()
 {
+	player.crashOnce = true;
+	
+	// 블록 충돌 전송
 }
+
+void Client::BlockCreate()
+{
+	player.crashOnce = false;
+	BlockCreateInfo info;
+	// 생성 전송
+}
+
+void Client::BlockCreateReceive(BlockCreateInfo blockInfo)
+{
+	player.crashOnce = false;
+}
+
+void Client::HpUpdate(int hpData)
+{
+	// hp 업데이트
+
+	hp = hpData;
+	if (3 == hp) // 3번 충돌  < 게임 오버 >
+	{
+		screen.status = 3;
+
+		PlaySound(L"sound/closing.wav", NULL, SND_ASYNC | SND_LOOP);//sound
+
+		player.init();
+		camera.setCamera(shaderProgramID, 0, cameraMode, player.getPos());
+		screen.initTex();
+	}
+	else if (2 == hp and !hpBarSet[1]) // 2번 충돌
+	{
+		screen.status = 5;
+		screen.initTex();
+		hpBarSet[1] = true;
+	}
+	else if (1 == hp and !hpBarSet[0]) // 1번 충돌
+	{
+		screen.status = 4;
+		screen.initTex();
+		hpBarSet[0] = true;
+	}
+}
+
 
 void Client::PlayerInfo()
 {

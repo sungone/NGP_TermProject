@@ -176,6 +176,7 @@ Cube Wall::getCube(int i, int j)
 
 void Wall::moveWall()
 {
+	bool finalBlock = false;
 	for (int i = 0; i < 3; ++i)
 	{
 		for (int j = 0; j < 3; ++j)
@@ -184,22 +185,26 @@ void Wall::moveWall()
 
 			if (cube[i][j].moveFinal())
 			{
-				if (client._clientMaster)
-				{
-					wall.emptyIdx.clear();
-					//player.crashOnce = false;
-					cube[i][j].reset();
-					cube[i][j].setPosX(0.3f * j);
-					cube[i][j].setPosY(0.3f * i);
-					makeWall(i, j, cur_idx);
-				}
-
-				if (i == 2 && j == 2)
-				{
-					++cur_idx; // 현재 몇번 벽이 움직였는 지 세는 변수
-				}
+				finalBlock = true;
+				if (finalBlock)
+					break;
 			}
 		}
+		if (finalBlock)
+			break;
+	}
+	if (finalBlock && client._clientMaster)
+	{
+		++cur_idx;
+		for (int i = 0; i < 3; ++i) {
+			for (int j = 0; j < 3; ++j) {
+				cube[i][j].reset();
+				cube[i][j].setPosX(0.3f * j);
+				cube[i][j].setPosY(0.3f * i);
+				makeWall(i, j, cur_idx);
+			}
+		}
+		client.BlockCreate();
 	}
 }
 

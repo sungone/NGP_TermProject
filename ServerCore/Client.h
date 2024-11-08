@@ -1,4 +1,6 @@
 #pragma once
+#include "PacketStructer.h"
+
 class Client
 {
 public:
@@ -16,8 +18,12 @@ public:
 	void SendMatchingStart(); //서버에게 Maching 요청
 	void SendMatchingCancel();//서버에게 Maching 취소요청
 
+
 	//아래는 구현해야함
 	void BlockCollision();
+	void BlockCreate();
+	void BlockCreateReceive(BlockCreateInfo info);
+	void HpUpdate(int hp);
 	void PlayerInfo();
 public:
 	int _clientID;
