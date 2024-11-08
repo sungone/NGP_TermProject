@@ -16,13 +16,11 @@ public :
 	void init() override;
 
 	// 서버에서 받은 뷰어 객체 위치 , 색 , 크기 정보를 업데이트 하는 함수
-	void updateViewerPlayer(float newPosX, 
-		const glm::vec3& newColor,
-		const glm::vec3& newScale);
+	void updateViewerPlayerPos(float newPosX);
+	void updateViewerPlayerColor(const vec3 newColor);
+	void updateViewerPlayerScale(const vec3 newScale);
 
 	void render(GLuint shaderProgramID) override;
-
-	void setPosX(float newPosX);
 
 } ViewerPlayer;
 
