@@ -12,22 +12,15 @@ enum CMDCODE
 	//필요한것을 추가할예정
 };
 
-struct MYCMD
-{
-	int Code = 0;			//명령코드
-	int Size = 0;			//질실적인 내용부의 데이터 크기
-	int ClientID = 0;
-};
-
 // 플레이어 위치 정보 패킷
 struct ClientInfoPacket
 {
 	float pos_x;
-	
+
 	float color_r;
 	float color_g;
 	float color_b;
-	
+
 	float scale_x;
 	float scale_y;
 };
@@ -36,6 +29,19 @@ struct ClientInfoPacket
 struct BlockRamdomSeedPacket
 {
 	int random_seed[36][3];
+};
+
+
+struct MYCMD
+{
+	int Code = 0;			//명령코드
+	int Size = 0;			//질실적인 내용부의 데이터 크기
+	int ClientID = 0;
+	union
+	{
+		ClientInfoPacket clientInfoPacket;
+		BlockRamdomSeedPacket blockRamdomSeedPacket;
+	};
 };
 
 

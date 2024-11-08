@@ -30,7 +30,7 @@ private:
 	mutex _mutex;
 	concurrent_queue<SOCKET> _listClient;
 	atomic<int> _readyCount = 0;
-	atomic<int> IDGenator =1;
+	atomic<int> IDGenator = 1;
 	atomic<int> _hp = 3;
 };
 

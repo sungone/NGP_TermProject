@@ -1,5 +1,7 @@
 #include "pch.h"
 #include "wall.h"
+
+#include "ClientData.h"
 #define CUBE_INDEX_COUNT 36
 
 // ·£´ý ÇÔ¼ö
@@ -80,13 +82,14 @@ void Cube::reset()
 
 bool Cube::moveCube()
 {
-	if (pos.z >= 1.7f)
-	{
-		reset();
-		return true;
-	}
-
 	pos.z += 0.01f;
+	return false;
+}
+
+bool Cube::moveFinal()
+{
+	if (pos.z >= 1.7f)
+		return true;
 	return false;
 }
 
@@ -177,12 +180,19 @@ void Wall::moveWall()
 	{
 		for (int j = 0; j < 3; ++j)
 		{
-			if (cube[i][j].moveCube())
-			{
-				cube[i][j].setPosX(0.3f * j);
-				cube[i][j].setPosY(0.3f * i);
+			cube[i][j].moveCube();
 
-				makeWall(i, j, cur_idx);
+			if (cube[i][j].moveFinal())
+			{
+				if (client._clientMaster)
+				{
+					wall.emptyIdx.clear();
+					//player.crashOnce = false;
+					cube[i][j].reset();
+					cube[i][j].setPosX(0.3f * j);
+					cube[i][j].setPosY(0.3f * i);
+					makeWall(i, j, cur_idx);
+				}
 
 				if (i == 2 && j == 2)
 				{

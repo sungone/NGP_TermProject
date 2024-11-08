@@ -65,6 +65,10 @@ void Client::PacketDecode()
 		{
 		case Connect:
 			_clientID = cmd.ClientID;
+			if (_clientID == 1)
+				_clientMaster = true;
+			else
+				_clientMaster = false;
 			break;
 		case MatcingStartReady: //3명이 모임
 			std::cout << "매칭 준비가 완료되었습니다!" << "\n";

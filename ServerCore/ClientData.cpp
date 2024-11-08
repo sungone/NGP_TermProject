@@ -9,7 +9,7 @@ Wall wall;
 
 // 플레이어
 Player player;
-
+ViewerPlayer viewerPlayers[3];
 // 맵
 CMap backgroundmap;
 

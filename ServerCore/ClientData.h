@@ -10,6 +10,7 @@
 #include "Map.h"
 #include "TextManager.h"
 #include "Client.h"
+#include "../Client/ViewerPlayer.h"
 
 // ¹Ù´Ú
 extern Base base;
@@ -19,6 +20,7 @@ extern Wall wall;
 
 // ÇÃ·¹ÀÌ¾î
 extern Player player;
+extern ViewerPlayer viewerPlayers[3];
 
 // ¸Ê
 extern CMap backgroundmap;

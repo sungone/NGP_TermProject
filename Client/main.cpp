@@ -308,6 +308,12 @@ void init()
 	player.init();
 	objects.push_back(&player);
 
+	for (int i = 0; i < 3; i++)
+	{
+		viewerPlayers[i].init();
+		viewerPlayers[i].setPosX(-0.15f + 0.1f * i);
+		objects.push_back(&viewerPlayers[i]);
+	}
 	
 	//vPlayer1.init();
 	//vPlayer1.setPosX(0.15f);
@@ -408,13 +414,16 @@ void wallUpdate()
 
 	if (not wall.emptyIdx.empty()) // 충돌처리 하는 로직이 들어있음
 	{
-		if (not player.crashOnce and 1.25f < wall.getCube(wall.emptyIdx[0].x, wall.emptyIdx[0].y).getPos().z) {
+		if ((not player.crashOnce) and 1.25f < wall.getCube(wall.emptyIdx[0].x, wall.emptyIdx[0].y).getPos().z) {
 			for (int i{}; i < wall.emptyIdx.size(); ++i) {
 				if ((player.getPos().x/*-0.01f*/ >= wall.emptyIdx[i].y * 0.3333f - 0.5f
 					and player.getPos().x + 0.13f <= wall.emptyIdx[i].y * 0.3333f + 0.3333f - 0.5f)//pl==cube
 
 					or (player.getPos().x + 0.13f > wall.emptyIdx[i].y * 0.3333f - 0.5f
 						and player.getPos().x/*-0.01f*/ < wall.emptyIdx[i].y * 0.3333f + 0.3333f - 0.5f)) {
+
+					//int currentIndex = player.getPos().x - 1/0.3f
+					std::cout << player.getPos().x << "\n";
 
 					if (0 == (wall.cur_idx - 1) / 10) {
 
@@ -450,8 +459,7 @@ void wallUpdate()
 
 	if (not wall.emptyIdx.empty() and 1.3f < wall.getCube(wall.emptyIdx[0].x, wall.emptyIdx[0].y).getPos().z)
 	{
-		player.crashOnce = false;
-		wall.emptyIdx.clear();
+		
 	}
 }
 

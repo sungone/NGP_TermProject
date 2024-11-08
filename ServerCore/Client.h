@@ -21,6 +21,7 @@ public:
 	void PlayerInfo();
 public:
 	int _clientID;
+	bool _clientMaster = false;
 private:
 	SOCKET _connectedSocket;
 };

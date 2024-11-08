@@ -14,7 +14,8 @@ public:
 
 	// 큐브를 움직이고 큐브가 끝에 도착하면 다시 처음 자리로 리셋해주는 함수
 	void reset();
-	bool moveCube(); 
+	bool moveCube();
+	bool moveFinal();
 	 
 	// 1 스테이지를 깨기위해 필요한 블럭을 없애는 함수 - x값을 멀리 보내서 화면에 안보이게 함 (랜덤값의 나머지가 0이면 블럭을 없앰)
 	void changeEmpty();
