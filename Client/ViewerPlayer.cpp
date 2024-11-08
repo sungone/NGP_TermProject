@@ -84,14 +84,20 @@ void ViewerPlayer::init()
 	initBuffer();
 }
 
-void ViewerPlayer::updateViewerPlayer(float newPosX, const glm::vec3& newColor, const glm::vec3& newScale)
+void ViewerPlayer::updateViewerPlayerPos(float newPosX)
 {
 	pos.x = newPosX;
-	
+}
+
+void ViewerPlayer::updateViewerPlayerColor(const vec3 newColor)
+{
 	color.r = newColor.r;
 	color.g = newColor.g;
 	color.b = newColor.b;
+}
 
+void ViewerPlayer::updateViewerPlayerScale(const vec3 newScale)
+{
 	scale.x = newScale.x;
 	scale.y = newScale.y;
 }
@@ -105,9 +111,4 @@ void ViewerPlayer::render(GLuint shaderProgramID)
 	model = glm::scale(model, scale);
 
 	drawP(shaderProgramID);
-}
-
-void ViewerPlayer::setPosX(float newPosX)
-{
-	pos.x = newPosX;
 }
