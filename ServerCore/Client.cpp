@@ -12,7 +12,6 @@ Client::~Client()
 
 void Client::Init()
 {
-
 	WSADATA wsa = { 0 };
 	if (::WSAStartup(MAKEWORD(2, 2), &wsa) != 0)
 	{
@@ -45,14 +44,11 @@ void Client::Init()
 	{
 		ErrorHandler("ERROR: 서버에 연결할 수 없습니다.");
 	}
-
 }
 
 void Client::Send()
 {
 	// 여러요청들을 서버에게 보낼거임. 자기위치정보 보내기등등..
-
-
 }
 
 void Client::PacketDecode()
@@ -198,6 +194,51 @@ void Client::HpUpdate(int hpData)
 
 void Client::PlayerInfo()
 {
+}
+
+void Client::CreateClientPlayer(int ClientID)
+{
+	if (OtherClient.find(ClientID) == OtherClient.end())
+	{
+		ViewerPlayer* newPlayer = new ViewerPlayer();
+		OtherClient[ClientID] = newPlayer;
+		std::cout << "Created a new client player with ID: " << ClientID << std::endl;
+	}
+	else
+	{
+		std::cout << "Client player with ID " << ClientID << " already exists." << std::endl;
+	}
+}
+
+ViewerPlayer* Client::FindClientPlayer(int ClientID)
+{
+	auto it = OtherClient.find(ClientID);
+
+	if (it != OtherClient.end())
+	{
+		std::cout << "Found client player with ID: " << ClientID << std::endl;
+		return it->second;
+	}
+	else
+	{
+		std::cout << "Client player with ID " << ClientID << " not found." << std::endl;
+		return nullptr;
+	}
+}
+
+void Client::RemoveClientPlayer(int ClientID)
+{
+	auto it = OtherClient.find(ClientID);
+	if (it != OtherClient.end())
+	{
+		delete it->second;
+		OtherClient.erase(it);
+		std::cout << "Removed client player with ID: " << ClientID << std::endl;
+	}
+	else
+	{
+		std::cout << "Client player with ID " << ClientID << " does not exist." << std::endl;
+	}
 }
 
 
