@@ -38,6 +38,10 @@ public :
 	void RemoveClientPlayer(int ClientID);
 
 private :
-	map<int, ViewerPlayer*> OtherClient;
+	map<int, ViewerPlayer*> ViewerClient;
+
+public :
+	void DisConnectClient();
+	void DeleteOtherClient(int ClientID , bool isMaster);
 };
 

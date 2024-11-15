@@ -73,6 +73,9 @@ void Client::PacketDecode()
 		case ChattingData:
 			RecvMessageFromServer(cmd.Size);
 			break;
+		case OtherClientIdData:
+			DeleteOtherClient(cmd.ClientID , cmd.IsClientMaster);
+			break;
 		default:
 			ErrorHandler("알수없는 명령어 수신했습니다.");
 			break;
@@ -191,17 +194,17 @@ void Client::HpUpdate(int hpData)
 	}
 }
 
-
 void Client::PlayerInfo()
 {
+
 }
 
 void Client::CreateClientPlayer(int ClientID)
 {
-	if (OtherClient.find(ClientID) == OtherClient.end())
+	if (ViewerClient.find(ClientID) == ViewerClient.end())
 	{
 		ViewerPlayer* newPlayer = new ViewerPlayer();
-		OtherClient[ClientID] = newPlayer;
+		ViewerClient[ClientID] = newPlayer;
 		std::cout << "Created a new client player with ID: " << ClientID << std::endl;
 	}
 	else
@@ -212,9 +215,9 @@ void Client::CreateClientPlayer(int ClientID)
 
 ViewerPlayer* Client::FindClientPlayer(int ClientID)
 {
-	auto it = OtherClient.find(ClientID);
+	auto it = ViewerClient.find(ClientID);
 
-	if (it != OtherClient.end())
+	if (it != ViewerClient.end())
 	{
 		std::cout << "Found client player with ID: " << ClientID << std::endl;
 		return it->second;
@@ -228,17 +231,43 @@ ViewerPlayer* Client::FindClientPlayer(int ClientID)
 
 void Client::RemoveClientPlayer(int ClientID)
 {
-	auto it = OtherClient.find(ClientID);
-	if (it != OtherClient.end())
+	auto it = ViewerClient.find(ClientID);
+	if (it != ViewerClient.end())
 	{
 		delete it->second;
-		OtherClient.erase(it);
+		ViewerClient.erase(it);
 		std::cout << "Removed client player with ID: " << ClientID << std::endl;
 	}
 	else
 	{
 		std::cout << "Client player with ID " << ClientID << " does not exist." << std::endl;
 	}
+}
+
+void Client::DisConnectClient()
+{
+	if (_connectedSocket != INVALID_SOCKET)
+	{
+		MYCMD cmd;
+		cmd.Code = DisconnectClient;
+		cmd.Size = 0;
+		cmd.ClientID = _clientID;
+		cmd.IsClientMaster = _clientMaster;
+
+		::send(_connectedSocket, (char*)&cmd, sizeof(cmd), 0);
+
+		closesocket(_connectedSocket);
+	}
+}
+
+void Client::DeleteOtherClient(int ClientID, bool isMaster)
+{
+	if (isMaster)
+	{
+
+	}
+
+	RemoveClientPlayer(ClientID);
 }
 
 

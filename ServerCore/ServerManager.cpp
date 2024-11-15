@@ -59,13 +59,15 @@ void ServerManager::PacketDecode(SOCKET socket)
 		case ChattingData:
 			SendMessageToAllclinet(socket,cmd.Size); 
 			break;
+		case DisconnectClient :
+			AllClientMessageByDisconnectClient(socket , cmd.ClientID , cmd.IsClientMaster);
+			DeleteClient(socket);
+			break;
 		default:
 			ErrorHandler("알수없는 명령어 수신했습니다.");
 			break;
 		}
-
 	}
-
 }
 
 void ServerManager::ConnectClient(SOCKET socket)
@@ -79,7 +81,6 @@ void ServerManager::ConnectClient(SOCKET socket)
 
 	::send(socket, (char*)&cmd , sizeof(cmd), 0);
 }
-
 
 void ServerManager::MatchingAccept(SOCKET socket)
 {
@@ -108,7 +109,6 @@ void ServerManager::MathcingOff(SOCKET socket)
 	PrintClinetInfo(socket, "으로부터 Mathcing 취소요청 입력받음");
 	_readyCount--;
 	cout << "_readyCount :" << _readyCount << "\n";
-
 }
 
 void ServerManager::SendMessageToAllclinet(SOCKET socket,int size)
@@ -134,13 +134,11 @@ void ServerManager::SendMessageToAllclinet(SOCKET socket,int size)
 		::send(*it, (char*)&cmd, sizeof(cmd),0);
 		::send(*it, Message, cmd.Size, 0);
 	}
-
 }
 
 void ServerManager::BlockCollision()
 {
 }
-
 
 void ServerManager::MakeBlockSend(SOCKET socket)
 {
@@ -150,12 +148,28 @@ void ServerManager::PlayerInfo(SOCKET socket)
 {
 }
 
-
 void ServerManager::Restart(SOCKET socket)
 {
 }
 
-
 void ServerManager::ReturnMenu(SOCKET socket)
 {
+}
+
+void ServerManager::AllClientMessageByDisconnectClient(SOCKET socket , int clientID, bool isClientMaster)
+{
+	MYCMD cmd;
+	cmd.Code = OtherClientIdData;
+	cmd.Size = 0;
+	cmd.ClientID = clientID;
+	cmd.IsClientMaster = isClientMaster;
+
+	for (auto it = _listClient.unsafe_begin(); it != _listClient.unsafe_end(); ++it)
+	{
+		//자기자신에게 쏠필요가없음
+		if (*it == socket)
+			continue;
+
+		::send(*it, (char*)&cmd, sizeof(cmd), 0);
+	}
 }

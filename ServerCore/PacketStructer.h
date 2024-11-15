@@ -8,8 +8,11 @@ enum CMDCODE
 	BlockData, //블록에 대한 정보
 	ChattingData, // 채팅에 대한정보
 	MatcingStartReady, //클라이언트에서 Matching 준비완료가 됬다는 신호 / 서버에서 3명이 되서 Matching 이 준비가 완료됬다는 신호
-	MatchingCancle // 클라이언트에서 Matching 을 취소하겠다는 신호를 서버에게 보냄.
+	MatchingCancle, // 클라이언트에서 Matching 을 취소하겠다는 신호를 서버에게 보냄.
 	//필요한것을 추가할예정
+
+	DisconnectClient, // 인게임 중 클라이언트가 게임을 종료하였을 때 서버로 종료했다는 걸 보내줌
+	OtherClientIdData , // 클라이언트 ID , 마스터 클라이언트 여부 정보 -> 클라가 종료했을 때 나머지 클라에게 정보를 보내기 위함
 };
 
 // 플레이어 위치 정보 패킷
@@ -37,6 +40,7 @@ struct MYCMD
 	int Code = 0;			//명령코드
 	int Size = 0;			//질실적인 내용부의 데이터 크기
 	int ClientID = 0;
+	bool IsClientMaster = false;
 	union
 	{
 		ClientInfoPacket clientInfoPacket;
