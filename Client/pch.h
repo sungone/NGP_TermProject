@@ -1,9 +1,5 @@
 #pragma once
 #define _CRT_SECURE_NO_WARNINGS
-#pragma comment(lib, "glew32.lib")
-#pragma comment(lib, "freeglut.lib")
-#pragma comment(lib, "ServerCore.lib")
-
 
 #pragma warning(disable : 4996)
 
@@ -20,8 +16,6 @@
 #include <MMSystem.h> 
 #include <fstream>
 #include <sstream>
-#pragma comment(lib, "msimg32.lib")
-#pragma comment(lib, "winmm.lib")
 
 #define _USE_MATH_DEFINES
 #include <math.h>
@@ -32,5 +26,9 @@
 using namespace std;
 using namespace glm;
 
-
+#pragma comment(lib, "msimg32.lib")
+#pragma comment(lib, "winmm.lib")
+#pragma comment(lib, "glew32.lib")
+#pragma comment(lib, "freeglut.lib")
+#pragma comment(lib, "ServerCore.lib")
 

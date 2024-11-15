@@ -1,5 +1,6 @@
 #pragma once
 #include "PacketStructer.h"
+#include "ViewerPlayer.h"
 
 class Client
 {
