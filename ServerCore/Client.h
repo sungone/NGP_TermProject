@@ -19,29 +19,27 @@ public:
 	void SendMatchingStart(); //서버에게 Maching 요청
 	void SendMatchingCancel();//서버에게 Maching 취소요청
 
+	void SendPlayerInfo(); // 다른 클라이언트와 동기화를 위해 서버로 현재 플레이어의 위치 , 색깔 , 크기 정보를 보내줌
+	void RecvClientInfo(int ClientID , ClientInfoPacket cInfo); // 다른 클라이언트의 정보를 받으면 반영하는 함수
+
+	void DisConnectClient(); // 내 클라이언트의 접속을 끊는 함수
+	void DeleteOtherClient(int ClientID, bool isMaster); // 다른 클라이언트를 삭제하는 함수
+
+	void CreateClientPlayer(int ClientID); // 뷰어 클라이언트를 생성하는 함수
+	ViewerPlayer* FindClientPlayer(int ClientID); // 뷰어 클라이언트를 찾는 함수
+	void RemoveClientPlayer(int ClientID); // 뷰어 클라이언트를 없애는 함수
+
+
 	//아래는 구현해야함
 	void BlockCollision();
 	void BlockCreate();
 	void BlockCreateReceive(BlockCreateInfo info);
 	void HpUpdate(int hp);
-	void PlayerInfo();
 
 public:
 	int _clientID;
 	bool _clientMaster = false;
 private:
 	SOCKET _connectedSocket;
-
-public :
-	void CreateClientPlayer(int ClientID);
-	ViewerPlayer* FindClientPlayer(int ClientID);
-	void RemoveClientPlayer(int ClientID);
-
-private :
-	map<int, ViewerPlayer*> ViewerClient;
-
-public :
-	void DisConnectClient();
-	void DeleteOtherClient(int ClientID , bool isMaster);
 };
 

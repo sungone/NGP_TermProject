@@ -76,6 +76,9 @@ void Client::PacketDecode()
 		case OtherClientIdData:
 			DeleteOtherClient(cmd.ClientID , cmd.IsClientMaster);
 			break;
+		case ClientInfoData:
+			RecvClientInfo(cmd.ClientID , cmd.clientInfoPacket);
+			break;
 		default:
 			ErrorHandler("알수없는 명령어 수신했습니다.");
 			break;
@@ -194,17 +197,42 @@ void Client::HpUpdate(int hpData)
 	}
 }
 
-void Client::PlayerInfo()
+void Client::RecvClientInfo(int ClientID , ClientInfoPacket cInfo)
 {
+	ViewerPlayer* pViewer = FindClientPlayer(ClientID);
 
+	pViewer->setPosX(cInfo.pos_x);
+	pViewer->setColorR(cInfo.color_r);
+	pViewer->setColorG(cInfo.color_g);
+	pViewer->setColorB(cInfo.color_b);
+	pViewer->setScaleX(cInfo.scale_x);
+	pViewer->setScaleY(cInfo.scale_y);
+}
+
+void Client::SendPlayerInfo()
+{
+	MYCMD cmd;
+	cmd.Code = ClientInfoData;
+	cmd.Size = sizeof(ClientInfoPacket);
+	cmd.ClientID = _clientID;
+	cmd.IsClientMaster = _clientMaster;
+
+	cmd.clientInfoPacket.pos_x = player.getPos().x;
+	cmd.clientInfoPacket.color_r = player.getColor().r;
+	cmd.clientInfoPacket.color_g = player.getColor().g;
+	cmd.clientInfoPacket.color_b = player.getColor().b;
+	cmd.clientInfoPacket.scale_x = player.getScale().x;
+	cmd.clientInfoPacket.scale_y = player.getScale().y;
+
+	::send(_connectedSocket, (char*)&cmd, sizeof(cmd), 0);
 }
 
 void Client::CreateClientPlayer(int ClientID)
 {
-	if (ViewerClient.find(ClientID) == ViewerClient.end())
+	if (viewerPlayer.find(ClientID) == viewerPlayer.end())
 	{
 		ViewerPlayer* newPlayer = new ViewerPlayer();
-		ViewerClient[ClientID] = newPlayer;
+		viewerPlayer[ClientID] = newPlayer;
 		std::cout << "Created a new client player with ID: " << ClientID << std::endl;
 	}
 	else
@@ -215,9 +243,9 @@ void Client::CreateClientPlayer(int ClientID)
 
 ViewerPlayer* Client::FindClientPlayer(int ClientID)
 {
-	auto it = ViewerClient.find(ClientID);
+	auto it = viewerPlayer.find(ClientID);
 
-	if (it != ViewerClient.end())
+	if (it != viewerPlayer.end())
 	{
 		std::cout << "Found client player with ID: " << ClientID << std::endl;
 		return it->second;
@@ -231,11 +259,11 @@ ViewerPlayer* Client::FindClientPlayer(int ClientID)
 
 void Client::RemoveClientPlayer(int ClientID)
 {
-	auto it = ViewerClient.find(ClientID);
-	if (it != ViewerClient.end())
+	auto it = viewerPlayer.find(ClientID);
+	if (it != viewerPlayer.end())
 	{
 		delete it->second;
-		ViewerClient.erase(it);
+		viewerPlayer.erase(it);
 		std::cout << "Removed client player with ID: " << ClientID << std::endl;
 	}
 	else

@@ -308,11 +308,18 @@ void init()
 	player.init();
 	objects.push_back(&player);
 
-	for (int i = 0; i < 3; i++)
+	//for (int i = 0; i < 3; i++)
+	//{
+	//	viewerPlayers[i].init();
+	//	viewerPlayers[i].setPosX(-0.15f + 0.1f * i);
+	//	objects.push_back(&viewerPlayers[i]);
+	//}
+
+	for (auto it = viewerPlayer.begin(); it != viewerPlayer.end(); ++it)
 	{
-		viewerPlayers[i].init();
-		viewerPlayers[i].setPosX(-0.15f + 0.1f * i);
-		objects.push_back(&viewerPlayers[i]);
+		it->second->init();
+		it->second->setPosX(-0.15f + 0.1f);
+		objects.push_back(it->second);
 	}
 	
 	//vPlayer1.init();

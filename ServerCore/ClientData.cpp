@@ -7,9 +7,10 @@ Base base;
 // 벽
 Wall wall;
 
-// 플레이어
+// 플레이어들
 Player player;
-ViewerPlayer viewerPlayers[3];
+map<int, ViewerPlayer*> viewerPlayer;
+
 // 맵
 CMap backgroundmap;
 

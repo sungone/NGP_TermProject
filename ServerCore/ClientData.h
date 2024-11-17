@@ -18,9 +18,9 @@ extern Base base;
 // 벽
 extern Wall wall;
 
-// 플레이어
+// 플레이어들
 extern Player player;
-extern ViewerPlayer viewerPlayers[3];
+extern map<int, ViewerPlayer*> viewerPlayer;
 
 // 맵
 extern CMap backgroundmap;
