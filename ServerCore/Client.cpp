@@ -201,12 +201,17 @@ void Client::RecvClientInfo(int ClientID , ClientInfoPacket cInfo)
 {
 	ViewerPlayer* pViewer = FindClientPlayer(ClientID);
 
-	pViewer->setPosX(cInfo.pos_x);
+	updateViewerPosX(pViewer , cInfo.pos_x);
 	pViewer->setColorR(cInfo.color_r);
 	pViewer->setColorG(cInfo.color_g);
 	pViewer->setColorB(cInfo.color_b);
 	pViewer->setScaleX(cInfo.scale_x);
 	pViewer->setScaleY(cInfo.scale_y);
+}
+
+void Client::updateViewerPosX(ViewerPlayer* pViewer , float PosX)
+{
+	pViewer->setColorR(PosX);
 }
 
 void Client::SendPlayerInfo()
