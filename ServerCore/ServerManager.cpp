@@ -161,7 +161,6 @@ void ServerManager::BlockCollision(SOCKET socket)
 
 void ServerManager::MakeBlockSend(SOCKET socket)
 {
-
 	MYCMD cmd;
 
 	cmd.Code = ENUM::BlockDataRecv;
