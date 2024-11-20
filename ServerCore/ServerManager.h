@@ -15,8 +15,8 @@ public:
 public:
 	//실질적인 함수구현부
 	void PacketDecode(SOCKET socket); //Packet의 정보를 확인하여 실질적인 함수부를 실행해줌.
-	void ConnectClient(SOCKET socket); //요청을 받아 ID 부여해줌
-	void MatchingAccept(SOCKET socket); // Matching 요청 받아서 처리해줌.
+	void RecvConnect(SOCKET socket); //요청을 받아 ID 부여해줌
+	void StartGame(SOCKET socket); // Matching 요청 받아서 처리해줌.
 	void MathcingOff(SOCKET socket); //MachingCancle 요청 받아서 처리해줌
 	void SendMessageToAllclinet(SOCKET socket,int size); //채팅
 

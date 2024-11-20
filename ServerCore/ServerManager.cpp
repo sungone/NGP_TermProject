@@ -45,21 +45,21 @@ void ServerManager::PacketDecode(SOCKET socket)
 	{
 		switch (cmd.Code) // 명령부의 해석에 따라 
 		{
-		case Connect:
-			ConnectClient(socket);
+		case ENUM::Connect:
+			RecvConnect(socket);
 			break;
-		case MatcingStartReady:
-			MatchingAccept(socket);
+		case ENUM::StartGame:
+			StartGame(socket);
 			break;
-		case MatchingCancle:
+		case ENUM::MatchingCancle:
 			MathcingOff(socket);
 			break;
-		case ClientInfoData:
+		case ENUM::ClientInfoData:
 			break;
-		case ChattingData:
+		case ENUM::ChattingData:
 			SendMessageToAllclinet(socket,cmd.Size); 
 			break;
-		case DisconnectClient :
+		case ENUM::DisconnectClient :
 			AllClientMessageByDisconnectClient(socket , cmd.ClientID , cmd.IsClientMaster);
 			DeleteClient(socket);
 			break;
@@ -70,19 +70,19 @@ void ServerManager::PacketDecode(SOCKET socket)
 	}
 }
 
-void ServerManager::ConnectClient(SOCKET socket)
+void ServerManager::RecvConnect(SOCKET socket)
 {
 	PrintClinetInfo(socket, "으로부터 Connection 요청 입력받음");
 
 	MYCMD cmd;
-	cmd.Code = Connect;
+	cmd.Code = ENUM::Connect;
 	cmd.Size = 0;
 	cmd.ClientID = IDGenator++;
 
 	::send(socket, (char*)&cmd , sizeof(cmd), 0);
 }
 
-void ServerManager::MatchingAccept(SOCKET socket)
+void ServerManager::StartGame(SOCKET socket)
 {
 	PrintClinetInfo(socket, "으로부터 Mathcing 요청 입력받음");
 
@@ -94,7 +94,7 @@ void ServerManager::MatchingAccept(SOCKET socket)
 	{
 		MYCMD cmd;
 
-		cmd.Code = MatcingStartReady;
+		cmd.Code = ENUM::StartGame;
 		cmd.Size = 0;
 		
 		for (auto it = _listClient.unsafe_begin(); it != _listClient.unsafe_end(); ++it)
@@ -120,7 +120,7 @@ void ServerManager::SendMessageToAllclinet(SOCKET socket,int size)
 
 	MYCMD cmd;
 
-	cmd.Code = ChattingData;
+	cmd.Code = ENUM::ChattingData;
 	cmd.Size = size; 
 
 	::recv(socket, Message, cmd.Size, MSG_WAITALL);
@@ -159,7 +159,7 @@ void ServerManager::ReturnMenu(SOCKET socket)
 void ServerManager::AllClientMessageByDisconnectClient(SOCKET socket , int clientID, bool isClientMaster)
 {
 	MYCMD cmd;
-	cmd.Code = OtherClientIdData;
+	cmd.Code = ENUM::OtherClientIdData;
 	cmd.Size = 0;
 	cmd.ClientID = clientID;
 	cmd.IsClientMaster = isClientMaster;

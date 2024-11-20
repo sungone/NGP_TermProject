@@ -1,4 +1,5 @@
 
+
 #include "pch.h"
 #include "shaders.h"
 #include "base.h"
@@ -18,8 +19,8 @@
 
 
 /******************************************
-            <Screen Status>
- 0 : 메인 화면 1 : 인게임 스크린 (HP : 66 % ) 2 : 게임 승리 3 : 게임 오버 
+			<Screen Status>
+ 0 : 메인 화면 1 : 인게임 스크린 (HP : 66 % ) 2 : 게임 승리 3 : 게임 오버
  4 : 인게임 스크린 (HP 100) 5 : 인게임 스크린 (HP 33) 6 : 매칭 화면
 ******************************************/
 
@@ -53,7 +54,7 @@ void main(int argc, char** argv)
 			client.Send();
 		});
 
-	client.SendConnectServer();
+	client.SendConnect();
 
 	PlaySound(L"sound/opening.wav", NULL, SND_ASYNC | SND_LOOP);//sound
 
@@ -162,7 +163,7 @@ GLvoid keyboard(unsigned char key, int x, int y)
 
 	case '[': // Game start , Game over 테스트 하기위함
 
-		if (1 == screen.status or 4 == screen.status or 5 == screen.status) 
+		if (1 == screen.status or 4 == screen.status or 5 == screen.status)
 		{
 			screen.status = 2;
 			PlaySound(L"sound/win.wav", NULL, SND_ASYNC | SND_LOOP);//sound
@@ -248,7 +249,7 @@ GLvoid Mouse(int button, int state, int x, int y)
 					// 임시로 로비 입장 버튼이 setting 버튼으로 해놓음
 					screen.status = 6;
 					cout << "Lobby Enter" << endl;
-					client.SendMatchingStart();
+					client.SendStartGame();
 					screen.initTex();
 					PlaySound(L"sound/inGame.wav", NULL, SND_ASYNC | SND_LOOP);//sound
 				}
@@ -321,7 +322,7 @@ void init()
 		it->second->setPosX(-0.15f + 0.1f);
 		objects.push_back(it->second);
 	}
-	
+
 	//vPlayer1.init();
 	//vPlayer1.setPosX(0.15f);
 	//objects.push_back(&vPlayer1);
@@ -432,7 +433,7 @@ void wallUpdate()
 
 	if (not wall.emptyIdx.empty() and 1.3f < wall.getCube(wall.emptyIdx[0].x, wall.emptyIdx[0].y).getPos().z)
 	{
-		
+
 	}
 }
 

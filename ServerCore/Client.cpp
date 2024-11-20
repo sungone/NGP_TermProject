@@ -59,25 +59,20 @@ void Client::PacketDecode()
 	{
 		switch (cmd.Code) // 명령부의 해석에 따라 
 		{
-		case Connect:
-			_clientID = cmd.ClientID;
-			if (_clientID == 1)
-				_clientMaster = true;
-			else
-				_clientMaster = false;
+		case ENUM::Connect:
+			RecvConnect(cmd);
 			break;
-		case MatcingStartReady: //3명이 모임
-			std::cout << "매칭 준비가 완료되었습니다!" << "\n";
-			screen.status = 4;
+		case ENUM::StartGame: //3명이 모임
+			RecvStartGame();
 			break;
-		case ChattingData:
-			RecvMessageFromServer(cmd.Size);
+		case ENUM::ChattingData:
+			RecvChattingData(cmd.Size);
 			break;
-		case OtherClientIdData:
-			DisConnectOtherClient(cmd.ClientID , cmd.IsClientMaster);
+		case ENUM::OtherClientIdData:
+			OtherClientIdData(cmd.ClientID , cmd.IsClientMaster);
 			break;
-		case ClientInfoData:
-			RecvClientInfo(cmd.ClientID , cmd.clientInfoPacket);
+		case ENUM::ClientInfoData:
+			ClientInfoData(cmd.ClientID , cmd.clientInfoPacket);
 			break;
 		default:
 			ErrorHandler("알수없는 명령어 수신했습니다.");
@@ -90,24 +85,44 @@ void Client::PacketDecode()
 
 }
 
-void Client::SendConnectServer()
+void Client::SendConnect()
 {
 	MYCMD cmd;
-	cmd.Code = Connect;
+	cmd.Code = ENUM::Connect;
 	cmd.Size = 0;
 	cmd.ClientID = _clientID;
 
 	::send(_connectedSocket, (char*)&cmd, sizeof(cmd), 0);
 }
 
-void Client::RecvMessageFromServer(int size)
+void Client::RecvConnect(MYCMD& cmd)
 {
-	char Message[256] = { 0 };
-	int len = ::recv(_connectedSocket, Message, size, MSG_WAITALL);
-	cout << Message << "\n";
+	_clientID = cmd.ClientID;
+	if (_clientID == 1)
+		_clientMaster = true;
+	else
+		_clientMaster = false;
 }
 
-void Client::SendMessageToAllclinet()
+
+void Client::SendStartGame()
+{
+	MYCMD cmd;
+	cmd.Code = ENUM::StartGame;
+	cmd.Size = 0;
+	cmd.ClientID = _clientID;
+
+	::send(_connectedSocket, (char*)&cmd, sizeof(cmd), 0);
+}
+
+void Client::RecvStartGame()
+{
+	std::cout << "매칭 준비가 완료되었습니다!" << "\n";
+	screen.status = 4;
+}
+
+
+void Client::SendChattingData()
 {
 	while (1)
 	{
@@ -118,7 +133,7 @@ void Client::SendMessageToAllclinet()
 
 		MYCMD cmd;
 
-		cmd.Code = ChattingData;
+		cmd.Code = ENUM::ChattingData;
 		cmd.Size = strlen(Message);
 		cmd.ClientID = _clientID;
 		//명령어 입력.
@@ -129,25 +144,26 @@ void Client::SendMessageToAllclinet()
 	}
 }
 
-void Client::SendMatchingStart()
-{
-	MYCMD cmd;
-	cmd.Code = MatcingStartReady;
-	cmd.Size = 0;
-	cmd.ClientID = _clientID;
 
-	::send(_connectedSocket, (char*)&cmd, sizeof(cmd), 0);
+void Client::RecvChattingData(int size)
+{
+	char Message[256] = { 0 };
+	int len = ::recv(_connectedSocket, Message, size, MSG_WAITALL);
+	cout << Message << "\n";
 }
+
+
 
 void Client::SendMatchingCancel()
 {
 	MYCMD cmd;
-	cmd.Code = MatchingCancle;
+	cmd.Code = ENUM::MatchingCancle;
 	cmd.Size = 0;
 	cmd.ClientID = _clientID;
 
 	::send(_connectedSocket, (char*)&cmd, sizeof(cmd), 0);
 }
+
 
 void Client::BlockCollision()
 {
@@ -197,7 +213,7 @@ void Client::HpUpdate(int hpData)
 	}
 }
 
-void Client::RecvClientInfo(int ClientID , ClientInfoPacket cInfo)
+void Client::ClientInfoData(int ClientID , ClientInfoPacket cInfo)
 {
 	ViewerPlayer* pViewer = FindClientPlayer(ClientID);
 
@@ -217,7 +233,7 @@ void Client::updateViewerPosX(ViewerPlayer* pViewer , float PosX)
 void Client::SendPlayerInfo()
 {
 	MYCMD cmd;
-	cmd.Code = ClientInfoData;
+	cmd.Code = ENUM::ClientInfoData;
 	cmd.Size = sizeof(ClientInfoPacket);
 	cmd.ClientID = _clientID;
 	cmd.IsClientMaster = _clientMaster;
@@ -282,7 +298,7 @@ void Client::DisConnectClient()
 	if (_connectedSocket != INVALID_SOCKET)
 	{
 		MYCMD cmd;
-		cmd.Code = DisconnectClient;
+		cmd.Code = ENUM::DisconnectClient;
 		cmd.Size = 0;
 		cmd.ClientID = _clientID;
 		cmd.IsClientMaster = _clientMaster;
@@ -293,7 +309,7 @@ void Client::DisConnectClient()
 	}
 }
 
-void Client::DisConnectOtherClient(int ClientID, bool isMaster)
+void Client::OtherClientIdData(int ClientID, bool isMaster)
 {
 	if (isMaster)
 	{
