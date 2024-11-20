@@ -190,7 +190,7 @@ void Client::BlockCreate()
 		}
 	for (int i = 0; i < 36; i++)
 		for (int j = 0; j < 3; j++)
-			info.random_num[36][3] = wall.random_num[i][j];
+			info.random_num[i][j] = wall.random_num[i][j];
 	//info.activeBlock = wall.emptyIdx
 	MYCMD cmd;
 	cmd.Code = ENUM::BlockDataRecv;
@@ -211,7 +211,7 @@ void Client::BlockCreateReceive()
 	wall.cur_idx = info.cur_idx;
 
 	for (int i=0;i<36;i++)
-		for (int j = 0; j < 36; j++)
+		for (int j = 0; j < 3; j++)
 		wall.random_num[i][j] = info.random_num[i][j];
 
 	for (int i = 0; i < 3; i++)
