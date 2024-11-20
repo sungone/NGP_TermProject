@@ -59,6 +59,9 @@ void ServerManager::PacketDecode(SOCKET socket)
 		case ENUM::ChattingData:
 			RecvSendChattingData(socket,cmd.Size); 
 			break;
+		case ENUM::BlockDataRecv:
+			MakeBlockSend(socket);
+			break;
 		case ENUM::DisconnectClient :
 			AllClientMessageByDisconnectClient(socket , cmd.ClientID , cmd.IsClientMaster);
 			DeleteClient(socket);
@@ -142,6 +145,26 @@ void ServerManager::BlockCollision()
 
 void ServerManager::MakeBlockSend(SOCKET socket)
 {
+
+	MYCMD cmd;
+
+	cmd.Code = ENUM::BlockDataRecv;
+	cmd.Size = 0;
+
+	BlockCreateInfo blockInfo;
+	::recv(socket, (char*)&blockInfo, sizeof(BlockCreateInfo), MSG_WAITALL);
+
+	PrintClinetInfo(socket, "으로부터 블록 정보 전파");
+
+	for (auto it = _listClient.unsafe_begin(); it != _listClient.unsafe_end(); ++it)
+	{
+		//자기자신에게 쏠필요가없음
+		if (*it == socket)
+			continue;
+
+		::send(*it, (char*)&cmd, sizeof(cmd), 0);
+		::send(*it, (char*)&blockInfo, sizeof(BlockCreateInfo), 0);
+	}
 }
 
 void ServerManager::PlayerInfo(SOCKET socket)

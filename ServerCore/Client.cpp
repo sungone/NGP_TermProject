@@ -74,6 +74,9 @@ void Client::PacketDecode()
 		case ENUM::ClientInfoData:
 			ClientInfoData(cmd.ClientID , cmd.clientInfoPacket);
 			break;
+		case ENUM::BlockDataRecv:
+			BlockCreateReceive();
+			break;
 		default:
 			ErrorHandler("알수없는 명령어 수신했습니다.");
 			break;
@@ -176,12 +179,52 @@ void Client::BlockCreate()
 {
 	player.crashOnce = false;
 	BlockCreateInfo info;
+
+	info.cur_idx = wall.cur_idx;
+	for (int i = 0; i < 3; i++)
+		for (int j = 0; j < 3; j++)
+		{
+			info.color[i][j][0] = wall.getCube(i, j).getColor().x;
+			info.color[i][j][1] = wall.getCube(i, j).getColor().y;
+			info.color[i][j][2] = wall.getCube(i, j).getColor().z;
+		}
+	for (int i = 0; i < 36; i++)
+		for (int j = 0; j < 3; j++)
+			info.random_num[36][3] = wall.random_num[i][j];
+	//info.activeBlock = wall.emptyIdx
+	MYCMD cmd;
+	cmd.Code = ENUM::BlockDataRecv;
+	cmd.Size = sizeof(BlockCreateInfo);
+	cmd.ClientID = _clientID;
+	cmd.IsClientMaster = true;
+
+	::send(_connectedSocket, (char*)&cmd, sizeof(cmd), 0);
+	::send(_connectedSocket, (char*)&info, sizeof(info), 0);
 	// 생성 전송
 }
 
-void Client::BlockCreateReceive(BlockCreateInfo blockInfo)
+void Client::BlockCreateReceive()
 {
-	player.crashOnce = false;
+	BlockCreateInfo info;
+	::recv(_connectedSocket, (char*)&info, sizeof(BlockCreateInfo), MSG_WAITALL);
+
+	wall.cur_idx = info.cur_idx;
+
+	for (int i=0;i<36;i++)
+		for (int j = 0; j < 36; j++)
+		wall.random_num[i][j] = info.random_num[i][j];
+
+	for (int i = 0; i < 3; i++)
+		for (int j = 0; j < 3; j++)
+		{
+			wall.cube[i][j].reset();
+			wall.cube[i][j].setPosX(0.3f * j);
+			wall.cube[i][j].setPosY(0.3f * i);
+			wall.cube[i][j].setColorR(info.color[i][j][0]);
+			wall.cube[i][j].setColorG(info.color[i][j][1]);
+			wall.cube[i][j].setColorB(info.color[i][j][2]);
+			wall.makeWall(i, j, wall.cur_idx);
+		}
 }
 
 void Client::HpUpdate(int hpData)

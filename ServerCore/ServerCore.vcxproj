@@ -82,12 +82,12 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>$(SolutionDir)dependency\lib\</OutDir>
-    <IncludePath>$(SolutionDir)Client\;$(SolutionDir)dependency\Include;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)Client\;$(SolutionDir)dependency\Include\;$(IncludePath)</IncludePath>
     <ReferencePath>$(SolutionDir)dependency\lib;$(ReferencePath)</ReferencePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>$(SolutionDir)dependency\lib\</OutDir>
-    <IncludePath>$(SolutionDir)Client\;$(SolutionDir)dependency\Include;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)Client\;$(SolutionDir)dependency\Include\;$(IncludePath)</IncludePath>
     <ReferencePath>$(SolutionDir)dependency\lib;$(ReferencePath)</ReferencePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">

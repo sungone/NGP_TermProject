@@ -156,6 +156,7 @@ void Wall::init()
 			random_num[i][j] = dis(gen);
 		}
 	}
+	emptyIdx.clear();
 }
 
 void Wall::render(GLuint shaderProgramID)

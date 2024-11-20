@@ -36,7 +36,7 @@ public:
 	//아래는 구현해야함
 	void BlockCollision();
 	void BlockCreate();
-	void BlockCreateReceive(BlockCreateInfo info);
+	void BlockCreateReceive();
 	void HpUpdate(int hp);
 
 public:
