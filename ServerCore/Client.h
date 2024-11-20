@@ -37,7 +37,7 @@ public:
 	void BlockCollision();
 	void BlockCreate();
 	void BlockCreateReceive();
-	void HpUpdate(int hp);
+	void HpUpdate();
 
 public:
 	int _clientID;

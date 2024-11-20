@@ -77,6 +77,9 @@ void Client::PacketDecode()
 		case ENUM::BlockDataRecv:
 			BlockCreateReceive();
 			break;
+		case ENUM::HPSync:
+			HpUpdate();
+			break;
 		default:
 			ErrorHandler("알수없는 명령어 수신했습니다.");
 			break;
@@ -171,7 +174,12 @@ void Client::SendMatchingCancel()
 void Client::BlockCollision()
 {
 	player.crashOnce = true;
-	
+
+	MYCMD cmd;
+	cmd.Code = ENUM::BlockCollision;
+	cmd.ClientID = _clientID;
+
+	::send(_connectedSocket, (char*)&cmd, sizeof(cmd), 0);
 	// 블록 충돌 전송
 }
 
@@ -227,11 +235,13 @@ void Client::BlockCreateReceive()
 		}
 }
 
-void Client::HpUpdate(int hpData)
+void Client::HpUpdate()
 {
 	// hp 업데이트
+	HPInfo info;
+	::recv(_connectedSocket, (char*)&info, sizeof(HPInfo), MSG_WAITALL);
+	hp = info.hp;
 
-	hp = hpData;
 	if (3 == hp) // 3번 충돌  < 게임 오버 >
 	{
 		screen.status = 3;
