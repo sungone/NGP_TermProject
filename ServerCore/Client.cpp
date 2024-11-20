@@ -74,7 +74,7 @@ void Client::PacketDecode()
 			RecvMessageFromServer(cmd.Size);
 			break;
 		case OtherClientIdData:
-			DeleteOtherClient(cmd.ClientID , cmd.IsClientMaster);
+			DisConnectOtherClient(cmd.ClientID , cmd.IsClientMaster);
 			break;
 		case ClientInfoData:
 			RecvClientInfo(cmd.ClientID , cmd.clientInfoPacket);
@@ -293,7 +293,7 @@ void Client::DisConnectClient()
 	}
 }
 
-void Client::DeleteOtherClient(int ClientID, bool isMaster)
+void Client::DisConnectOtherClient(int ClientID, bool isMaster)
 {
 	if (isMaster)
 	{

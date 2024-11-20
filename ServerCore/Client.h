@@ -25,7 +25,7 @@ public:
 	void updateViewerPosX(ViewerPlayer* pViewer , float PosX);
 
 	void DisConnectClient(); // 내 클라이언트의 접속을 끊는 함수
-	void DeleteOtherClient(int ClientID, bool isMaster); // 다른 클라이언트를 삭제하는 함수
+	void DisConnectOtherClient(int ClientID, bool isMaster); // 다른 클라이언트의 접속을 끊는 함수
 
 	void CreateClientPlayer(int ClientID); // 뷰어 클라이언트를 생성하는 함수
 	ViewerPlayer* FindClientPlayer(int ClientID); // 뷰어 클라이언트를 찾는 함수
