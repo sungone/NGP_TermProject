@@ -11,17 +11,15 @@ std::mutex ThreadManager::_lock;
 
 ThreadManager::~ThreadManager()
 {
-	Join();
+	//Join();
 }
 
 void ThreadManager::Launch(function<void(void)> callback)
 {
 	lock_guard<mutex> guard(_lock);
+	thread t(callback);
+	t.detach();
 
-	_threads.push_back(thread([=]()
-		{
-			callback();
-		}));
 }
 
 void ThreadManager::Join()

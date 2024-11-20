@@ -49,15 +49,15 @@ void ServerManager::PacketDecode(SOCKET socket)
 			RecvConnect(socket);
 			break;
 		case ENUM::StartGame:
-			StartGame(socket);
+			RecvSendStartGame(socket);
 			break;
 		case ENUM::MatchingCancle:
-			MathcingOff(socket);
+			RecvMathcingCancle(socket);
 			break;
 		case ENUM::ClientInfoData:
 			break;
 		case ENUM::ChattingData:
-			SendMessageToAllclinet(socket,cmd.Size); 
+			RecvSendChattingData(socket,cmd.Size); 
 			break;
 		case ENUM::DisconnectClient :
 			AllClientMessageByDisconnectClient(socket , cmd.ClientID , cmd.IsClientMaster);
@@ -82,7 +82,7 @@ void ServerManager::RecvConnect(SOCKET socket)
 	::send(socket, (char*)&cmd , sizeof(cmd), 0);
 }
 
-void ServerManager::StartGame(SOCKET socket)
+void ServerManager::RecvSendStartGame(SOCKET socket)
 {
 	PrintClinetInfo(socket, "으로부터 Mathcing 요청 입력받음");
 
@@ -104,14 +104,14 @@ void ServerManager::StartGame(SOCKET socket)
 	}
 }
 
-void ServerManager::MathcingOff(SOCKET socket)
+void ServerManager::RecvMathcingCancle(SOCKET socket)
 {
 	PrintClinetInfo(socket, "으로부터 Mathcing 취소요청 입력받음");
 	_readyCount--;
 	cout << "_readyCount :" << _readyCount << "\n";
 }
 
-void ServerManager::SendMessageToAllclinet(SOCKET socket,int size)
+void ServerManager::RecvSendChattingData(SOCKET socket,int size)
 {
 
 	PrintClinetInfo(socket,"으로부터 Chat요청 입력받음");
