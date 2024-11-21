@@ -42,6 +42,10 @@ SOCKET Listener::Init()
 	{
 		ErrorHandler("SO_REUSEADDR 실패");
 	}
+	if (::setsockopt(_listenSocket, IPPROTO_TCP, TCP_NODELAY, (char*)&option, sizeof(bool)) == SOCKET_ERROR)
+	{
+		ErrorHandler("NODELAY실패");
+	}
 
 	if (::bind(_listenSocket, (SOCKADDR*)&serverAddr, sizeof(serverAddr)) == SOCKET_ERROR)
 	{
