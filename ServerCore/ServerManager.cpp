@@ -225,6 +225,7 @@ void ServerManager::PlayerInfo(SOCKET socket, int clientID, const ClientInfoPack
 
 void ServerManager::Restart(SOCKET socket)
 {
+
 }
 
 void ServerManager::ReturnMenu(SOCKET socket)

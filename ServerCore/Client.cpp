@@ -298,6 +298,8 @@ void Client::ClientInfoData(int ClientID , const ClientInfoPacket& cInfo)
 	updateViewerPosX(pViewer , cInfo.pos_x);
 	updateViewerColor(pViewer, cInfo.color_r, cInfo.color_g, cInfo.color_b);
 	updateViewerScale(pViewer, cInfo.scale_x, cInfo.scale_y);
+
+	cout << "클라이언트 " << ClientID << " 의 패킷정보를 받음" << '\n';
 }
 
 void Client::updateViewerPosX(ViewerPlayer* pViewer , float PosX)
