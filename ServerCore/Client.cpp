@@ -3,8 +3,14 @@
 #include "Packet.h"
 #include "ClientData.h"
 
+Client::Client()
+{
+	int a = 5;
+}
+
 Client::~Client()
 {
+	DisConnectClient();
 	::closesocket(_connectedSocket);
 	::Sleep(100);
 	::WSACleanup();
@@ -108,6 +114,8 @@ void Client::RecvConnect(MYCMD& cmd)
 		_clientMaster = true;
 	else
 		_clientMaster = false;
+
+	cout << "서버로부터 " << _clientID << " 부여 받음" << "\n";
 }
 
 void Client::SendStartGame()

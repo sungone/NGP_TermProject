@@ -16,7 +16,7 @@ ThreadManager::~ThreadManager()
 
 void ThreadManager::Launch(function<void(void)> callback)
 {
-	lock_guard<mutex> guard(_lock);
+	//lock_guard<mutex> guard(_lock);
 	thread t(callback);
 	t.detach();
 
