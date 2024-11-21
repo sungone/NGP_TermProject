@@ -213,6 +213,7 @@ void Client::BlockCreate()
 
 void Client::BlockCreateReceive()
 {
+	player.crashOnce = false;
 	BlockCreateInfo info;
 	::recv(_connectedSocket, (char*)&info, sizeof(BlockCreateInfo), MSG_WAITALL);
 
