@@ -104,7 +104,6 @@ void ServerManager::RecvConnect(SOCKET socket)
 		}
 	}
 
-
 	MYCMD cmd;
 	cmd.Code = ENUM::Connect;
 	cmd.Size = 0;

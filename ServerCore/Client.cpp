@@ -29,7 +29,6 @@ void Client::Init()
 	if (_connectedSocket == INVALID_SOCKET)
 	{
 		ErrorHandler("ERROR: 소켓을 생성할 수 없습니다.");
-
 	}
 
 	int nOpt = 1;
@@ -131,8 +130,13 @@ void Client::SendStartGame()
 void Client::RecvStartGame()
 {
 	std::cout << "매칭 준비가 완료되었습니다!" << "\n";
-	InitViewerPlayer();
-	screen.status = 4;
+
+	if (viewerPlayer.size() == 2)
+		screen.status = 4;
+	else
+	{
+		cout << "뷰어 플레이어 생성 실패" << endl;
+	}
 }
 
 void Client::SendChattingData()
@@ -177,14 +181,14 @@ void Client::SendMatchingCancel()
 	::send(_connectedSocket, (char*)&cmd, sizeof(cmd), 0);
 }
 
-void Client::InitViewerPlayer()
+void Client::InitViewerPlayer(int MyClientID)
 {
 	for (int i = 0; i < 3; ++i)
 	{
 		CreateClientPlayer(i + 1);
 	}
 
-	RemoveClientPlayer(_clientID);
+	RemoveClientPlayer(MyClientID);
 }
 
 void Client::BlockCollision()

@@ -1,6 +1,6 @@
 #pragma once
 #include "PacketStructer.h"
-#include "ViewerPlayer.h"
+class ViewerPlayer;
 
 class Client
 {
@@ -21,7 +21,7 @@ public:
 	void SendStartGame(); //서버에게 Maching 요청
 	void SendMatchingCancel();//서버에게 Maching 취소요청
 
-	void InitViewerPlayer();
+	void InitViewerPlayer(int MyClientID);
 
 	void SendPlayerInfo(); // 다른 클라이언트와 동기화를 위해 서버로 현재 플레이어의 위치 , 색깔 , 크기 정보를 보내줌
 	void ClientInfoData(int ClientID , const ClientInfoPacket& cInfo); // 다른 클라이언트의 정보를 받으면 반영하는 함수

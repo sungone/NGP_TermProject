@@ -319,6 +319,8 @@ void init()
 	//	objects.push_back(&viewerPlayers[i]);
 	//}
 
+	client.InitViewerPlayer(client._clientID);
+
 	for (auto it = viewerPlayer.begin(); it != viewerPlayer.end(); ++it)
 	{
 		it->second->init();
@@ -335,7 +337,6 @@ void init()
 	//objects.push_back(&vPlayer2);
 
 	backgroundmap.init();
-
 
 	screen.initBuf();
 	screen.initTex();
