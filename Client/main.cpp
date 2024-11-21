@@ -1,5 +1,6 @@
 
 
+
 #include "pch.h"
 #include "shaders.h"
 #include "base.h"
@@ -24,9 +25,10 @@
  4 : 인게임 스크린 (HP 100) 5 : 인게임 스크린 (HP 33) 6 : 매칭 화면
 ******************************************/
 
-// 초기화
+
 void init();
-void gameExit();
+//void gameExit(); // client 클라이언트 소멸자에서 호출
+
 // gl 함수
 GLvoid drawScene(GLvoid);
 GLvoid Reshape(int w, int h);
@@ -39,11 +41,10 @@ void wallUpdate();
 GLvoid update(int value);
 
 void initCamera();
-
 void main(int argc, char** argv)
 {
 	client.Init();
-
+	
 	ThreadManager::Launch([]()
 		{
 			client.PacketDecode();
@@ -53,6 +54,7 @@ void main(int argc, char** argv)
 		{
 			client.Send();
 		});
+
 
 	client.SendConnect();
 
@@ -89,7 +91,9 @@ void main(int argc, char** argv)
 	glutSpecialFunc(KeyboardSpecial);
 	glutMouseFunc(Mouse);
 	glutMainLoop();
-	atexit(gameExit);
+
+
+
 }
 
 GLvoid drawScene()
@@ -339,14 +343,7 @@ void init()
 
 	light.InitBuffer(shaderProgramID, camera);
 }
-void gameExit()
-{
-	cout << "Game gameExit" << endl;
-	client.SendMatchingCancel();
-	if (screen.status == 6)
-	{
-	}
-}
+
 
 
 void initCamera()
@@ -449,3 +446,4 @@ void wallUpdate()
 
 
 
+ 

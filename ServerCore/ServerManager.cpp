@@ -2,6 +2,15 @@
 #include "ServerManager.h"
 
 
+ServerManager::ServerManager()
+{
+	_IDGenator.resize(4, -1);
+}
+
+ServerManager::~ServerManager()
+{
+}
+
 void ServerManager::PrintClinetInfo(SOCKET socket, string message)
 {
 #ifdef _DEBUG  // 디버그 모드에서만 실행
@@ -66,7 +75,7 @@ void ServerManager::PacketDecode(SOCKET socket)
 			BlockCollision(socket);
 			break;
 		case ENUM::DisconnectClient :
-			AllClientMessageByDisconnectClient(socket , cmd.ClientID , cmd.IsClientMaster);
+			RecvSendDisconnect(socket , cmd.ClientID , cmd.IsClientMaster);
 			DeleteClient(socket);
 			break;
 		default:
@@ -78,12 +87,27 @@ void ServerManager::PacketDecode(SOCKET socket)
 
 void ServerManager::RecvConnect(SOCKET socket)
 {
+	lock_guard<mutex> gard(_mutex);
 	PrintClinetInfo(socket, "으로부터 Connection 요청 입력받음");
+
+	//ID부여
+	int ID = 999;
+
+	for (int i = 1; i <= 3; ++i)
+	{
+		if (_IDGenator[i] == -1)
+		{
+			ID = i;
+			_IDGenator[i] = ID;
+			break;
+		}
+	}
+
 
 	MYCMD cmd;
 	cmd.Code = ENUM::Connect;
 	cmd.Size = 0;
-	cmd.ClientID = IDGenator++;
+	cmd.ClientID = ID;
 
 	::send(socket, (char*)&cmd , sizeof(cmd), 0);
 }
@@ -194,13 +218,27 @@ void ServerManager::ReturnMenu(SOCKET socket)
 {
 }
 
-void ServerManager::AllClientMessageByDisconnectClient(SOCKET socket , int clientID, bool isClientMaster)
+void ServerManager::RecvSendDisconnect(SOCKET socket , int clientID, bool isClientMaster)
 {
+	lock_guard<mutex> gard(_mutex);
+
 	MYCMD cmd;
 	cmd.Code = ENUM::OtherClientIdData;
 	cmd.Size = 0;
 	cmd.ClientID = clientID;
 	cmd.IsClientMaster = isClientMaster;
+
+	PrintClinetInfo(socket, "으로부터 접속종료 패킷받음.");
+
+	for (int i = 1; i <= 3; ++i)
+	{
+		if (_IDGenator[i] == clientID)
+		{
+			_IDGenator[i] = -1;
+			break;
+		}
+
+	}
 
 	for (auto it = _listClient.unsafe_begin(); it != _listClient.unsafe_end(); ++it)
 	{

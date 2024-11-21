@@ -7,6 +7,8 @@
 class ServerManager
 {
 public:
+	ServerManager();
+	~ServerManager();
 	
 	void	PrintClinetInfo(SOCKET socket, string Message);
 	void	PushClient(SOCKET socket);
@@ -27,12 +29,12 @@ public:
 	void Restart(SOCKET socket);  // 재시작
 	void ReturnMenu(SOCKET socket); //연결을 끊고 다시 방매칭 할수있게해줌
 
-	void AllClientMessageByDisconnectClient(SOCKET socket , int clientID , bool isClientMaster);
+	void RecvSendDisconnect(SOCKET socket , int clientID , bool isClientMaster);
 private:
 	mutex _mutex;
 	concurrent_queue<SOCKET> _listClient;
 	atomic<int> _readyCount = 0;
-	atomic<int> IDGenator = 1;
+	vector<int> _IDGenator;
 	atomic<int> _hp = 1;
 };
 

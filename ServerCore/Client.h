@@ -5,7 +5,7 @@
 class Client
 {
 public:
-	Client() = default;
+	Client();
 	~Client();
 
 	void Init();
