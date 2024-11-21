@@ -53,10 +53,6 @@ struct MYCMD
 	int Size = 0;			//질실적인 내용부의 데이터 크기
 	int ClientID = 0;
 	bool IsClientMaster = false;
-	union
-	{
-		ClientInfoPacket clientInfoPacket;
-	};
 };
 
 

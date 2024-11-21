@@ -24,7 +24,7 @@ public:
 	void InitViewerPlayer(int MyClientID);
 
 	void SendPlayerInfo(); // 다른 클라이언트와 동기화를 위해 서버로 현재 플레이어의 위치 , 색깔 , 크기 정보를 보내줌
-	void ClientInfoData(int ClientID , const ClientInfoPacket& cInfo); // 다른 클라이언트의 정보를 받으면 반영하는 함수
+	void ClientInfoData(MYCMD& cmd); // 다른 클라이언트의 정보를 받으면 반영하는 함수
 
 	void updateViewerPosX(ViewerPlayer* pViewer, float PosX);
 	void updateViewerColor(ViewerPlayer* pViewer, float r, float g, float b);

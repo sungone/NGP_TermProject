@@ -77,7 +77,7 @@ void Client::PacketDecode()
 			DisConnectClientInfo(cmd.ClientID , cmd.IsClientMaster);
 			break;
 		case ENUM::ClientInfoData:
-			ClientInfoData(cmd.ClientID , cmd.clientInfoPacket);
+			ClientInfoData(cmd);
 			break;
 		case ENUM::BlockDataRecv:
 			BlockCreateReceive();
@@ -289,17 +289,20 @@ void Client::HpUpdate()
 	}
 }
 
-void Client::ClientInfoData(int ClientID , const ClientInfoPacket& cInfo)
+void Client::ClientInfoData(MYCMD& cmd)
 {
-	if (ClientID == _clientID)
-		return;
+	
+	ClientInfoPacket cInfo;
+	
+	::recv(_connectedSocket, (char*)&cInfo, sizeof(ClientInfoPacket), MSG_WAITALL);
 
-	ViewerPlayer* pViewer = FindClientPlayer(ClientID);
+
+	ViewerPlayer* pViewer = FindClientPlayer(cmd.ClientID);
 	updateViewerPosX(pViewer , cInfo.pos_x);
 	updateViewerColor(pViewer, cInfo.color_r, cInfo.color_g, cInfo.color_b);
 	updateViewerScale(pViewer, cInfo.scale_x, cInfo.scale_y);
 
-	cout << "클라이언트 " << ClientID << " 의 패킷정보를 받음" << '\n';
+	cout << "클라이언트 " << cmd.ClientID << " 의 위치정보를 받음" << '\n';
 }
 
 void Client::updateViewerPosX(ViewerPlayer* pViewer , float PosX)
@@ -328,14 +331,18 @@ void Client::SendPlayerInfo()
 	cmd.ClientID = _clientID;
 	cmd.IsClientMaster = _clientMaster;
 
-	cmd.clientInfoPacket.pos_x = player.getPos().x;
-	cmd.clientInfoPacket.color_r = player.getColor().r;
-	cmd.clientInfoPacket.color_g = player.getColor().g;
-	cmd.clientInfoPacket.color_b = player.getColor().b;
-	cmd.clientInfoPacket.scale_x = player.getScale().x;
-	cmd.clientInfoPacket.scale_y = player.getScale().y;
-
 	::send(_connectedSocket, (char*)&cmd, sizeof(cmd), 0);
+
+	ClientInfoPacket Packet;
+
+	Packet.pos_x = player.getPos().x;
+	Packet.color_r = player.getColor().r;
+	Packet.color_g = player.getColor().g;
+	Packet.color_b = player.getColor().b;
+	Packet.scale_x = player.getScale().x;
+	Packet.scale_y = player.getScale().y;
+
+	::send(_connectedSocket, (char*)&Packet, sizeof(Packet), 0);
 }
 
 void Client::CreateClientPlayer(int ClientID)

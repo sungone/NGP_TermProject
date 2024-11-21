@@ -64,7 +64,7 @@ void ServerManager::PacketDecode(SOCKET socket)
 			RecvMathcingCancle(socket);
 			break;
 		case ENUM::ClientInfoData:
-			PlayerInfo(socket , cmd.ClientID , cmd.clientInfoPacket);
+			PlayerInfo(socket , cmd);
 			break;
 		case ENUM::ChattingData:
 			RecvSendChattingData(socket,cmd.Size); 
@@ -206,20 +206,19 @@ void ServerManager::MakeBlockSend(SOCKET socket)
 	}
 }
 
-void ServerManager::PlayerInfo(SOCKET socket, int clientID, const ClientInfoPacket& Info)
+void ServerManager::PlayerInfo(SOCKET socket  ,MYCMD& cmd)
 {
-	MYCMD cmd;
-	cmd.Code = ENUM::ClientInfoData;
-	cmd.Size = 0;
-	cmd.ClientID = clientID;
-	cmd.clientInfoPacket = Info;
+	ClientInfoPacket packet;
 
+	::recv(socket, (char*)&packet, sizeof(ClientInfoPacket), MSG_WAITALL);
+	
 	for (auto it = _listClient.unsafe_begin(); it != _listClient.unsafe_end(); ++it)
 	{
 		if (*it == socket)
 			continue;
 
 		::send(*it, (char*)&cmd, sizeof(cmd), 0);
+		::send(*it, (char*)&packet, sizeof(ClientInfoPacket), 0);
 	}
 }
 
