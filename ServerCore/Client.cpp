@@ -296,7 +296,6 @@ void Client::ClientInfoData(MYCMD& cmd)
 	
 	::recv(_connectedSocket, (char*)&cInfo, sizeof(ClientInfoPacket), MSG_WAITALL);
 
-
 	ViewerPlayer* pViewer = FindClientPlayer(cmd.ClientID);
 	updateViewerPosX(pViewer , cInfo.pos_x);
 	updateViewerColor(pViewer, cInfo.color_r, cInfo.color_g, cInfo.color_b);
@@ -327,7 +326,7 @@ void Client::SendPlayerInfo()
 {
 	MYCMD cmd;
 	cmd.Code = ENUM::ClientInfoData;
-	cmd.Size = 0;
+	cmd.Size = sizeof(ClientInfoPacket);
 	cmd.ClientID = _clientID;
 	cmd.IsClientMaster = _clientMaster;
 
