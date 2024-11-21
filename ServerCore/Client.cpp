@@ -68,8 +68,8 @@ void Client::PacketDecode()
 		case ENUM::ChattingData:
 			RecvChattingData(cmd.Size);
 			break;
-		case ENUM::OtherClientIdData:
-			OtherClientIdData(cmd.ClientID , cmd.IsClientMaster);
+		case ENUM::DisConnectClientInfo:
+			DisConnectClientInfo(cmd.ClientID , cmd.IsClientMaster);
 			break;
 		case ENUM::ClientInfoData:
 			ClientInfoData(cmd.ClientID , cmd.clientInfoPacket);
@@ -110,7 +110,6 @@ void Client::RecvConnect(MYCMD& cmd)
 		_clientMaster = false;
 }
 
-
 void Client::SendStartGame()
 {
 	MYCMD cmd;
@@ -124,9 +123,9 @@ void Client::SendStartGame()
 void Client::RecvStartGame()
 {
 	std::cout << "매칭 준비가 완료되었습니다!" << "\n";
+	InitViewerPlayer();
 	screen.status = 4;
 }
-
 
 void Client::SendChattingData()
 {
@@ -170,6 +169,15 @@ void Client::SendMatchingCancel()
 	::send(_connectedSocket, (char*)&cmd, sizeof(cmd), 0);
 }
 
+void Client::InitViewerPlayer()
+{
+	for (int i = 0; i < 3; ++i)
+	{
+		CreateClientPlayer(i + 1);
+	}
+
+	RemoveClientPlayer(_clientID);
+}
 
 void Client::BlockCollision()
 {
@@ -269,28 +277,40 @@ void Client::HpUpdate()
 	}
 }
 
-void Client::ClientInfoData(int ClientID , ClientInfoPacket cInfo)
+void Client::ClientInfoData(int ClientID , const ClientInfoPacket& cInfo)
 {
-	ViewerPlayer* pViewer = FindClientPlayer(ClientID);
+	if (ClientID == _clientID)
+		return;
 
+	ViewerPlayer* pViewer = FindClientPlayer(ClientID);
 	updateViewerPosX(pViewer , cInfo.pos_x);
-	pViewer->setColorR(cInfo.color_r);
-	pViewer->setColorG(cInfo.color_g);
-	pViewer->setColorB(cInfo.color_b);
-	pViewer->setScaleX(cInfo.scale_x);
-	pViewer->setScaleY(cInfo.scale_y);
+	updateViewerColor(pViewer, cInfo.color_r, cInfo.color_g, cInfo.color_b);
+	updateViewerScale(pViewer, cInfo.scale_x, cInfo.scale_y);
 }
 
 void Client::updateViewerPosX(ViewerPlayer* pViewer , float PosX)
 {
-	pViewer->setColorR(PosX);
+	pViewer->setPosX(PosX);
+}
+
+void Client::updateViewerColor(ViewerPlayer* pViewer, float r, float g, float b)
+{
+	pViewer->setColorR(r);
+	pViewer->setColorG(g);
+	pViewer->setColorB(b);
+}
+
+void Client::updateViewerScale(ViewerPlayer* pViewer, float x, float y)
+{
+	pViewer->setScaleX(x);
+	pViewer->setScaleY(y);
 }
 
 void Client::SendPlayerInfo()
 {
 	MYCMD cmd;
 	cmd.Code = ENUM::ClientInfoData;
-	cmd.Size = sizeof(ClientInfoPacket);
+	cmd.Size = 0;
 	cmd.ClientID = _clientID;
 	cmd.IsClientMaster = _clientMaster;
 
@@ -310,11 +330,6 @@ void Client::CreateClientPlayer(int ClientID)
 	{
 		ViewerPlayer* newPlayer = new ViewerPlayer();
 		viewerPlayer[ClientID] = newPlayer;
-		std::cout << "Created a new client player with ID: " << ClientID << std::endl;
-	}
-	else
-	{
-		std::cout << "Client player with ID " << ClientID << " already exists." << std::endl;
 	}
 }
 
@@ -324,12 +339,10 @@ ViewerPlayer* Client::FindClientPlayer(int ClientID)
 
 	if (it != viewerPlayer.end())
 	{
-		std::cout << "Found client player with ID: " << ClientID << std::endl;
 		return it->second;
 	}
 	else
 	{
-		std::cout << "Client player with ID " << ClientID << " not found." << std::endl;
 		return nullptr;
 	}
 }
@@ -341,11 +354,6 @@ void Client::RemoveClientPlayer(int ClientID)
 	{
 		delete it->second;
 		viewerPlayer.erase(it);
-		std::cout << "Removed client player with ID: " << ClientID << std::endl;
-	}
-	else
-	{
-		std::cout << "Client player with ID " << ClientID << " does not exist." << std::endl;
 	}
 }
 
@@ -365,13 +373,8 @@ void Client::DisConnectClient()
 	}
 }
 
-void Client::OtherClientIdData(int ClientID, bool isMaster)
+void Client::DisConnectClientInfo(int ClientID, bool isMaster)
 {
-	if (isMaster)
-	{
-
-	}
-
 	RemoveClientPlayer(ClientID);
 }
 

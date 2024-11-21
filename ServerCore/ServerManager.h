@@ -23,7 +23,7 @@ public:
 	/* 아래는 구현해야함*/
 	void BlockCollision(SOCKET socket); //피검사를 해서 GameOver 시키거나 hp를 깍음.
 	void MakeBlockSend(SOCKET socket); //블록생성해서 보내줌
-	void PlayerInfo(SOCKET socket); //플레이어의 정보를 받아서 브로드캐스팅방식으로 쏴줌.
+	void PlayerInfo(SOCKET socket , int clientID , const ClientInfoPacket& Info); //플레이어의 정보를 받아서 브로드캐스팅방식으로 쏴줌.
 	void Restart(SOCKET socket);  // 재시작
 	void ReturnMenu(SOCKET socket); //연결을 끊고 다시 방매칭 할수있게해줌
 

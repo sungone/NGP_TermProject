@@ -55,6 +55,7 @@ void ServerManager::PacketDecode(SOCKET socket)
 			RecvMathcingCancle(socket);
 			break;
 		case ENUM::ClientInfoData:
+			PlayerInfo(socket , cmd.ClientID , cmd.clientInfoPacket);
 			break;
 		case ENUM::ChattingData:
 			RecvSendChattingData(socket,cmd.Size); 
@@ -182,8 +183,21 @@ void ServerManager::MakeBlockSend(SOCKET socket)
 	}
 }
 
-void ServerManager::PlayerInfo(SOCKET socket)
+void ServerManager::PlayerInfo(SOCKET socket, int clientID, const ClientInfoPacket& Info)
 {
+	MYCMD cmd;
+	cmd.Code = ENUM::ClientInfoData;
+	cmd.Size = 0;
+	cmd.ClientID = clientID;
+	cmd.clientInfoPacket = Info;
+
+	for (auto it = _listClient.unsafe_begin(); it != _listClient.unsafe_end(); ++it)
+	{
+		if (*it == socket)
+			continue;
+
+		::send(*it, (char*)&cmd, sizeof(cmd), 0);
+	}
 }
 
 void ServerManager::Restart(SOCKET socket)
@@ -197,7 +211,7 @@ void ServerManager::ReturnMenu(SOCKET socket)
 void ServerManager::AllClientMessageByDisconnectClient(SOCKET socket , int clientID, bool isClientMaster)
 {
 	MYCMD cmd;
-	cmd.Code = ENUM::OtherClientIdData;
+	cmd.Code = ENUM::DisConnectClientInfo;
 	cmd.Size = 0;
 	cmd.ClientID = clientID;
 	cmd.IsClientMaster = isClientMaster;

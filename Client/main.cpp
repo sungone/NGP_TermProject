@@ -1,5 +1,4 @@
 
-
 #include "pch.h"
 #include "shaders.h"
 #include "base.h"
@@ -11,6 +10,7 @@
 #include "TextManager.h"
 #include "ThreadManager.h"
 #include "ClientData.h"
+#include "Client.h"
 
 /*****************************************
 * 변수들 전역변수 공용으로 사용하기위해  *
@@ -134,16 +134,19 @@ GLvoid keyboard(unsigned char key, int x, int y)
 	{
 	case 'z': // 플레이어 빨간색 변경
 		player.changeRed();
+		client.SendPlayerInfo();
 		break;
 	case 'x': // 플레이어 초록색 변경
 		player.changeGreen();
+		client.SendPlayerInfo();
 		break;
 	case 'c': // 플레이어 파란색 변경
 		player.changeBlue();
+		client.SendPlayerInfo();
 		break;
 	case 'v': // 플레이어 축소 / 확대
 		player.changeSize();
-
+		client.SendPlayerInfo();
 		if (not plSizeChange)
 			plSizeChange = true;
 		else
@@ -200,14 +203,14 @@ GLvoid KeyboardSpecial(int key, int x, int y)
 	case GLUT_KEY_LEFT:
 		// 왼쪽 화살표 키 처리
 		player.moveLeft();
-
+		client.SendPlayerInfo();
 		if (FIRST_PERSON == cameraMode)
 			camera.moveLeft();
 		break;
 	case GLUT_KEY_RIGHT:
 		// 오른쪽 화살표 키 처리
 		player.moveRight();
-
+		client.SendPlayerInfo();
 		if (FIRST_PERSON == cameraMode)
 			camera.moveRight();
 		break;

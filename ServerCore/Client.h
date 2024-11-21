@@ -21,13 +21,17 @@ public:
 	void SendStartGame(); //서버에게 Maching 요청
 	void SendMatchingCancel();//서버에게 Maching 취소요청
 
-	void SendPlayerInfo(); // 다른 클라이언트와 동기화를 위해 서버로 현재 플레이어의 위치 , 색깔 , 크기 정보를 보내줌
-	void ClientInfoData(int ClientID , ClientInfoPacket cInfo); // 다른 클라이언트의 정보를 받으면 반영하는 함수
+	void InitViewerPlayer();
 
-	void updateViewerPosX(ViewerPlayer* pViewer , float PosX);
+	void SendPlayerInfo(); // 다른 클라이언트와 동기화를 위해 서버로 현재 플레이어의 위치 , 색깔 , 크기 정보를 보내줌
+	void ClientInfoData(int ClientID , const ClientInfoPacket& cInfo); // 다른 클라이언트의 정보를 받으면 반영하는 함수
+
+	void updateViewerPosX(ViewerPlayer* pViewer, float PosX);
+	void updateViewerColor(ViewerPlayer* pViewer, float r, float g, float b);
+	void updateViewerScale(ViewerPlayer* pViewer, float x, float y);
 
 	void DisConnectClient(); // 내 클라이언트의 접속을 끊는 함수
-	void OtherClientIdData(int ClientID, bool isMaster); // 다른 클라이언트의 접속을 끊는 함수
+	void DisConnectClientInfo(int ClientID, bool isMaster); // 다른 클라이언트의 접속을 끊는 함수
 
 	void CreateClientPlayer(int ClientID); // 뷰어 클라이언트를 생성하는 함수
 	ViewerPlayer* FindClientPlayer(int ClientID); // 뷰어 클라이언트를 찾는 함수
@@ -42,6 +46,7 @@ public:
 public:
 	int _clientID;
 	bool _clientMaster = false;
+
 private:
 	SOCKET _connectedSocket;
 };
