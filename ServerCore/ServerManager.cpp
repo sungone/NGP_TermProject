@@ -4,7 +4,7 @@
 
 ServerManager::ServerManager()
 {
-	_IDGenator.resize(4, -1);
+
 }
 
 ServerManager::~ServerManager()
@@ -92,22 +92,14 @@ void ServerManager::RecvConnect(SOCKET socket)
 	PrintClinetInfo(socket, "으로부터 Connection 요청 입력받음");
 
 	//ID부여
-	int ID = 999;
-
-	for (int i = 1; i <= 3; ++i)
-	{
-		if (_IDGenator[i] == -1)
-		{
-			ID = i;
-			_IDGenator[i] = ID;
-			break;
-		}
-	}
+	
 
 	MYCMD cmd;
 	cmd.Code = ENUM::Connect;
 	cmd.Size = 0;
-	cmd.ClientID = ID;
+	cmd.ClientID = _IDGenator%3+1;
+	_IDGenator++;
+
 
 	::send(socket, (char*)&cmd , sizeof(cmd), 0);
 }
@@ -242,16 +234,6 @@ void ServerManager::RecvSendDisconnect(SOCKET socket , int clientID, bool isClie
 	cmd.IsClientMaster = isClientMaster;
 
 	PrintClinetInfo(socket, "으로부터 접속종료 패킷받음.");
-
-	for (int i = 1; i <= 3; ++i)
-	{
-		if (_IDGenator[i] == clientID)
-		{
-			_IDGenator[i] = -1;
-			break;
-		}
-
-	}
 
 	for (auto it = _listClient.unsafe_begin(); it != _listClient.unsafe_end(); ++it)
 	{
