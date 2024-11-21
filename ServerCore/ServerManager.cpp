@@ -144,7 +144,7 @@ void ServerManager::RecvSendChattingData(SOCKET socket,int size)
 
 void ServerManager::BlockCollision(SOCKET socket)
 {
-	_hp -= 1;
+	_hp += 1;
 	HPInfo info;
 	info.hp = _hp;
 	MYCMD cmd;
