@@ -195,7 +195,7 @@ void Client::InitViewerPlayer(int MyClientID)
 
 void Client::BlockCollision()
 {
-	player.crashOnce = true;
+	//player.crashOnce = true;
 
 	MYCMD cmd;
 	cmd.Code = ENUM::BlockCollision;
@@ -207,7 +207,7 @@ void Client::BlockCollision()
 
 void Client::BlockCreate()
 {
-	player.crashOnce = false;
+	//player.crashOnce = false;
 	wall.emptyIdx.clear();
 	BlockCreateInfo info;
 
@@ -237,7 +237,8 @@ void Client::BlockCreate()
 
 void Client::BlockCreateReceive()
 {
-	player.crashOnce = false;
+	/*player.crashOnce = false;*/
+
 	wall.emptyIdx.clear();
 	BlockCreateInfo info;
 	::recv(_connectedSocket, (char*)&info, sizeof(BlockCreateInfo), MSG_WAITALL);

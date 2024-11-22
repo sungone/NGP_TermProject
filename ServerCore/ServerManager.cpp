@@ -185,6 +185,7 @@ void ServerManager::MakeBlockSend(SOCKET socket)
 	cmd.Size = 0;
 
 	BlockCreateInfo blockInfo;
+
 	::recv(socket, (char*)&blockInfo, sizeof(BlockCreateInfo), MSG_WAITALL);
 
 	PrintClinetInfo(socket, "으로부터 블록 정보 전파");

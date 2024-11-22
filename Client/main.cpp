@@ -386,10 +386,13 @@ void wallUpdate()
 		screen.initTex();
 	}
 
+
 	if (!wall.emptyIdx.empty()) // 충돌처리 하는 로직이 들어있음
 	{
+		
 		if ((!player.crashOnce) and 1.25f < wall.getCube(wall.emptyIdx[0].x, wall.emptyIdx[0].y).getPos().z) {
 			int findIndex = -1;
+		
 			for (int i{}; i < wall.emptyIdx.size(); ++i) {
 				if ((player.getPos().x - 0.13f >= wall.emptyIdx[i].y * 0.3333f - 0.5f && player.getPos().x + 0.13f <= wall.emptyIdx[i].y * 0.3333f + 0.3333f - 0.5f))// ||
 					//(player.getPos().x + 0.13f >= wall.emptyIdx[i].y * 0.3333f - 0.5f && player.getPos().x <= wall.emptyIdx[i].y * 0.3333f + 0.3333f - 0.5f))
@@ -410,12 +413,14 @@ void wallUpdate()
 						or 1 == player.getColor().y and 1 == wall.emptyIdx[findIndex].x
 						or 1 == player.getColor().z and 2 == wall.emptyIdx[findIndex].x)) {
 						client.BlockCollision();
+						player.crashOnce = true;
 					}
 				}
 				else if (2 == (wall.cur_idx - 1) / 10) {
 					if (0 == wall.emptyIdx[findIndex].x and not plSizeChange
 						or 1 == wall.emptyIdx[findIndex].x) {
 						client.BlockCollision();
+						player.crashOnce = true;
 					}
 
 				}
@@ -425,7 +430,7 @@ void wallUpdate()
 
 	if (not wall.emptyIdx.empty() and 1.3f < wall.getCube(wall.emptyIdx[0].x, wall.emptyIdx[0].y).getPos().z)
 	{
-
+		player.crashOnce = false;
 	}
 }
 
