@@ -437,8 +437,8 @@ void wallUpdate()
 
 	if (not wall.emptyIdx.empty() and 1.3f < wall.getCube(wall.emptyIdx[0].x, wall.emptyIdx[0].y).getPos().z)
 	{
-		player.crashOnce = false;
-		wall.emptyIdx.clear();
+		//player.crashOnce = false;
+		//wall.emptyIdx.clear();
 	}
 }
 

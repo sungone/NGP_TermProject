@@ -208,7 +208,6 @@ void Client::BlockCollision()
 void Client::BlockCreate()
 {
 	//player.crashOnce = false;
-	wall.emptyIdx.clear();
 	BlockCreateInfo info;
 
 	info.cur_idx = wall.cur_idx;
@@ -237,8 +236,7 @@ void Client::BlockCreate()
 
 void Client::BlockCreateReceive()
 {
-	/*player.crashOnce = false;*/
-
+	player.crashOnce = false;
 	wall.emptyIdx.clear();
 	BlockCreateInfo info;
 	::recv(_connectedSocket, (char*)&info, sizeof(BlockCreateInfo), MSG_WAITALL);
