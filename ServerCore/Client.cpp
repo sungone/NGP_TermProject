@@ -49,6 +49,7 @@ void Client::Init()
 	{
 		ErrorHandler("ERROR: 서버에 연결할 수 없습니다.");
 	}
+
 }
 
 void Client::Send()
@@ -109,6 +110,7 @@ void Client::SendConnect()
 void Client::RecvConnect(MYCMD& cmd)
 {
 	_clientID = cmd.ClientID;
+
 	if (_clientID == 1)
 		_clientMaster = true;
 	else
@@ -271,7 +273,6 @@ void Client::HpUpdate()
 
 		PlaySound(L"sound/closing.wav", NULL, SND_ASYNC | SND_LOOP);//sound
 
-		player.init();
 		camera.setCamera(shaderProgramID, 0, cameraMode, player.getPos());
 		screen.initTex();
 	}
@@ -348,6 +349,7 @@ void Client::CreateClientPlayer(int ClientID)
 {
 	if (viewerPlayer.find(ClientID) == viewerPlayer.end())
 	{
+		_clientConnect.push_back(ClientID);
 		ViewerPlayer* newPlayer = new ViewerPlayer();
 		viewerPlayer[ClientID] = newPlayer;
 	}
@@ -395,7 +397,24 @@ void Client::DisConnectClient()
 
 void Client::DisConnectClientInfo(int ClientID, bool isMaster)
 {
-	RemoveClientPlayer(ClientID);
+	auto iter = std::find(_clientConnect.begin(), _clientConnect.end(), ClientID);
+	if (iter != _clientConnect.end())
+	{
+		int removeID = *iter;
+		_clientConnect.erase(iter);
+		if (isMaster)
+		{
+			if (_clientConnect.size() >= 1)
+			{
+				std::sort(_clientConnect.begin(), _clientConnect.end());
+				if (_clientConnect[0] == _clientID)
+				{
+					_clientMaster = true;
+				}
+			}
+		}
+	}
+	//RemoveClientPlayer(ClientID);
 }
 
 

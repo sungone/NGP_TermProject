@@ -89,8 +89,8 @@ void main(int argc, char** argv)
 	glutKeyboardFunc(keyboard);
 	glutSpecialFunc(KeyboardSpecial);
 	glutMouseFunc(Mouse);
+	glutWMCloseFunc(gameExit);
 	glutMainLoop();
-	atexit(gameExit);
 }
 
 GLvoid drawScene()
@@ -110,7 +110,7 @@ GLvoid drawScene()
 	if (1 == screen.status or 4 == screen.status or 5 == screen.status) {
 
 		// 마우스 커서 숨기기
-		ShowCursor(FALSE);
+		//ShowCursor(FALSE);
 
 		backgroundmap.render(shaderProgramID);
 
@@ -347,10 +347,11 @@ void init()
 void gameExit()
 {
 	cout << "Game gameExit" << endl;
-	client.SendMatchingCancel();
-	if (screen.status == 6)
+	if (screen.status == 1 || screen.status == 4 || screen.status == 5)
 	{
+		client.DisConnectClient();
 	}
+	client.SendMatchingCancel();
 }
 
 
