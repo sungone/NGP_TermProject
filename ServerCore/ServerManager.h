@@ -36,6 +36,6 @@ private:
 	atomic<int> _readyCount = 0;
 	atomic<int> _IDGenator = 0;
 	//vector<int> _IDGenator;
-	atomic<int> _hp = 1;
+	atomic<int> _hp = 0;
 };
 
