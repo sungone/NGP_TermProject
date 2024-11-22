@@ -17,8 +17,19 @@
 * 변수들 전역변수 공용으로 사용하기위해  *
 * ServerCore 의 ClinetData 로 이동       *
 ******************************************/
-
-
+namespace E
+{
+	enum ScreenState
+	{
+		Main,
+		HP66,
+		WIN,
+		GAMEOVER,
+		HP100,
+		HP33,
+		MATCHING
+	};
+}
 /******************************************
 			<Screen Status>
  0 : 메인 화면 1 : 인게임 스크린 (HP : 66 % ) 2 : 게임 승리 3 : 게임 오버
@@ -115,8 +126,9 @@ GLvoid drawScene()
 	camera.setCamera(shaderProgramID, 0, cameraMode, player.getPos());
 	screen.render(shaderProgramID);
 
+	
 	// Object Draw
-	if (1 == screen.status or 4 == screen.status or 5 == screen.status) {
+	if (E::HP66 == screen.status or E::HP100 == screen.status or E::HP33 == screen.status) {
 
 		// 마우스 커서 숨기기
 	/*	ShowCursor(FALSE);*/
@@ -176,23 +188,29 @@ GLvoid keyboard(unsigned char key, int x, int y)
 
 	case '[': // Game start , Game over 테스트 하기위함
 
-		if (1 == screen.status or 4 == screen.status or 5 == screen.status)
+		if (E::HP66 == screen.status or E::HP100 == screen.status or E::HP33 == screen.status)
 		{
-			screen.status = 2;
+			screen.status = E::WIN;
 			PlaySound(L"sound/win.wav", NULL, SND_ASYNC | SND_LOOP);//sound
 		}
-		else if (2 == screen.status)
+
+
+	
+		else if (E::WIN == screen.status)
 		{
-			screen.status = 3;
+			screen.status = E::GAMEOVER;
 			PlaySound(L"sound/closing.wav", NULL, SND_ASYNC | SND_LOOP);//sound
 		}
-		else if (3 == screen.status)
+
+		
+
+		else if (E::GAMEOVER == screen.status)
 		{
-			screen.status = 6;
+			screen.status = E::MATCHING;
 		}
-		else if (6 == screen.status)
+		else if (E::MATCHING == screen.status)
 		{
-			screen.status = 1;
+			screen.status = E::HP66;
 			PlaySound(L"sound/inGame.wav", NULL, SND_ASYNC | SND_LOOP);//sound
 		}
 
@@ -240,16 +258,18 @@ GLvoid Mouse(int button, int state, int x, int y)
 	float normalizedX = static_cast<float>(x) / windowWidth;
 	float normalizedY = static_cast<float>(y) / windowHeight;
 
-	
 	if (button == GLUT_LEFT_BUTTON)
 	{
-		if (0 == screen.status)
+
+		
+		if (E::Main == screen.status)
 		{
+		
 			
 				// "플레이" button
 				if (normalizedX >= 0.65 && normalizedX <= 0.77 &&
 					normalizedY >= 0.66 && normalizedY <= 0.74) {
-					screen.status = 1;
+					screen.status = E::HP66;
 					screen.initTex();
 					PlaySound(L"sound/inGame.wav", NULL, SND_ASYNC | SND_LOOP); // sound
 				}
@@ -261,7 +281,7 @@ GLvoid Mouse(int button, int state, int x, int y)
 				//로비입장버튼			
 				else if (normalizedX >= 0.62 && normalizedX <= 0.85 &&
 					normalizedY >= 0.83 && normalizedY <= 0.9) {
-					screen.status = 6;
+					screen.status = E::MATCHING;
 					cout << "Lobby Enter" << endl;
 					client.SendStartGame();
 					screen.initTex();
@@ -269,13 +289,13 @@ GLvoid Mouse(int button, int state, int x, int y)
 				}
 			
 		}
-		else if (screen.status == 6) // Matching screen
+		else if (screen.status == E::MATCHING) // Matching screen
 		{
 				// "매칭취소
 				if (normalizedX >= 0.313 && normalizedX <= 0.75 &&
 					normalizedY >= 0.889 && normalizedY <= 0.999) {
 					client.SendMatchingCancel();
-					screen.status = 0;
+					screen.status = E::Main;
 					screen.initTex();
 					PlaySound(L"sound/opening.wav", NULL, SND_ASYNC | SND_LOOP); 				}
 			
