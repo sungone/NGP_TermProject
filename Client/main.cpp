@@ -40,10 +40,17 @@ void wallUpdate();
 GLvoid update(int value);
 
 void initCamera();
+HWND hwnd;
 
 void main(int argc, char** argv)
 {
 	client.Init();
+
+	hwnd = GetForegroundWindow();
+
+	//RECT rect = { 0, 0, windowWidth, windowHeight };
+
+	//::AdjustWindowRect(&rect, WS_OVERLAPPEDWINDOW, false);
 
 	ThreadManager::Launch([]()
 		{
@@ -80,6 +87,8 @@ void main(int argc, char** argv)
 	char fragmentFile[] = "shader/fragment.glsl";
 	shaderProgramID = initShader(vertexFile, fragmentFile);
 
+
+
 	// 초기화
 	TextManager::GetInstance()->Init();
 	init();
@@ -110,7 +119,7 @@ GLvoid drawScene()
 	if (1 == screen.status or 4 == screen.status or 5 == screen.status) {
 
 		// 마우스 커서 숨기기
-		ShowCursor(FALSE);
+	/*	ShowCursor(FALSE);*/
 
 		backgroundmap.render(shaderProgramID);
 
@@ -231,69 +240,52 @@ GLvoid KeyboardSpecial(int key, int x, int y)
 
 GLvoid Mouse(int button, int state, int x, int y)
 {
+
+	float normalizedX = static_cast<float>(x) / windowWidth;
+	float normalizedY = static_cast<float>(y) / windowHeight;
+
+	cout << normalizedX << " " << normalizedY << endl;
+
 	if (button == GLUT_LEFT_BUTTON)
 	{
-		/*cout << "x : " << x << endl;
-		cout << "y : " << y << endl << endl << endl;*/
-
 		if (0 == screen.status)
 		{
-			if (not full)
+			if (!full)
 			{
-				if (513 <= x && 616 >= x and 528 <= y && 583 >= y) {//play
+				// "Play" button
+				if (normalizedX >= 0.65 && normalizedX <= 0.77 &&
+					normalizedY >= 0.66 && normalizedY <= 0.74) {
 					screen.status = 1;
 					screen.initTex();
-					PlaySound(L"sound/inGame.wav", NULL, SND_ASYNC | SND_LOOP);//sound
+					PlaySound(L"sound/inGame.wav", NULL, SND_ASYNC | SND_LOOP); // sound
 				}
-				else if (507 <= x && 603 >= x and 595 <= y && 648 >= y)//gameExit
+				// "Game Exit" button
+				else if (normalizedX >= 0.63 && normalizedX <= 0.75 &&
+					normalizedY >= 0.744 && normalizedY <= 0.81) {
 					exit(-1);
-
-				else if (505 <= x && 673 >= x and 663 <= y && 711 >= y)
-				{
-					// 임시로 로비 입장 버튼이 setting 버튼으로 해놓음
+				}
+				// "Lobby Enter" button
+				else if (normalizedX >= 0.62 && normalizedX <= 0.85 &&
+					normalizedY >= 0.83 && normalizedY <= 0.9) {
 					screen.status = 6;
 					cout << "Lobby Enter" << endl;
 					client.SendStartGame();
 					screen.initTex();
-					PlaySound(L"sound/inGame.wav", NULL, SND_ASYNC | SND_LOOP);//sound
-				}
-			}
-			else
-			{
-				if (1242 <= x && 1490 >= x and 719 <= y && 786 >= y) {//play
-					screen.status = 1;
-					screen.initTex();
-					PlaySound(L"sound/inGame.wav", NULL, SND_ASYNC | SND_LOOP);//sound
-				}
-
-				else if (1228 <= x && 1446 >= x and 807 <= y && 873 >= y)
-				{//gameExit
-					exit(-1);
-				}
-
-				else if (1216 <= x && 1618 >= x and 899 <= y && 957 >= y)
-				{
-					// 임시로 로비 입장 버튼이 setting 버튼으로 해놓음
-				/*	client.SendMatchingStart();*/
-					screen.status = 6;
-					screen.initTex();
-					PlaySound(L"sound/inGame.wav", NULL, SND_ASYNC | SND_LOOP);//sound
+					PlaySound(L"sound/inGame.wav", NULL, SND_ASYNC | SND_LOOP); // sound
 				}
 			}
 		}
-
-		else if (screen.status == 6) // 매칭 화면 일때 - 3명을 기다리는 방
+		else if (screen.status == 6) // Matching screen
 		{
-			if (not full)
-			{
-				if (711 <= y && 799 >= y and 300 <= x && 500 >= x) // 매칭 취소 버튼 설정
-				{
+				// "매칭취소
+				if (normalizedX >= 0.313 && normalizedX <= 0.75 &&
+					normalizedY >= 0.889 && normalizedY <= 0.999) {
 					client.SendMatchingCancel();
 					screen.status = 0;
 					screen.initTex();
-					PlaySound(L"sound/opening.wav", NULL, SND_ASYNC | SND_LOOP);//sound
+					PlaySound(L"sound/opening.wav", NULL, SND_ASYNC | SND_LOOP); // sound
 				}
-			}
+			
 		}
 	}
 }
