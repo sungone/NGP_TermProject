@@ -1,3 +1,4 @@
+
 #include "pch.h"
 #include "Client.h"
 #include "Packet.h"
@@ -75,7 +76,7 @@ void Client::PacketDecode()
 			RecvChattingData(cmd.Size);
 			break;
 		case ENUM::DisConnectClientInfo:
-			DisConnectClientInfo(cmd.ClientID , cmd.IsClientMaster);
+			DisConnectClientInfo(cmd.ClientID, cmd.IsClientMaster);
 			break;
 		case ENUM::ClientInfoData:
 			ClientInfoData(cmd);
@@ -243,9 +244,9 @@ void Client::BlockCreateReceive()
 
 	wall.cur_idx = info.cur_idx;
 
-	for (int i=0;i<36;i++)
+	for (int i = 0; i < 36; i++)
 		for (int j = 0; j < 3; j++)
-		wall.random_num[i][j] = info.random_num[i][j];
+			wall.random_num[i][j] = info.random_num[i][j];
 
 	for (int i = 0; i < 3; i++)
 		for (int j = 0; j < 3; j++)
@@ -292,20 +293,20 @@ void Client::HpUpdate()
 
 void Client::ClientInfoData(MYCMD& cmd)
 {
-	
+
 	ClientInfoPacket cInfo;
-	
+
 	::recv(_connectedSocket, (char*)&cInfo, sizeof(ClientInfoPacket), MSG_WAITALL);
 
 	ViewerPlayer* pViewer = FindClientPlayer(cmd.ClientID);
-	updateViewerPosX(pViewer , cInfo.pos_x);
+	updateViewerPosX(pViewer, cInfo.pos_x);
 	updateViewerColor(pViewer, cInfo.color_r, cInfo.color_g, cInfo.color_b);
 	updateViewerScale(pViewer, cInfo.scale_x, cInfo.scale_y);
 
 	cout << "클라이언트 " << cmd.ClientID << " 의 위치정보를 받음" << '\n';
 }
 
-void Client::updateViewerPosX(ViewerPlayer* pViewer , float PosX)
+void Client::updateViewerPosX(ViewerPlayer* pViewer, float PosX)
 {
 	pViewer->setPosX(PosX);
 }
