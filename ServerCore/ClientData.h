@@ -36,7 +36,6 @@ extern CameraMode cameraMode;
 extern CImage screen;
 extern GLuint windowWidth;
 extern GLuint windowHeight;
-extern bool full;
 
 extern bool hpBarSet[2];
 extern int hp;

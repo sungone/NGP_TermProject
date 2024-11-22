@@ -230,10 +230,6 @@ GLvoid KeyboardSpecial(int key, int x, int y)
 		// Ctrl 키 처리
 		glutFullScreenToggle();
 
-		if (not full)
-			full = true;
-		else
-			full = false;
 		break;
 	}
 }
@@ -244,36 +240,34 @@ GLvoid Mouse(int button, int state, int x, int y)
 	float normalizedX = static_cast<float>(x) / windowWidth;
 	float normalizedY = static_cast<float>(y) / windowHeight;
 
-	cout << normalizedX << " " << normalizedY << endl;
-
+	
 	if (button == GLUT_LEFT_BUTTON)
 	{
 		if (0 == screen.status)
 		{
-			if (!full)
-			{
-				// "Play" button
+			
+				// "플레이" button
 				if (normalizedX >= 0.65 && normalizedX <= 0.77 &&
 					normalizedY >= 0.66 && normalizedY <= 0.74) {
 					screen.status = 1;
 					screen.initTex();
 					PlaySound(L"sound/inGame.wav", NULL, SND_ASYNC | SND_LOOP); // sound
 				}
-				// "Game Exit" button
+				// "게임나가기" button
 				else if (normalizedX >= 0.63 && normalizedX <= 0.75 &&
 					normalizedY >= 0.744 && normalizedY <= 0.81) {
 					exit(-1);
 				}
-				// "Lobby Enter" button
+				//로비입장버튼			
 				else if (normalizedX >= 0.62 && normalizedX <= 0.85 &&
 					normalizedY >= 0.83 && normalizedY <= 0.9) {
 					screen.status = 6;
 					cout << "Lobby Enter" << endl;
 					client.SendStartGame();
 					screen.initTex();
-					PlaySound(L"sound/inGame.wav", NULL, SND_ASYNC | SND_LOOP); // sound
+					PlaySound(L"sound/inGame.wav", NULL, SND_ASYNC | SND_LOOP); 
 				}
-			}
+			
 		}
 		else if (screen.status == 6) // Matching screen
 		{
@@ -283,8 +277,7 @@ GLvoid Mouse(int button, int state, int x, int y)
 					client.SendMatchingCancel();
 					screen.status = 0;
 					screen.initTex();
-					PlaySound(L"sound/opening.wav", NULL, SND_ASYNC | SND_LOOP); // sound
-				}
+					PlaySound(L"sound/opening.wav", NULL, SND_ASYNC | SND_LOOP); 				}
 			
 		}
 	}
