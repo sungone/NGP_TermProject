@@ -133,8 +133,10 @@ void Client::RecvStartGame()
 	std::cout << "매칭 준비가 완료되었습니다!" << "\n";
 
 	if (viewerPlayer.size() == 2)
+	{
 		screen.status = E::HP100;
-
+		//screen.initTex();
+	}
 	else
 	{
 		cout << "뷰어 플레이어 생성 실패" << endl;
@@ -270,23 +272,22 @@ void Client::HpUpdate()
 
 	if (3 <= hp) // 3번 충돌  < 게임 오버 >
 	{
-		screen.status = E::MATCHING;
-
+		screen.status = E::GAMEOVER;
 		//PlaySound(L"sound/closing.wav", NULL, SND_ASYNC | SND_LOOP);//sound
 
-		player.init();
-		camera.setCamera(shaderProgramID, 0, cameraMode, player.getPos());
-		/*screen.initTex();*/
+		//player.init();
+		//camera.setCamera(shaderProgramID, 0, cameraMode, player.getPos());
+		//screen.initTex();
 	}
 
-	else if (2 == hp ) // 2번 충돌
+	else if (2 == hp) // 2번 충돌
 	{
 		screen.status = E::HP33;
-	/*	screen.initTex();*/
+		//screen.initTex();
 		//hpBarSet[1] = true;
 	}
 
-	else if (1 == hp ) // 1번 충돌
+	else if (1 == hp) // 1번 충돌
 	{
 		screen.status = E::HP66;
 		//screen.initTex();

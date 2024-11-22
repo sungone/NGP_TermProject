@@ -1,7 +1,6 @@
 #include "pch.h"
 #include "ServerManager.h"
 
-
 ServerManager::ServerManager()
 {
 
@@ -9,6 +8,7 @@ ServerManager::ServerManager()
 
 ServerManager::~ServerManager()
 {
+
 }
 
 void ServerManager::PrintClinetInfo(SOCKET socket, string message)
@@ -93,13 +93,11 @@ void ServerManager::RecvConnect(SOCKET socket)
 
 	//IDºÎ¿©
 	
-
 	MYCMD cmd;
 	cmd.Code = ENUM::Connect;
 	cmd.Size = 0;
 	cmd.ClientID = _IDGenator%3+1;
 	_IDGenator++;
-
 
 	::send(socket, (char*)&cmd , sizeof(cmd), 0);
 }
@@ -225,6 +223,7 @@ void ServerManager::Restart(SOCKET socket)
 
 void ServerManager::ReturnMenu(SOCKET socket)
 {
+
 }
 
 void ServerManager::RecvSendDisconnect(SOCKET socket , int clientID, bool isClientMaster)

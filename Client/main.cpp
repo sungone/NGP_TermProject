@@ -16,7 +16,6 @@
 * ServerCore 의 ClinetData 로 이동       *
 ******************************************/
 
-
 /******************************************
 			<Screen Status>
  0 : 메인 화면 1 : 인게임 스크린 (HP : 66 % ) 2 : 게임 승리 3 : 게임 오버
@@ -224,7 +223,6 @@ GLvoid KeyboardSpecial(int key, int x, int y)
 	case GLUT_KEY_CTRL_R://전체 화면
 		// Ctrl 키 처리
 		glutFullScreenToggle();
-
 		break;
 	}
 }
@@ -234,7 +232,6 @@ GLvoid Mouse(int button, int state, int x, int y)
 
 	float normalizedX = static_cast<float>(x) / windowWidth;
 	float normalizedY = static_cast<float>(y) / windowHeight;
-
 
 	if (button == GLUT_LEFT_BUTTON)
 	{
@@ -265,9 +262,8 @@ GLvoid Mouse(int button, int state, int x, int y)
 			}
 		}
 
-
 		else if (screen.status == E::MATCHING)
-		{
+		{	
 			if (normalizedX >= 0.313 && normalizedX <= 0.75 &&
 				normalizedY >= 0.889 && normalizedY <= 0.999)
 			{
@@ -337,7 +333,6 @@ void gameExit()
 	}
 }
 
-
 void initCamera()
 {
 	camera.setWinSize(windowWidth, windowHeight);
@@ -360,18 +355,37 @@ void initCamera()
 
 GLvoid update(int value)
 {
-
 	if (1 == screen.status or 4 == screen.status or 5 == screen.status)
 		wallUpdate();
+	else if (hp >= 3) // hp >= 3 이면 hp 가 모두 소진되었으므로 게임 종료
+	{
+		screen.status = E::GAMEOVER;
+		screen.initTex();
+	}
 
 	glutTimerFunc(wallUpdateSpeed, update, value);
 	glutPostRedisplay();
 }
 
-
 void wallUpdate()
 {
 	wall.moveWall(); // 벽 움직이는 함수
+
+	if (hp == 0) // Client 프로젝트의 main 에서만 씬 이동이 되는것 같아서 여기서 hp 로 씬 전환을 함 , hp >= 3 이면 update 에서!
+	{
+		screen.status = E::HP100;
+		screen.initTex();
+	}
+	else if (hp == 1)
+	{
+		screen.status = E::HP66;
+		screen.initTex();
+	}
+	else if (hp == 2)
+	{
+		screen.status = E::HP33;
+		screen.initTex();
+	}
 
 	if (wall.cur_idx == 30) // Game win
 	{

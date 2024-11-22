@@ -7,7 +7,6 @@ Listener::~Listener()
 	::WSACleanup();
 }
 
-
 SOCKET Listener::Init()
 {
 	WSADATA wsa;
@@ -35,13 +34,13 @@ SOCKET Listener::Init()
 	//	ErrorHandler("네이글 알고리즘 OFF 실패 .");
 	//}
 
-
 	// 바인딩 전에 IP주소와 포트를 재사용하도록 소켓 옵션을 변경한다.
 	bool option = TRUE;
 	if (::setsockopt(_listenSocket, SOL_SOCKET, SO_REUSEADDR, (char*)&option, sizeof(bool)) == SOCKET_ERROR)
 	{
 		ErrorHandler("SO_REUSEADDR 실패");
 	}
+
 	if (::setsockopt(_listenSocket, IPPROTO_TCP, TCP_NODELAY, (char*)&option, sizeof(bool)) == SOCKET_ERROR)
 	{
 		ErrorHandler("NODELAY실패");
@@ -57,7 +56,12 @@ SOCKET Listener::Init()
 		ErrorHandler("리슨 상태로 전환할 수 없습니다.");
 	}
 
-
-
 	return _listenSocket;
 }
+
+
+
+
+
+
+

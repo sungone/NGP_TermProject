@@ -2,7 +2,6 @@
 #include "Client.h"
 #include "ThreadManager.h"
 
-
 int main()
 {
 	Client client;
