@@ -46,7 +46,6 @@ public:
 public:
 	int _clientID;
 	bool _clientMaster = false;
-	vector<int> _clientConnect;
 
 private:
 	SOCKET _connectedSocket;

@@ -1,5 +1,6 @@
 
 
+
 #include "pch.h"
 #include "shaders.h"
 #include "base.h"
@@ -17,6 +18,7 @@
 * 변수들 전역변수 공용으로 사용하기위해  *
 * ServerCore 의 ClinetData 로 이동       *
 ******************************************/
+
 namespace E
 {
 	enum ScreenState
@@ -109,8 +111,8 @@ void main(int argc, char** argv)
 	glutKeyboardFunc(keyboard);
 	glutSpecialFunc(KeyboardSpecial);
 	glutMouseFunc(Mouse);
-	glutWMCloseFunc(gameExit);
 	glutMainLoop();
+	atexit(gameExit);
 }
 
 GLvoid drawScene()
@@ -126,9 +128,8 @@ GLvoid drawScene()
 	camera.setCamera(shaderProgramID, 0, cameraMode, player.getPos());
 	screen.render(shaderProgramID);
 
-	
 	// Object Draw
-	if (E::HP66 == screen.status or E::HP100 == screen.status or E::HP33 == screen.status) {
+	if (1 == screen.status or 4 == screen.status or 5 == screen.status) {
 
 		// 마우스 커서 숨기기
 	/*	ShowCursor(FALSE);*/
@@ -186,37 +187,28 @@ GLvoid keyboard(unsigned char key, int x, int y)
 		exit(-1);
 		break;
 
-	case '[': // Game start , Game over 테스트 하기위함
-
-		if (E::HP66 == screen.status or E::HP100 == screen.status or E::HP33 == screen.status)
+	case '[': // Game start, Game over test
+		if (screen.status == E::HP66 || screen.status == E::HP100 || screen.status == E::HP33)
 		{
 			screen.status = E::WIN;
-			PlaySound(L"sound/win.wav", NULL, SND_ASYNC | SND_LOOP);//sound
+			PlaySound(L"sound/win.wav", NULL, SND_ASYNC | SND_LOOP);
 		}
-
-
-	
-		else if (E::WIN == screen.status)
+		else if (screen.status == E::WIN)
 		{
 			screen.status = E::GAMEOVER;
-			PlaySound(L"sound/closing.wav", NULL, SND_ASYNC | SND_LOOP);//sound
+			PlaySound(L"sound/closing.wav", NULL, SND_ASYNC | SND_LOOP);
 		}
-
-		
-
-		else if (E::GAMEOVER == screen.status)
+		else if (screen.status == E::GAMEOVER)
 		{
 			screen.status = E::MATCHING;
 		}
-		else if (E::MATCHING == screen.status)
+		else if (screen.status == E::MATCHING)
 		{
 			screen.status = E::HP66;
-			PlaySound(L"sound/inGame.wav", NULL, SND_ASYNC | SND_LOOP);//sound
+			PlaySound(L"sound/inGame.wav", NULL, SND_ASYNC | SND_LOOP);
 		}
 
 		player.init();
-		//player.setPos(vec3(0, 0, 0));
-
 		camera.setCamera(shaderProgramID, 0, cameraMode, player.getPos());
 		screen.initTex();
 
@@ -258,47 +250,44 @@ GLvoid Mouse(int button, int state, int x, int y)
 	float normalizedX = static_cast<float>(x) / windowWidth;
 	float normalizedY = static_cast<float>(y) / windowHeight;
 
+
 	if (button == GLUT_LEFT_BUTTON)
 	{
-
-		
-		if (E::Main == screen.status)
+		if (screen.status == E::Main)
 		{
-		
-			
-				// "플레이" button
-				if (normalizedX >= 0.65 && normalizedX <= 0.77 &&
-					normalizedY >= 0.66 && normalizedY <= 0.74) {
-					screen.status = E::HP66;
-					screen.initTex();
-					PlaySound(L"sound/inGame.wav", NULL, SND_ASYNC | SND_LOOP); // sound
-				}
-				// "게임나가기" button
-				else if (normalizedX >= 0.63 && normalizedX <= 0.75 &&
-					normalizedY >= 0.744 && normalizedY <= 0.81) {
-					exit(-1);
-				}
-				//로비입장버튼			
-				else if (normalizedX >= 0.62 && normalizedX <= 0.85 &&
-					normalizedY >= 0.83 && normalizedY <= 0.9) {
-					screen.status = E::MATCHING;
-					cout << "Lobby Enter" << endl;
-					client.SendStartGame();
-					screen.initTex();
-					PlaySound(L"sound/inGame.wav", NULL, SND_ASYNC | SND_LOOP); 
-				}
-			
+			if (normalizedX >= 0.65 && normalizedX <= 0.77 &&
+				normalizedY >= 0.66 && normalizedY <= 0.74)
+			{
+				screen.status = E::HP66;
+				screen.initTex();
+				PlaySound(L"sound/inGame.wav", NULL, SND_ASYNC | SND_LOOP);
+			}
+			else if (normalizedX >= 0.63 && normalizedX <= 0.75 &&
+				normalizedY >= 0.744 && normalizedY <= 0.81)
+			{
+				exit(-1);
+			}
+			else if (normalizedX >= 0.62 && normalizedX <= 0.85 &&
+				normalizedY >= 0.83 && normalizedY <= 0.9)
+			{
+				screen.status = E::MATCHING;
+				std::cout << "Lobby Enter" << std::endl;
+				client.SendStartGame();
+				screen.initTex();
+				PlaySound(L"sound/inGame.wav", NULL, SND_ASYNC | SND_LOOP);
+			}
 		}
-		else if (screen.status == E::MATCHING) // Matching screen
+
+		else if (screen.status == E::MATCHING)
 		{
-				// "매칭취소
-				if (normalizedX >= 0.313 && normalizedX <= 0.75 &&
-					normalizedY >= 0.889 && normalizedY <= 0.999) {
-					client.SendMatchingCancel();
-					screen.status = E::Main;
-					screen.initTex();
-					PlaySound(L"sound/opening.wav", NULL, SND_ASYNC | SND_LOOP); 				}
-			
+			if (normalizedX >= 0.313 && normalizedX <= 0.75 &&
+				normalizedY >= 0.889 && normalizedY <= 0.999)
+			{
+				client.SendMatchingCancel();
+				screen.status = E::Main;
+				screen.initTex();
+				PlaySound(L"sound/opening.wav", NULL, SND_ASYNC | SND_LOOP);
+			}
 		}
 	}
 }
@@ -349,14 +338,15 @@ void init()
 
 	light.InitBuffer(shaderProgramID, camera);
 }
+
 void gameExit()
 {
-	cout << "Game gameExit" << endl;
-	if (screen.status == 1 || screen.status == 4 || screen.status == 5)
-	{
-		client.DisConnectClient();
-	}
+	std::cout << "Game Exit" << std::endl;
 	client.SendMatchingCancel();
+	if (screen.status == E::MATCHING)
+	{
+
+	}
 }
 
 
@@ -395,10 +385,10 @@ void wallUpdate()
 {
 	wall.moveWall(); // 벽 움직이는 함수
 
-	if (30 == wall.cur_idx) // 게임 승리
+	if (wall.cur_idx == 30) // Game win
 	{
-		screen.status = 2;
-		PlaySound(L"sound/win.wav", NULL, SND_ASYNC | SND_LOOP);//sound
+		screen.status = E::WIN;
+		PlaySound(L"sound/win.wav", NULL, SND_ASYNC | SND_LOOP);
 
 		player.init();
 		camera.setCamera(shaderProgramID, 0, cameraMode, player.getPos());
