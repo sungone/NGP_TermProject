@@ -20,6 +20,8 @@ public :
 	void updateViewerPlayerColor(const vec3 newColor);
 	void updateViewerPlayerScale(const vec3 newScale);
 
+
+	void initBuf();
 	void render(GLuint shaderProgramID) override;
 
 } ViewerPlayer;
