@@ -129,7 +129,7 @@ GLvoid drawScene()
 	screen.render(shaderProgramID);
 
 	// Object Draw
-	if (1 == screen.status or 4 == screen.status or 5 == screen.status) {
+	if (E::HP100 == screen.status or E::HP33 == screen.status or E::HP66 == screen.status) {
 
 		// 마우스 커서 숨기기
 	/*	ShowCursor(FALSE);*/
