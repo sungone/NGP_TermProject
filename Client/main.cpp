@@ -1,6 +1,8 @@
 
 
 
+
+
 #include "pch.h"
 #include "shaders.h"
 #include "base.h"
@@ -274,7 +276,7 @@ GLvoid Mouse(int button, int state, int x, int y)
 			if (normalizedX >= 0.313 && normalizedX <= 0.75 &&
 				normalizedY >= 0.889 && normalizedY <= 0.999)
 			{
-			/*	client.SendMatchingCancel();*/
+				/*	client.SendMatchingCancel();*/
 				screen.status = E::Main;
 				screen.initTex();
 				PlaySound(L"sound/opening.wav", NULL, SND_ASYNC | SND_LOOP);
@@ -387,50 +389,55 @@ void wallUpdate()
 	}
 
 
-	if (!wall.emptyIdx.empty()) // 충돌처리 하는 로직이 들어있음
+	if (not wall.emptyIdx.empty()) // 충돌처리 하는 로직이 들어있음
 	{
-		
-		if ((!player.crashOnce) and 1.25f < wall.getCube(wall.emptyIdx[0].x, wall.emptyIdx[0].y).getPos().z) {
-			int findIndex = -1;
-		
+		if (not player.crashOnce and 1.25f < wall.getCube(wall.emptyIdx[0].x, wall.emptyIdx[0].y).getPos().z) {
 			for (int i{}; i < wall.emptyIdx.size(); ++i) {
-				if ((player.getPos().x - 0.13f >= wall.emptyIdx[i].y * 0.3333f - 0.5f && player.getPos().x + 0.13f <= wall.emptyIdx[i].y * 0.3333f + 0.3333f - 0.5f))// ||
-					//(player.getPos().x + 0.13f >= wall.emptyIdx[i].y * 0.3333f - 0.5f && player.getPos().x <= wall.emptyIdx[i].y * 0.3333f + 0.3333f - 0.5f))
-				{
-					findIndex = i;
-					break;
-				}
-			}
+				if ((player.getPos().x/*-0.01f*/ >= wall.emptyIdx[i].y * 0.3333f - 0.5f
+					and player.getPos().x + 0.13f <= wall.emptyIdx[i].y * 0.3333f + 0.3333f - 0.5f)//pl==cube
 
+					or (player.getPos().x + 0.13f > wall.emptyIdx[i].y * 0.3333f - 0.5f
+						and player.getPos().x/*-0.01f*/ < wall.emptyIdx[i].y * 0.3333f + 0.3333f - 0.5f)) {
 
-			if (findIndex != -1)
-			{
-				if (0 == (wall.cur_idx - 1) / 10) {
-					client.BlockCollision();
-				}
-				else if (1 == (wall.cur_idx - 1) / 10) {
-					if (not(1 == player.getColor().x and 0 == wall.emptyIdx[findIndex].x
-						or 1 == player.getColor().y and 1 == wall.emptyIdx[findIndex].x
-						or 1 == player.getColor().z and 2 == wall.emptyIdx[findIndex].x)) {
+					if (0 == (wall.cur_idx - 1) / 10) {
+
+						++wall.crashCnt;
+						player.crashOnce = true;
 						client.BlockCollision();
-				/*		player.crashOnce = true;*/
+						break;
+					}
+					else if (1 == (wall.cur_idx - 1) / 10) {
+						if (not(1 == player.getColor().x and 0 == wall.emptyIdx[i].x
+							or 1 == player.getColor().y and 1 == wall.emptyIdx[i].x
+							or 1 == player.getColor().z and 2 == wall.emptyIdx[i].x)) {
+
+							++wall.crashCnt;
+							player.crashOnce = true;
+							client.BlockCollision();
+							break;
+						}
+					}
+					else if (2 == (wall.cur_idx - 1) / 10) {
+						if (0 == wall.emptyIdx[i].x and not plSizeChange
+							or 1 == wall.emptyIdx[i].x) {
+
+							++wall.crashCnt;
+							player.crashOnce = true;
+							client.BlockCollision();
+							break;
+						}
+
 					}
 				}
-				else if (2 == (wall.cur_idx - 1) / 10) {
-					if (0 == wall.emptyIdx[findIndex].x and not plSizeChange
-						or 1 == wall.emptyIdx[findIndex].x) {
-						client.BlockCollision();
-				/*		player.crashOnce = true;*/
-					}
 
-				}
 			}
 		}
 	}
 
 	if (not wall.emptyIdx.empty() and 1.3f < wall.getCube(wall.emptyIdx[0].x, wall.emptyIdx[0].y).getPos().z)
 	{
-	/*	player.crashOnce = false;*/
+		player.crashOnce = false;
+		wall.emptyIdx.clear();
 	}
 }
 

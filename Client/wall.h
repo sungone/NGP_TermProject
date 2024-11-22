@@ -39,6 +39,7 @@ public:
 	int	random_num[36][3];
 	vector<vec2> emptyIdx /*= { {0,0},{0,1},{0,2} }*/;
 	int cur_idx{};
+	int crashCnt{};
 public:
 	void init();
 	void render(GLuint shaderProgramID) override;
