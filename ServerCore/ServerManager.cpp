@@ -112,7 +112,7 @@ void ServerManager::RecvSendStartGame(SOCKET socket)
 	_readyCount++;
 	cout << "_readyCount :" << _readyCount << "\n";
 
-	if (_readyCount == 2)
+	if (_readyCount == 3)
 	{
 		MYCMD cmd;
 
