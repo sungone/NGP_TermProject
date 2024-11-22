@@ -1,9 +1,3 @@
-
-
-
-
-
-
 #include "pch.h"
 #include "shaders.h"
 #include "base.h"
@@ -389,7 +383,6 @@ void wallUpdate()
 		screen.initTex();
 	}
 
-
 	if (not wall.emptyIdx.empty()) // 충돌처리 하는 로직이 들어있음
 	{
 		if (not player.crashOnce and 1.25f < wall.getCube(wall.emptyIdx[0].x, wall.emptyIdx[0].y).getPos().z) {
@@ -400,14 +393,16 @@ void wallUpdate()
 					or (player.getPos().x + 0.13f > wall.emptyIdx[i].y * 0.3333f - 0.5f
 						and player.getPos().x/*-0.01f*/ < wall.emptyIdx[i].y * 0.3333f + 0.3333f - 0.5f)) {
 
-					if (0 == (wall.cur_idx - 1) / 10) {
+					// cur_idx 1 ~ 9 1 단계
+					if (0 == (wall.cur_idx) / 10) {
 
 						++wall.crashCnt;
 						player.crashOnce = true;
 						client.BlockCollision();
 						break;
 					}
-					else if (1 == (wall.cur_idx - 1) / 10) {
+					else if (1 == (wall.cur_idx) / 10) // cur_idx 10 ~ 19 2단계
+					{
 						if (not(1 == player.getColor().x and 0 == wall.emptyIdx[i].x
 							or 1 == player.getColor().y and 1 == wall.emptyIdx[i].x
 							or 1 == player.getColor().z and 2 == wall.emptyIdx[i].x)) {
@@ -418,7 +413,7 @@ void wallUpdate()
 							break;
 						}
 					}
-					else if (2 == (wall.cur_idx - 1) / 10) {
+					else if (2 == (wall.cur_idx) / 10) { // cur_idx 20 ~ 29 3단계
 						if (0 == wall.emptyIdx[i].x and not plSizeChange
 							or 1 == wall.emptyIdx[i].x) {
 

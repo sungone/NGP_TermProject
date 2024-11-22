@@ -197,6 +197,7 @@ void Wall::moveWall()
 	if (finalBlock && client._clientMaster)
 	{
 		++cur_idx;
+		cout << "ÇöÀç Wave : " << cur_idx << endl;
 		player.crashOnce = false;
 		wall.emptyIdx.clear();
 
