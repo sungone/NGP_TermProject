@@ -160,6 +160,8 @@ void ServerManager::RecvSendChattingData(SOCKET socket,int size)
 
 void ServerManager::BlockCollision(SOCKET socket)
 {
+	lock_guard<mutex> guard(_mutex);
+
 	_hp += 1;
 	HPInfo info;
 	info.hp = _hp;

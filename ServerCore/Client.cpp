@@ -269,7 +269,7 @@ void Client::HpUpdate()
 
 	hp = info.hp;
 
-	if (3 == hp) // 3번 충돌  < 게임 오버 >
+	if (3 <= hp) // 3번 충돌  < 게임 오버 >
 	{
 		screen.status = E::MATCHING;
 
@@ -280,17 +280,18 @@ void Client::HpUpdate()
 		/*screen.initTex();*/
 	}
 
-	else if (2 == hp and !hpBarSet[1]) // 2번 충돌
+	else if (2 == hp ) // 2번 충돌
 	{
 		screen.status = E::HP33;
 	/*	screen.initTex();*/
-		hpBarSet[1] = true;
+		//hpBarSet[1] = true;
 	}
-	else if (1 == hp and !hpBarSet[0]) // 1번 충돌
+
+	else if (1 == hp ) // 1번 충돌
 	{
 		screen.status = E::HP66;
 		//screen.initTex();
-		hpBarSet[0] = true;
+		//hpBarSet[0] = true;
 	}
 }
 
