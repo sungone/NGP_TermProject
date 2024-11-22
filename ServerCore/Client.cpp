@@ -275,8 +275,8 @@ void Client::HpUpdate()
 
 		//PlaySound(L"sound/closing.wav", NULL, SND_ASYNC | SND_LOOP);//sound
 
-	/*	player.init();*/
-	/*	camera.setCamera(shaderProgramID, 0, cameraMode, player.getPos());*/
+		player.init();
+		camera.setCamera(shaderProgramID, 0, cameraMode, player.getPos());
 		/*screen.initTex();*/
 	}
 
