@@ -19,19 +19,7 @@
 * ServerCore 의 ClinetData 로 이동       *
 ******************************************/
 
-namespace E
-{
-	enum ScreenState
-	{
-		Main,
-		HP66,
-		WIN,
-		GAMEOVER,
-		HP100,
-		HP33,
-		MATCHING
-	};
-}
+
 /******************************************
 			<Screen Status>
  0 : 메인 화면 1 : 인게임 스크린 (HP : 66 % ) 2 : 게임 승리 3 : 게임 오버
@@ -204,7 +192,7 @@ GLvoid keyboard(unsigned char key, int x, int y)
 		}
 		else if (screen.status == E::MATCHING)
 		{
-			screen.status = E::HP66;
+			screen.status = E::HP100;
 			PlaySound(L"sound/inGame.wav", NULL, SND_ASYNC | SND_LOOP);
 		}
 
@@ -258,15 +246,17 @@ GLvoid Mouse(int button, int state, int x, int y)
 			if (normalizedX >= 0.65 && normalizedX <= 0.77 &&
 				normalizedY >= 0.66 && normalizedY <= 0.74)
 			{
-				screen.status = E::HP66;
+				screen.status = E::HP100;
 				screen.initTex();
 				PlaySound(L"sound/inGame.wav", NULL, SND_ASYNC | SND_LOOP);
 			}
+
 			else if (normalizedX >= 0.63 && normalizedX <= 0.75 &&
 				normalizedY >= 0.744 && normalizedY <= 0.81)
 			{
 				exit(-1);
 			}
+
 			else if (normalizedX >= 0.62 && normalizedX <= 0.85 &&
 				normalizedY >= 0.83 && normalizedY <= 0.9)
 			{
@@ -277,6 +267,7 @@ GLvoid Mouse(int button, int state, int x, int y)
 				PlaySound(L"sound/inGame.wav", NULL, SND_ASYNC | SND_LOOP);
 			}
 		}
+
 
 		else if (screen.status == E::MATCHING)
 		{
