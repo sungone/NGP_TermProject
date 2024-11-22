@@ -211,6 +211,7 @@ void Client::BlockCreate()
 	BlockCreateInfo info;
 
 	info.cur_idx = wall.cur_idx;
+
 	for (int i = 0; i < 3; i++)
 		for (int j = 0; j < 3; j++)
 		{
@@ -268,7 +269,7 @@ void Client::HpUpdate()
 
 	if (3 == hp) // 3번 충돌  < 게임 오버 >
 	{
-		screen.status = 3;
+		screen.status = E::GAMEOVER;
 
 		PlaySound(L"sound/closing.wav", NULL, SND_ASYNC | SND_LOOP);//sound
 
@@ -278,13 +279,13 @@ void Client::HpUpdate()
 	}
 	else if (2 == hp and !hpBarSet[1]) // 2번 충돌
 	{
-		screen.status = 5;
+		screen.status = E::HP33;
 		screen.initTex();
 		hpBarSet[1] = true;
 	}
 	else if (1 == hp and !hpBarSet[0]) // 1번 충돌
 	{
-		screen.status = 4;
+		screen.status = E::HP100;
 		screen.initTex();
 		hpBarSet[0] = true;
 	}

@@ -112,7 +112,7 @@ void main(int argc, char** argv)
 	glutSpecialFunc(KeyboardSpecial);
 	glutMouseFunc(Mouse);
 	glutMainLoop();
-	atexit(gameExit);
+	//atexit(gameExit);
 }
 
 GLvoid drawScene()
@@ -283,7 +283,7 @@ GLvoid Mouse(int button, int state, int x, int y)
 			if (normalizedX >= 0.313 && normalizedX <= 0.75 &&
 				normalizedY >= 0.889 && normalizedY <= 0.999)
 			{
-				client.SendMatchingCancel();
+			/*	client.SendMatchingCancel();*/
 				screen.status = E::Main;
 				screen.initTex();
 				PlaySound(L"sound/opening.wav", NULL, SND_ASYNC | SND_LOOP);
