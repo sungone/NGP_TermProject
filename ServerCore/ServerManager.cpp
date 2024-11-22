@@ -112,7 +112,7 @@ void ServerManager::RecvSendStartGame(SOCKET socket)
 	_readyCount++;
 	cout << "_readyCount :" << _readyCount << "\n";
 
-	if (_readyCount == 3)
+	if (_readyCount == 2)
 	{
 		MYCMD cmd;
 
@@ -168,6 +168,7 @@ void ServerManager::BlockCollision(SOCKET socket)
 	MYCMD cmd;
 	PrintClinetInfo(socket, "으로부터 충돌 이벤트 받음");
 
+	cout << "hp :" << _hp << endl;
 	cmd.Code = ENUM::HPSync;
 
 	for (auto it = _listClient.unsafe_begin(); it != _listClient.unsafe_end(); ++it)

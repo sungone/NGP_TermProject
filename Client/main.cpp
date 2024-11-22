@@ -413,14 +413,14 @@ void wallUpdate()
 						or 1 == player.getColor().y and 1 == wall.emptyIdx[findIndex].x
 						or 1 == player.getColor().z and 2 == wall.emptyIdx[findIndex].x)) {
 						client.BlockCollision();
-						player.crashOnce = true;
+				/*		player.crashOnce = true;*/
 					}
 				}
 				else if (2 == (wall.cur_idx - 1) / 10) {
 					if (0 == wall.emptyIdx[findIndex].x and not plSizeChange
 						or 1 == wall.emptyIdx[findIndex].x) {
 						client.BlockCollision();
-						player.crashOnce = true;
+				/*		player.crashOnce = true;*/
 					}
 
 				}
@@ -430,7 +430,7 @@ void wallUpdate()
 
 	if (not wall.emptyIdx.empty() and 1.3f < wall.getCube(wall.emptyIdx[0].x, wall.emptyIdx[0].y).getPos().z)
 	{
-		player.crashOnce = false;
+	/*	player.crashOnce = false;*/
 	}
 }
 
