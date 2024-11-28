@@ -177,11 +177,14 @@ void ViewerPlayer::updateViewerPlayerScale(const vec3 newScale)
 
 void ViewerPlayer::render(GLuint shaderProgramID)
 {
-	glBindVertexArray(vao);
+	if (isRender)
+	{
+		glBindVertexArray(vao);
 
-	model = glm::mat4(1.f);
-	model = glm::translate(model, pos);
-	model = glm::scale(model, scale);
+		model = glm::mat4(1.f);
+		model = glm::translate(model, pos);
+		model = glm::scale(model, scale);
 
-	drawP(shaderProgramID);
+		drawP(shaderProgramID);
+	}
 }
