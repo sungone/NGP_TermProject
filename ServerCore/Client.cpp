@@ -378,7 +378,7 @@ void Client::RemoveClientPlayer(int ClientID)
 	auto it = viewerPlayer.find(ClientID);
 	if (it != viewerPlayer.end())
 	{
-		delete it->second;
+		it->second->isRender = false;
 		viewerPlayer.erase(it);
 	}
 }

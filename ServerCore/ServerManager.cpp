@@ -121,6 +121,7 @@ void ServerManager::RecvSendStartGame(SOCKET socket)
 		{
 			::send(*it, (char*)&cmd, sizeof(cmd), 0);
 		}
+		_readyCount = 0;
 	}
 }
 

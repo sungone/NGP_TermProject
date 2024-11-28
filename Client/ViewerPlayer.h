@@ -8,11 +8,11 @@ private :
 	glm::mat4 pModel; // player ¸ðµ¨
 	CFileIn in;
 
-	bool isRender = true;
 
 	void drawP(GLuint shaderProgramID);
 
 public :
+	bool isRender = true;
 	ViewerPlayer() : Object() {}
 
 	void init() override;
