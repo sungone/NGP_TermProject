@@ -129,13 +129,12 @@ GLvoid drawScene()
 			for (int i = 0; i < objects.size(); ++i)
 				(*objects[i]).render(shaderProgramID);
 
+			float x = player.GetTextPos();
+			glUseProgram(0); //unbind
+			TextManager::GetInstance()->Render(x, -0.4f, "me");
 		}
 	
 
-
-		float x = player.GetTextPos();
-		glUseProgram(0);
-		TextManager::GetInstance()->Render(x, -0.4f, "me");
 		glutSwapBuffers();
 	
 	}
