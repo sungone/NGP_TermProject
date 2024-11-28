@@ -96,7 +96,6 @@ void main(int argc, char** argv)
 	glutSpecialFunc(KeyboardSpecial);
 	glutMouseFunc(Mouse);
 	glutMainLoop();
-	//atexit(gameExit);
 }
 
 GLvoid drawScene()
