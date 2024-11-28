@@ -95,6 +95,7 @@ void main(int argc, char** argv)
 	glutKeyboardFunc(keyboard);
 	glutSpecialFunc(KeyboardSpecial);
 	glutMouseFunc(Mouse);
+	glutCloseFunc(gameExit);
 	glutMainLoop();
 }
 
@@ -325,11 +326,11 @@ void init()
 void gameExit()
 {
 	std::cout << "Game Exit" << std::endl;
-	client.SendMatchingCancel();
 	if (screen.status == E::MATCHING)
 	{
-
+		client.SendMatchingCancel();
 	}
+	client.DisConnectClient();
 }
 
 void initCamera()
