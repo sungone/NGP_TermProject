@@ -1,3 +1,4 @@
+
 #include "pch.h"
 #include "shaders.h"
 #include "base.h"
@@ -10,7 +11,7 @@
 #include "ThreadManager.h"
 #include "ClientData.h"
 #include "Client.h"
-#include "TimeManager.h"
+
 /*****************************************
 * 변수들 전역변수 공용으로 사용하기위해  *
 * ServerCore 의 ClinetData 로 이동       *
@@ -34,10 +35,12 @@ GLvoid Mouse(int button, int state, int x, int y);
 // 벽 이동 함수
 void wallUpdate();
 // 게임 전체 플레이 로직
-GLvoid update(int value);
+GLvoid update();
 
 void initCamera();
 HWND hwnd;
+
+uint64 lastTick = 0;
 
 void main(int argc, char** argv)
 {
@@ -45,7 +48,7 @@ void main(int argc, char** argv)
 
 
 	hwnd = GetForegroundWindow();
-	TimeManager::GetInstance()->Init(hwnd);
+
 	//RECT rect = { 0, 0, windowWidth, windowHeight };
 
 	//::AdjustWindowRect(&rect, WS_OVERLAPPEDWINDOW, false);
@@ -91,8 +94,6 @@ void main(int argc, char** argv)
 	TextManager::GetInstance()->Init();
 	init();
 
-	float  dt =TimeManager::GetInstance()->GetDeltaTime();
-	glutTimerFunc(wallUpdateSpeed, update, dt);
 	glutDisplayFunc(drawScene);
 	glutReshapeFunc(Reshape);
 	glutKeyboardFunc(keyboard);
@@ -106,30 +107,41 @@ void main(int argc, char** argv)
 GLvoid drawScene()
 {
 
-	glClearColor(g_color[0], g_color[1], g_color[2], g_color[3]);
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	glUseProgram(shaderProgramID);
+	uint64 currentTick = ::GetTickCount64();
 
-	glViewport(0, 0, windowWidth, windowHeight);
+	if (currentTick - lastTick > 16)
+	{
+		lastTick = currentTick;
 
-	// Camera
-	camera.setCamera(shaderProgramID, 0, cameraMode, player.getPos());
-	screen.render(shaderProgramID);
+		glClearColor(g_color[0], g_color[1], g_color[2], g_color[3]);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		glUseProgram(shaderProgramID);
 
-	// Object Draw
-	if (E::HP100 == screen.status or E::HP33 == screen.status or E::HP66 == screen.status) {
+		glViewport(0, 0, windowWidth, windowHeight);
 
-		// 마우스 커서 숨기기
-	/*	ShowCursor(FALSE);*/
+		update();
+		// Camera
+		camera.setCamera(shaderProgramID, 0, cameraMode, player.getPos());
+		screen.render(shaderProgramID);
 
-		backgroundmap.render(shaderProgramID);
+		// Object Draw
+		if (E::HP100 == screen.status or E::HP33 == screen.status or E::HP66 == screen.status) {
 
-		for (int i = 0; i < objects.size(); ++i)
-			(*objects[i]).render(shaderProgramID);
+			// 마우스 커서 숨기기
+		/*	ShowCursor(FALSE);*/
 
+			backgroundmap.render(shaderProgramID);
+
+			for (int i = 0; i < objects.size(); ++i)
+				(*objects[i]).render(shaderProgramID);
+
+		}
+
+		glutSwapBuffers();
+	
 	}
 
-	glutSwapBuffers();
+	glutPostRedisplay();
 }
 
 GLvoid Reshape(int w, int h)
@@ -267,7 +279,7 @@ GLvoid Mouse(int button, int state, int x, int y)
 		}
 
 		else if (screen.status == E::MATCHING)
-		{	
+		{
 			if (normalizedX >= 0.313 && normalizedX <= 0.75 &&
 				normalizedY >= 0.889 && normalizedY <= 0.999)
 			{
@@ -357,9 +369,8 @@ void initCamera()
 	camera.setEye(glm::vec3(0.f, 1.f, 2.f));
 }
 
-GLvoid update(int value)
+GLvoid update()
 {
-
 	if (1 == screen.status or 4 == screen.status or 5 == screen.status)
 		wallUpdate();
 	else if (hp >= 3) // hp >= 3 이면 hp 가 모두 소진되었으므로 게임 종료
@@ -369,9 +380,6 @@ GLvoid update(int value)
 	}
 
 
-	float dt = TimeManager::GetInstance()->GetDeltaTime();
-	glutTimerFunc(wallUpdateSpeed, update, dt);
-	glutPostRedisplay();
 }
 
 void wallUpdate()
