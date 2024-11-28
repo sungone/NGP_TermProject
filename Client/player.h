@@ -12,12 +12,11 @@ private:
 
 	void drawP(GLuint shaderProgramID);
 public:
-	float HelloWorld() { return sum; }
+	float GetTextPos() { return TextPos; }
 	bool crashOnce{};
 	CFileIn in;
-	float sum{};
+	float TextPos = -0.05f;
 
-	
 	
 public:
 

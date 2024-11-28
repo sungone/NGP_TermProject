@@ -122,7 +122,7 @@ void Player::moveLeft()
 	{
 		
 		pos.x -= 0.05f;
-		sum -= 0.06f;
+		TextPos -= 0.065f;
 	}
 }
 
@@ -131,7 +131,7 @@ void Player::moveRight()
 	if (pos.x < 0.35f)
 	{
 		pos.x += 0.05f;
-		sum += 0.06f;
+		TextPos += 0.065f;
 	}
 }
 

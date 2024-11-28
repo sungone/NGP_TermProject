@@ -59,8 +59,8 @@ void main(int argc, char** argv)
 	PlaySound(L"sound/opening.wav", NULL, SND_ASYNC | SND_LOOP);//sound
 
 	glutInit(&argc, argv);
-	::glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA | GLUT_DEPTH | GLUT_BORDERLESS); // 컬러모델, 윈도우 버퍼 등 초기의 출력 모드를 결정한다.
-	glutInitWindowPosition(0, 0);
+	::glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA | GLUT_DEPTH ); // 컬러모델, 윈도우 버퍼 등 초기의 출력 모드를 결정한다.
+	glutInitWindowPosition(300,200);
 	glutInitWindowSize(windowWidth, windowHeight);
 
 	windowWidth = glutGet(GLUT_SCREEN_WIDTH); // 모니터의 가로 해상도 가져오기
@@ -133,7 +133,7 @@ GLvoid drawScene()
 	
 
 
-		float x = player.HelloWorld();
+		float x = player.GetTextPos();
 		glUseProgram(0);
 		TextManager::GetInstance()->Render(x, -0.4f, "me");
 		glutSwapBuffers();
