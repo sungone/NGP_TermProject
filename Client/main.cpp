@@ -10,7 +10,7 @@
 #include "ThreadManager.h"
 #include "ClientData.h"
 #include "Client.h"
-
+#include "TimeManager.h"
 /*****************************************
 * 변수들 전역변수 공용으로 사용하기위해  *
 * ServerCore 의 ClinetData 로 이동       *
@@ -43,8 +43,9 @@ void main(int argc, char** argv)
 {
 	client.Init();
 
-	hwnd = GetForegroundWindow();
 
+	hwnd = GetForegroundWindow();
+	TimeManager::GetInstance()->Init(hwnd);
 	//RECT rect = { 0, 0, windowWidth, windowHeight };
 
 	//::AdjustWindowRect(&rect, WS_OVERLAPPEDWINDOW, false);
@@ -89,7 +90,9 @@ void main(int argc, char** argv)
 	// 초기화
 	TextManager::GetInstance()->Init();
 	init();
-	glutTimerFunc(wallUpdateSpeed, update, 50);
+
+	float  dt =TimeManager::GetInstance()->GetDeltaTime();
+	glutTimerFunc(wallUpdateSpeed, update, dt);
 	glutDisplayFunc(drawScene);
 	glutReshapeFunc(Reshape);
 	glutKeyboardFunc(keyboard);
@@ -97,6 +100,7 @@ void main(int argc, char** argv)
 	glutMouseFunc(Mouse);
 	glutCloseFunc(gameExit);
 	glutMainLoop();
+
 }
 
 GLvoid drawScene()
@@ -355,6 +359,7 @@ void initCamera()
 
 GLvoid update(int value)
 {
+
 	if (1 == screen.status or 4 == screen.status or 5 == screen.status)
 		wallUpdate();
 	else if (hp >= 3) // hp >= 3 이면 hp 가 모두 소진되었으므로 게임 종료
@@ -363,7 +368,9 @@ GLvoid update(int value)
 		screen.initTex();
 	}
 
-	glutTimerFunc(wallUpdateSpeed, update, value);
+
+	float dt = TimeManager::GetInstance()->GetDeltaTime();
+	glutTimerFunc(wallUpdateSpeed, update, dt);
 	glutPostRedisplay();
 }
 

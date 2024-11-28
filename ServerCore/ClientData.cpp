@@ -45,7 +45,7 @@ glm::mat4 model;
 glm::mat4 view;
 glm::mat4 projection;
 
-int wallUpdateSpeed = 10;
+int wallUpdateSpeed = 2;
 
 //辑滚烹脚家南 积己
 Client client;
