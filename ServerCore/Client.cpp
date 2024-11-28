@@ -269,30 +269,6 @@ void Client::HpUpdate()
 	::recv(_connectedSocket, (char*)&info, sizeof(HPInfo), MSG_WAITALL);
 
 	hp = info.hp;
-
-	if (3 <= hp) // 3번 충돌  < 게임 오버 >
-	{
-		screen.status = E::GAMEOVER;
-		//PlaySound(L"sound/closing.wav", NULL, SND_ASYNC | SND_LOOP);//sound
-
-		//player.init();
-		//camera.setCamera(shaderProgramID, 0, cameraMode, player.getPos());
-		//screen.initTex();
-	}
-
-	else if (2 == hp) // 2번 충돌
-	{
-		screen.status = E::HP33;
-		//screen.initTex();
-		//hpBarSet[1] = true;
-	}
-
-	else if (1 == hp) // 1번 충돌
-	{
-		screen.status = E::HP66;
-		//screen.initTex();
-		//hpBarSet[0] = true;
-	}
 }
 
 void Client::ClientInfoData(MYCMD& cmd)
