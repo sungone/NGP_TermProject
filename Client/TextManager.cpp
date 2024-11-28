@@ -8,7 +8,7 @@ void TextManager::Init()
 
 	HFONT font; // <1>
 	_base = glGenLists(96); // <2>
-	font = CreateFont(-70, // <3-1>
+	font = CreateFont(-20, // <3-1>
 		0,
 		0,
 		0,
@@ -21,7 +21,7 @@ void TextManager::Init()
 		CLIP_DEFAULT_PRECIS,
 		ANTIALIASED_QUALITY,
 		FF_DONTCARE | DEFAULT_PITCH,
-		LPCWSTR("Courier New")); // <3-6>
+		LPCWSTR(L"ksh")); // <3-6>
 
 	SelectObject(_hdc, font); // <4>
 	wglUseFontBitmaps(_hdc, 32, 96, _base); // <5>
@@ -32,7 +32,6 @@ void TextManager::Init()
 
 void TextManager::Render(float x, float y, const char* text)
 {
-
 	glColor3f(1.0f, 1.0f, 1.0f); // Èò»ö
 	glRasterPos2f(x, y);       //<2>
 	glPushAttrib(GL_LIST_BIT); //<1>

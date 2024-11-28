@@ -41,36 +41,30 @@ void initCamera();
 HWND hwnd;
 
 uint64 lastTick = 0;
-
+float add = 0;
 void main(int argc, char** argv)
 {
 	client.Init();
 
 
-	hwnd = GetForegroundWindow();
-
-	//RECT rect = { 0, 0, windowWidth, windowHeight };
-
-	//::AdjustWindowRect(&rect, WS_OVERLAPPEDWINDOW, false);
 
 	ThreadManager::Launch([]()
 		{
 			client.PacketDecode();
 		});
 
-	ThreadManager::Launch([]()
-		{
-			client.Send();
-		});
 
 	client.SendConnect();
 
 	PlaySound(L"sound/opening.wav", NULL, SND_ASYNC | SND_LOOP);//sound
 
 	glutInit(&argc, argv);
-	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA);
-	glutInitWindowPosition(500, 100);
+	::glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA | GLUT_DEPTH | GLUT_BORDERLESS); // 컬러모델, 윈도우 버퍼 등 초기의 출력 모드를 결정한다.
+	glutInitWindowPosition(0, 0);
 	glutInitWindowSize(windowWidth, windowHeight);
+
+	windowWidth = glutGet(GLUT_SCREEN_WIDTH); // 모니터의 가로 해상도 가져오기
+	windowHeight = glutGet(GLUT_SCREEN_HEIGHT); // 모니터의 세로 해상도 가져오기
 
 	glutCreateWindow("Unity of Mind");
 	glewExperimental = GL_TRUE;
@@ -136,7 +130,12 @@ GLvoid drawScene()
 				(*objects[i]).render(shaderProgramID);
 
 		}
+	
 
+
+		float x = player.HelloWorld();
+		glUseProgram(0);
+		TextManager::GetInstance()->Render(x, -0.4f, "me");
 		glutSwapBuffers();
 	
 	}
@@ -223,6 +222,7 @@ GLvoid KeyboardSpecial(int key, int x, int y)
 	case GLUT_KEY_LEFT:
 		// 왼쪽 화살표 키 처리
 		player.moveLeft();
+
 		client.SendPlayerInfo();
 		if (FIRST_PERSON == cameraMode)
 			camera.moveLeft();
@@ -230,6 +230,7 @@ GLvoid KeyboardSpecial(int key, int x, int y)
 	case GLUT_KEY_RIGHT:
 		// 오른쪽 화살표 키 처리
 		player.moveRight();
+
 		client.SendPlayerInfo();
 		if (FIRST_PERSON == cameraMode)
 			camera.moveRight();

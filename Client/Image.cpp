@@ -38,7 +38,7 @@ void CImage::render(GLuint ID)
 	glBindTexture(GL_TEXTURE_2D, texId);
 	glDrawArrays(GL_TRIANGLES, 0, vert.size());
 
-	TextManager::GetInstance()->Render(0.5f, 0.5f, "Test");
+	
 }
 
 void CImage::initBuf()

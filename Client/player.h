@@ -8,11 +8,17 @@ private:
 
 	glm::mat4 pModel; // player ¸ðµ¨
 
+
+
 	void drawP(GLuint shaderProgramID);
 public:
+	float HelloWorld() { return sum; }
 	bool crashOnce{};
 	CFileIn in;
+	float sum{};
 
+	
+	
 public:
 
 	void init() override;

@@ -117,9 +117,12 @@ void Player::drawP(GLuint shaderProgramID)
 
 void Player::moveLeft()
 {
+
 	if (pos.x > -0.35f)
 	{
+		
 		pos.x -= 0.05f;
+		sum -= 0.06f;
 	}
 }
 
@@ -128,6 +131,7 @@ void Player::moveRight()
 	if (pos.x < 0.35f)
 	{
 		pos.x += 0.05f;
+		sum += 0.06f;
 	}
 }
 
