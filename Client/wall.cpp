@@ -194,6 +194,7 @@ void Wall::moveWall()
 		if (finalBlock)
 			break;
 	}
+
 	if (finalBlock && client._clientMaster)
 	{
 		++cur_idx;
@@ -211,6 +212,8 @@ void Wall::moveWall()
 		}
 		client.BlockCreate();
 	}
+
+
 }
 
 void Wall::makeWall(int i, int j, int cur_idx)
