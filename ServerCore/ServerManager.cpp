@@ -3,7 +3,7 @@
 
 ServerManager::ServerManager()
 {
-
+	_IDGenator.resize(4, -1);
 }
 
 ServerManager::~ServerManager()
@@ -13,7 +13,7 @@ ServerManager::~ServerManager()
 
 void ServerManager::PrintClinetInfo(SOCKET socket, string message)
 {
-#ifdef _DEBUG  // 디버그 모드에서만 실행
+
 	struct sockaddr_in clientaddr;
 	char addr[32];
 	int addrlen;
@@ -24,7 +24,7 @@ void ServerManager::PrintClinetInfo(SOCKET socket, string message)
 
 	cout << "클라이언트 : IP 주소:" << addr << "포트 번호 : " << ntohs(clientaddr.sin_port) << " ";
 	cout << message << "\n";
-#endif
+
 }
 
 void ServerManager::PushClient(SOCKET socket)
@@ -96,8 +96,18 @@ void ServerManager::RecvConnect(SOCKET socket)
 	MYCMD cmd;
 	cmd.Code = ENUM::Connect;
 	cmd.Size = 0;
-	cmd.ClientID = _IDGenator%3+1;
-	_IDGenator++;
+
+
+	for (int i = 1; i <= 3; ++i)
+	{
+		if (_IDGenator[i] == -1)
+		{
+			_IDGenator[i] = 1;
+			cmd.ClientID = i;
+			break;
+		}
+	}
+
 
 	::send(socket, (char*)&cmd , sizeof(cmd), 0);
 }
@@ -217,15 +227,6 @@ void ServerManager::PlayerInfo(SOCKET socket  ,MYCMD& cmd)
 	}
 }
 
-void ServerManager::Restart(SOCKET socket)
-{
-
-}
-
-void ServerManager::ReturnMenu(SOCKET socket)
-{
-
-}
 
 void ServerManager::RecvSendDisconnect(SOCKET socket , int clientID, bool isClientMaster)
 {
@@ -247,4 +248,8 @@ void ServerManager::RecvSendDisconnect(SOCKET socket , int clientID, bool isClie
 
 		::send(*it, (char*)&cmd, sizeof(cmd), 0);
 	}
+
+
+	_IDGenator[clientID] = -1;
+
 }

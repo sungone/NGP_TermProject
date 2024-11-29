@@ -45,9 +45,6 @@
     <ClInclude Include="PacketStructer.h">
       <Filter>Packet</Filter>
     </ClInclude>
-    <ClInclude Include="Packet.h">
-      <Filter>Packet</Filter>
-    </ClInclude>
     <ClInclude Include="ClientData.h">
       <Filter>Clinet</Filter>
     </ClInclude>
@@ -72,9 +69,6 @@
       <Filter>Clinet</Filter>
     </ClCompile>
     <ClCompile Include="PacketStructer.cpp">
-      <Filter>Packet</Filter>
-    </ClCompile>
-    <ClCompile Include="Packet.cpp">
       <Filter>Packet</Filter>
     </ClCompile>
     <ClCompile Include="ClientData.cpp">

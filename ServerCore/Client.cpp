@@ -1,7 +1,6 @@
 
 #include "pch.h"
 #include "Client.h"
-#include "Packet.h"
 #include "ClientData.h"
 
 Client::Client()
@@ -132,15 +131,7 @@ void Client::RecvStartGame()
 {
 	std::cout << "매칭 준비가 완료되었습니다!" << "\n";
 
-	if (viewerPlayer.size() == 2)
-	{
-		screen.status = E::HP100;
-		//screen.initTex();
-	}
-	else
-	{
-		cout << "뷰어 플레이어 생성 실패" << endl;
-	}
+	screen.status = E::HP100;
 }
 
 void Client::SendChattingData()
@@ -361,19 +352,16 @@ void Client::RemoveClientPlayer(int ClientID)
 
 void Client::DisConnectClient()
 {
-	if (_connectedSocket != INVALID_SOCKET)
-	{
-		MYCMD cmd;
-		cmd.Code = ENUM::DisconnectClient;
-		cmd.Size = 0;
-		cmd.ClientID = _clientID;
-		cmd.IsClientMaster = _clientMaster;
 
-		::send(_connectedSocket, (char*)&cmd, sizeof(cmd), 0);
+	MYCMD cmd;
+	cmd.Code = ENUM::DisconnectClient;
+	cmd.Size = 0;
+	cmd.ClientID = _clientID;
+	cmd.IsClientMaster = _clientMaster;
 
-		closesocket(_connectedSocket);
-	}
-}
+	::send(_connectedSocket, (char*)&cmd, sizeof(cmd), 0);
+
+};
 
 void Client::DisConnectClientInfo(int ClientID, bool isMaster)
 {

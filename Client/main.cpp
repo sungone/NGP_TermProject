@@ -1,4 +1,5 @@
 
+
 #include "pch.h"
 #include "shaders.h"
 #include "base.h"
@@ -59,8 +60,8 @@ void main(int argc, char** argv)
 	PlaySound(L"sound/opening.wav", NULL, SND_ASYNC | SND_LOOP);//sound
 
 	glutInit(&argc, argv);
-	::glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA | GLUT_DEPTH ); // 컬러모델, 윈도우 버퍼 등 초기의 출력 모드를 결정한다.
-	glutInitWindowPosition(300,200);
+	::glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA | GLUT_DEPTH); // 컬러모델, 윈도우 버퍼 등 초기의 출력 모드를 결정한다.
+	glutInitWindowPosition(300, 200);
 	glutInitWindowSize(windowWidth, windowHeight);
 
 	windowWidth = glutGet(GLUT_SCREEN_WIDTH); // 모니터의 가로 해상도 가져오기
@@ -133,10 +134,10 @@ GLvoid drawScene()
 			glUseProgram(0); //unbind
 			TextManager::GetInstance()->Render(x, -0.4f, "me");
 		}
-	
+
 
 		glutSwapBuffers();
-	
+
 	}
 
 	glutPostRedisplay();
@@ -283,7 +284,7 @@ GLvoid Mouse(int button, int state, int x, int y)
 			if (normalizedX >= 0.313 && normalizedX <= 0.75 &&
 				normalizedY >= 0.889 && normalizedY <= 0.999)
 			{
-				/*	client.SendMatchingCancel();*/
+				client.SendMatchingCancel();
 				screen.status = E::Main;
 				screen.initTex();
 				PlaySound(L"sound/opening.wav", NULL, SND_ASYNC | SND_LOOP);
