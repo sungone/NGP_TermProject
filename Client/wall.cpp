@@ -83,7 +83,7 @@ void Cube::reset()
 bool Cube::moveCube()
 {
 	float  dt=  TimeManager::GetInstance()->GetDeltaTime();
-	pos.z += 0.3f*dt;
+	pos.z += 0.4f*dt;
 	return false;
 }
 
