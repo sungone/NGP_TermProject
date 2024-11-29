@@ -1,5 +1,6 @@
 
 
+
 #include "pch.h"
 #include "shaders.h"
 #include "base.h"
@@ -12,6 +13,8 @@
 #include "ThreadManager.h"
 #include "ClientData.h"
 #include "Client.h"
+#include "TimeManager.h"
+
 
 /*****************************************
 * 변수들 전역변수 공용으로 사용하기위해  *
@@ -41,13 +44,12 @@ GLvoid update();
 void initCamera();
 HWND hwnd;
 
-HANDLE BlockEvent;
-
 uint64 lastTick = 0;
 float add = 0;
 void main(int argc, char** argv)
 {
 	client.Init();
+	TimeManager::GetInstance()->Init();
 
 
 	ThreadManager::Launch([]()
@@ -55,11 +57,6 @@ void main(int argc, char** argv)
 			client.PacketDecode();
 		});
 
-	BlockEvent= ::CreateEvent(
-		NULL,	
-		FALSE,	
-		FALSE,	
-		NULL);	
 
 	client.SendConnect();
 
@@ -108,7 +105,9 @@ GLvoid drawScene()
 
 	uint64 currentTick = ::GetTickCount64();
 
-	if (currentTick - lastTick > 16)
+	TimeManager::GetInstance()->Update();
+
+	if (currentTick - lastTick > 8)
 	{
 		lastTick = currentTick;
 
@@ -397,7 +396,6 @@ GLvoid update()
 
 void wallUpdate()
 {
-
 	wall.moveWall(); // 벽 움직이는 함수
 
 	if (hp == 0) // Client 프로젝트의 main 에서만 씬 이동이 되는것 같아서 여기서 hp 로 씬 전환을 함 , hp >= 3 이면 update 에서!

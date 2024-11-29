@@ -61,6 +61,9 @@
     <ClCompile Include="pch.cpp">
       <Filter>Utils</Filter>
     </ClCompile>
+    <ClCompile Include="TimeManager.cpp">
+      <Filter>TextManager</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="object.h">
@@ -104,6 +107,9 @@
     </ClInclude>
     <ClInclude Include="pch.h">
       <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="TimeManager.h">
+      <Filter>TextManager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

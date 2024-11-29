@@ -183,6 +183,7 @@
     <ClCompile Include="player.cpp" />
     <ClCompile Include="shader.cpp" />
     <ClCompile Include="TextManager.cpp" />
+    <ClCompile Include="TimeManager.cpp" />
     <ClCompile Include="ViewerPlayer.cpp" />
     <ClCompile Include="wall.cpp" />
   </ItemGroup>
@@ -199,6 +200,7 @@
     <ClInclude Include="shaders.h" />
     <ClInclude Include="stb_image.h" />
     <ClInclude Include="TextManager.h" />
+    <ClInclude Include="TimeManager.h" />
     <ClInclude Include="ViewerPlayer.h" />
     <ClInclude Include="wall.h" />
   </ItemGroup>

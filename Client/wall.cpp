@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "wall.h"
-
 #include "ClientData.h"
+#include "TimeManager.h"
 #define CUBE_INDEX_COUNT 36
 
 // ·£´ý ÇÔ¼ö
@@ -82,7 +82,8 @@ void Cube::reset()
 
 bool Cube::moveCube()
 {
-	pos.z += 0.01f;
+	float  dt=  TimeManager::GetInstance()->GetDeltaTime();
+	pos.z += 0.3f*dt;
 	return false;
 }
 
@@ -194,7 +195,6 @@ void Wall::moveWall()
 		if (finalBlock)
 			break;
 	}
-
 	if (finalBlock && client._clientMaster)
 	{
 		++cur_idx;
@@ -212,8 +212,6 @@ void Wall::moveWall()
 		}
 		client.BlockCreate();
 	}
-
-
 }
 
 void Wall::makeWall(int i, int j, int cur_idx)
