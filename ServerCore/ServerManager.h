@@ -27,6 +27,7 @@ public:
 	void MakeBlockSend(SOCKET socket); //블록생성해서 보내줌
 	void PlayerInfo(SOCKET socketm, MYCMD&cmd); //플레이어의 정보를 받아서 브로드캐스팅방식으로 쏴줌.
 	void RecvSendDisconnect(SOCKET socket , int clientID , bool isClientMaster);
+	void GameOver();
 private:
 	mutex _mutex;
 	concurrent_queue<SOCKET> _listClient;

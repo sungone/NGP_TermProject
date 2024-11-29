@@ -48,7 +48,6 @@ void main(int argc, char** argv)
 	client.Init();
 
 
-
 	ThreadManager::Launch([]()
 		{
 			client.PacketDecode();
@@ -82,8 +81,6 @@ void main(int argc, char** argv)
 	char vertexFile[] = "shader/vertex.glsl";
 	char fragmentFile[] = "shader/fragment.glsl";
 	shaderProgramID = initShader(vertexFile, fragmentFile);
-
-
 
 	// 초기화
 	TextManager::GetInstance()->Init();
@@ -182,6 +179,15 @@ GLvoid keyboard(unsigned char key, int x, int y)
 		cameraMode = THIRD_PERSON;
 		break;
 
+	case 13:
+		if (screen.status == E::GAMEOVER)
+		{
+			screen.status = E::Main;
+			client.GameOver();
+			hp = 0;
+			init();
+			break;
+		}
 	case 27://esc : 프로그램 종료
 		exit(-1);
 		break;
@@ -214,7 +220,6 @@ GLvoid keyboard(unsigned char key, int x, int y)
 		break;
 	}
 
-	glutPostRedisplay();
 }
 GLvoid KeyboardSpecial(int key, int x, int y)
 {
@@ -230,13 +235,12 @@ GLvoid KeyboardSpecial(int key, int x, int y)
 	case GLUT_KEY_RIGHT:
 		// 오른쪽 화살표 키 처리
 		player.moveRight();
-
 		client.SendPlayerInfo();
 		if (FIRST_PERSON == cameraMode)
 			camera.moveRight();
 		break;
-
 	case GLUT_KEY_CTRL_L:
+		break;
 	case GLUT_KEY_CTRL_R://전체 화면
 		// Ctrl 키 처리
 		glutFullScreenToggle();
@@ -374,7 +378,8 @@ GLvoid update()
 {
 	if (1 == screen.status or 4 == screen.status or 5 == screen.status)
 		wallUpdate();
-	else if (hp >= 3) // hp >= 3 이면 hp 가 모두 소진되었으므로 게임 종료
+
+	if (hp >= 3) // hp >= 3 이면 hp 가 모두 소진되었으므로 게임 종료
 	{
 		screen.status = E::GAMEOVER;
 		screen.initTex();
@@ -402,15 +407,7 @@ void wallUpdate()
 		screen.status = E::HP33;
 		screen.initTex();
 	}
-	else if (3 <= hp) // 3번 충돌  < 게임 오버 >
-	{
-		screen.status = E::GAMEOVER;
-		//PlaySound(L"sound/closing.wav", NULL, SND_ASYNC | SND_LOOP);//sound
 
-		//player.init();
-		//camera.setCamera(shaderProgramID, 0, cameraMode, player.getPos());
-		//screen.initTex();
-	}
 
 	if (wall.cur_idx == 30) // Game win
 	{

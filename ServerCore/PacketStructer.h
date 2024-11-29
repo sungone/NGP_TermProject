@@ -17,6 +17,7 @@ namespace ENUM
 		HPSync,
 		DisconnectClient, // 인게임 중 클라이언트가 게임을 종료하였을 때 서버로 종료했다는 걸 보내줌
 		DisConnectClientInfo, // 클라이언트 ID , 마스터 클라이언트 여부 정보 -> 클라가 종료했을 때 나머지 클라에게 정보를 보내기 위함
+		GAMEOVER
 	};
 }
 

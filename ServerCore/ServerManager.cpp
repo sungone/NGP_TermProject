@@ -57,6 +57,9 @@ void ServerManager::PacketDecode(SOCKET socket)
 		case ENUM::Connect:
 			RecvConnect(socket);
 			break;
+		case ENUM::GAMEOVER:
+			GameOver();
+			break;
 		case ENUM::StartGame:
 			RecvSendStartGame(socket);
 			break;
@@ -252,4 +255,10 @@ void ServerManager::RecvSendDisconnect(SOCKET socket , int clientID, bool isClie
 
 	_IDGenator[clientID] = -1;
 
+}
+
+void ServerManager::GameOver()
+{
+	_hp = 0;
+	_readyCount = 0;
 }

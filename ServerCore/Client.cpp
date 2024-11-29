@@ -350,6 +350,15 @@ void Client::RemoveClientPlayer(int ClientID)
 	}
 }
 
+void Client::GameOver()
+{
+	MYCMD cmd;
+	cmd.Code = ENUM::GAMEOVER;
+	cmd.Size = 0;
+	cmd.ClientID = _clientID;
+	::send(_connectedSocket, (char*)&cmd, sizeof(cmd), 0);
+}
+
 void Client::DisConnectClient()
 {
 
