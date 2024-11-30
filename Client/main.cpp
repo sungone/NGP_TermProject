@@ -1,5 +1,6 @@
 
 
+
 #include "pch.h"
 #include "shaders.h"
 #include "base.h"
@@ -104,35 +105,42 @@ GLvoid drawScene()
 
 	TimeManager::GetInstance()->Update();
 
-	glClearColor(g_color[0], g_color[1], g_color[2], g_color[3]);
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	glUseProgram(shaderProgramID);
+	uint64 currentTick = ::GetTickCount64();
 
-	glViewport(0, 0, windowWidth, windowHeight);
+	if (currentTick - lastTick > 16)
+	{
+		lastTick = currentTick;
 
-	update();
-	// Camera
-	camera.setCamera(shaderProgramID, 0, cameraMode, player.getPos());
-	screen.render(shaderProgramID);
+		glClearColor(g_color[0], g_color[1], g_color[2], g_color[3]);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		glUseProgram(shaderProgramID);
 
-	// Object Draw
-	if (E::HP100 == screen.status or E::HP33 == screen.status or E::HP66 == screen.status) {
+		glViewport(0, 0, windowWidth, windowHeight);
 
-		// 마우스 커서 숨기기
-	/*	ShowCursor(FALSE);*/
+		update();
+		// Camera
+		camera.setCamera(shaderProgramID, 0, cameraMode, player.getPos());
+		screen.render(shaderProgramID);
 
-		backgroundmap.render(shaderProgramID);
+		// Object Draw
+		if (E::HP100 == screen.status or E::HP33 == screen.status or E::HP66 == screen.status)
+		{
 
-		for (int i = 0; i < objects.size(); ++i)
-			(*objects[i]).render(shaderProgramID);
+			// 마우스 커서 숨기기
+		/*	ShowCursor(FALSE);*/
 
-		float x = player.GetTextPos();
-		glUseProgram(0); //unbind
-		TextManager::GetInstance()->Render(x, -0.4f, "me");
+			backgroundmap.render(shaderProgramID);
+
+			for (int i = 0; i < objects.size(); ++i)
+				(*objects[i]).render(shaderProgramID);
+
+			float x = player.GetTextPos();
+			glUseProgram(0); //unbind
+			TextManager::GetInstance()->Render(x, -0.4f, "me");
+		}
+		glutSwapBuffers();
 	}
 
-
-	glutSwapBuffers();
 	glutPostRedisplay();
 };
 
