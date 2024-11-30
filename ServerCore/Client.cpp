@@ -375,11 +375,25 @@ void Client::DisConnectClient()
 void Client::DisConnectClientInfo(int ClientID, bool isMaster)
 {
 	std::cout << ClientID << " 접속 종료\n";
+
 	RemoveClientPlayer(ClientID);
+
 	if (isMaster)
+	{
 		if (viewerPlayer.size() != 0)
+		{
 			if ((viewerPlayer.begin()->first) > client._clientID)
+			{
 				client._clientMaster = true;
+				cout << client._clientID << "번인 내가 마스터클라이언트를 위임받았다" << endl;
+			}
+		}
+		else
+		{
+			client._clientMaster = true;
+			cout << client._clientID << "번인 내가 마스터클라이언트를 위임받았다" << endl;
+		}
+	}
 }
 
 
