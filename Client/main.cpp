@@ -2,6 +2,7 @@
 
 
 
+
 #include "pch.h"
 #include "shaders.h"
 #include "base.h"
@@ -186,8 +187,9 @@ GLvoid keyboard(unsigned char key, int x, int y)
 			init();
 			break;
 		}
+
 	case 27://esc : 프로그램 종료
-		exit(-1);
+		gameExit();
 		break;
 
 	case '[': // Game start, Game over test
@@ -346,6 +348,7 @@ void gameExit()
 {
 
 	std::cout << "Game Exit" << std::endl;
+
 	if (screen.status == E::MATCHING)
 	{
 		client.SendMatchingCancel();
@@ -355,6 +358,7 @@ void gameExit()
 	Sleep(100);
 	closesocket(client.GetSokcet());
 	WSACleanup();
+	exit(0);
 
 
 }
