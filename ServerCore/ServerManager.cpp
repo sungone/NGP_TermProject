@@ -34,10 +34,7 @@ void ServerManager::PushClient(SOCKET socket)
 
 void ServerManager::DeleteClient(SOCKET socket)
 {
-	if (_listClient.try_pop(socket))
-	{
-		::closesocket(socket);
-	}
+	_listClient.try_pop(socket);
 }
 
 int ServerManager::GetClinetCount()
