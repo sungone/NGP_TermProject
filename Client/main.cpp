@@ -103,11 +103,11 @@ void main(int argc, char** argv)
 GLvoid drawScene()
 {
 
-	TimeManager::GetInstance()->Update();
-
 	uint64 currentTick = ::GetTickCount64();
 
-	if (currentTick - lastTick > 16)
+	TimeManager::GetInstance()->Update();
+
+	if (currentTick - lastTick > 8)
 	{
 		lastTick = currentTick;
 
@@ -123,8 +123,7 @@ GLvoid drawScene()
 		screen.render(shaderProgramID);
 
 		// Object Draw
-		if (E::HP100 == screen.status or E::HP33 == screen.status or E::HP66 == screen.status)
-		{
+		if (E::HP100 == screen.status or E::HP33 == screen.status or E::HP66 == screen.status) {
 
 			// 마우스 커서 숨기기
 		/*	ShowCursor(FALSE);*/
@@ -138,10 +137,14 @@ GLvoid drawScene()
 			glUseProgram(0); //unbind
 			TextManager::GetInstance()->Render(x, -0.4f, "me");
 		}
+
+
 		glutSwapBuffers();
+
 	}
 
 	glutPostRedisplay();
+
 };
 
 GLvoid Reshape(int w, int h)
