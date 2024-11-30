@@ -10,10 +10,10 @@ Client::Client()
 
 Client::~Client()
 {
-	DisConnectClient();
-	::closesocket(_connectedSocket);
-	::Sleep(100);
-	::WSACleanup();
+	//DisConnectClient();
+	//::closesocket(_connectedSocket);
+	//::Sleep(100);
+	//::WSACleanup();
 }
 
 void Client::Init()

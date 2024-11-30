@@ -1,6 +1,7 @@
 
 
 
+
 #include "pch.h"
 #include "shaders.h"
 #include "base.h"
@@ -45,7 +46,7 @@ void initCamera();
 HWND hwnd;
 
 uint64 lastTick = 0;
-float add = 0;
+
 void main(int argc, char** argv)
 {
 	client.Init();
@@ -103,48 +104,39 @@ void main(int argc, char** argv)
 GLvoid drawScene()
 {
 
-	uint64 currentTick = ::GetTickCount64();
-
 	TimeManager::GetInstance()->Update();
 
-	if (currentTick - lastTick > 8)
-	{
-		lastTick = currentTick;
+	glClearColor(g_color[0], g_color[1], g_color[2], g_color[3]);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	glUseProgram(shaderProgramID);
 
-		glClearColor(g_color[0], g_color[1], g_color[2], g_color[3]);
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		glUseProgram(shaderProgramID);
+	glViewport(0, 0, windowWidth, windowHeight);
 
-		glViewport(0, 0, windowWidth, windowHeight);
+	update();
+	// Camera
+	camera.setCamera(shaderProgramID, 0, cameraMode, player.getPos());
+	screen.render(shaderProgramID);
 
-		update();
-		// Camera
-		camera.setCamera(shaderProgramID, 0, cameraMode, player.getPos());
-		screen.render(shaderProgramID);
+	// Object Draw
+	if (E::HP100 == screen.status or E::HP33 == screen.status or E::HP66 == screen.status) {
 
-		// Object Draw
-		if (E::HP100 == screen.status or E::HP33 == screen.status or E::HP66 == screen.status) {
+		// 마우스 커서 숨기기
+	/*	ShowCursor(FALSE);*/
 
-			// 마우스 커서 숨기기
-		/*	ShowCursor(FALSE);*/
+		backgroundmap.render(shaderProgramID);
 
-			backgroundmap.render(shaderProgramID);
+		for (int i = 0; i < objects.size(); ++i)
+			(*objects[i]).render(shaderProgramID);
 
-			for (int i = 0; i < objects.size(); ++i)
-				(*objects[i]).render(shaderProgramID);
-
-			float x = player.GetTextPos();
-			glUseProgram(0); //unbind
-			TextManager::GetInstance()->Render(x, -0.4f, "me");
-		}
-
-
-		glutSwapBuffers();
-
+		float x = player.GetTextPos();
+		glUseProgram(0); //unbind
+		TextManager::GetInstance()->Render(x, -0.4f, "me");
 	}
 
+
+	glutSwapBuffers();
 	glutPostRedisplay();
-}
+};
 
 GLvoid Reshape(int w, int h)
 {
@@ -352,12 +344,19 @@ void init()
 
 void gameExit()
 {
+
 	std::cout << "Game Exit" << std::endl;
 	if (screen.status == E::MATCHING)
 	{
 		client.SendMatchingCancel();
 	}
 	client.DisConnectClient();
+
+	Sleep(100);
+	closesocket(client.GetSokcet());
+	WSACleanup();
+
+
 }
 
 void initCamera()

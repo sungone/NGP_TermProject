@@ -10,7 +10,7 @@ public:
 
 	void Init();
 	void Send(); //매프레임 메인 쓰레드 에서 필요한 데이터를 서버에게 전송
-
+	SOCKET& GetSokcet() { return _connectedSocket; }
 public:
 	void PacketDecode(); //서버로부터 패킷을 받아서 실질적인 해석하여 실질적인 함수부를 구현.
 	void RecvConnect(MYCMD& cmd);
