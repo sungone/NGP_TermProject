@@ -34,7 +34,19 @@ void ServerManager::PushClient(SOCKET socket)
 
 void ServerManager::DeleteClient(SOCKET socket)
 {
-	_listClient.try_pop(socket);
+	std::vector<SOCKET>_tempListClient;
+	SOCKET tempSocket;
+	while (_listClient.try_pop(tempSocket))
+		_tempListClient.push_back(tempSocket);
+	auto it = std::find(_tempListClient.begin(), _tempListClient.end(), socket);
+	if (it != _tempListClient.end())
+	{
+		::closesocket(socket);
+		_tempListClient.erase(it);
+	}
+	for (auto& a : _tempListClient)
+		_listClient.push(a);
+	
 }
 
 int ServerManager::GetClinetCount()
@@ -75,7 +87,7 @@ void ServerManager::PacketDecode(SOCKET socket)
 		case ENUM::BlockCollision:
 			BlockCollision(socket);
 			break;
-		case ENUM::DisconnectClient :
+		case ENUM::DisconnectClient:
 			RecvSendDisconnect(socket , cmd.ClientID , cmd.IsClientMaster);
 			DeleteClient(socket);
 			break;
