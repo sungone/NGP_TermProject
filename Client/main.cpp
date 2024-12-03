@@ -326,6 +326,7 @@ void reset()
 	initCamera();
 	player.clear();
 	wall.WallReset();
+
 	hp = 0;
 	hpBarSet[0] = hpBarSet[1] = false;
 	

@@ -93,6 +93,8 @@ void Player::clear()
 	setColor(vec3(1, 0, 0));
 	setScale(vec3(1, 1, 1));
 	crashOnce = false;
+	TextPos = -0.05f;
+
 }
 
 void Player::render(GLuint shaderProgramID)
