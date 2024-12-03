@@ -330,8 +330,11 @@ void reset()
 	hp = 0;
 	hpBarSet[0] = hpBarSet[1] = false;
 	
-	for (auto view : viewerPlayer)
+	for (auto& view : viewerPlayer)
+	{
 		view.second->clear();
+		client.RemoveClientPlayer(client._clientID);
+	}
 }
 
 
