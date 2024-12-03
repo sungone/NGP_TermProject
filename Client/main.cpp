@@ -356,6 +356,8 @@ void init()
 void reset()
 {
 	initCamera();
+	hp = 0;
+	hpBarSet[1] = hpBarSet[2] = false;
 	player.clear();
 	wall.reset();
 	for (auto view : viewerPlayer)
