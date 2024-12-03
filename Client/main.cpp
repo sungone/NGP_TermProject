@@ -29,6 +29,7 @@
 
 // 초기화
 void init();
+void reset();
 void gameExit();
 // gl 함수
 GLvoid drawScene(GLvoid);
@@ -192,7 +193,7 @@ GLvoid keyboard(unsigned char key, int x, int y)
 			screen.status = E::Main;
 			client.GameOver();
 			hp = 0;
-			init();
+			reset();
 			break;
 		}
 
@@ -351,6 +352,16 @@ void init()
 
 	light.InitBuffer(shaderProgramID, camera);
 }
+
+void reset()
+{
+	initCamera();
+	player.clear();
+	wall.init();
+	viewerPlayer.clear();
+	screen.initTex();
+}
+
 
 void gameExit()
 {
