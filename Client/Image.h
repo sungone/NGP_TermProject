@@ -11,14 +11,17 @@ public:
 	vector<vec2> uv;
 
 	GLuint texId=0;
-	int status{ 0 };
 
 public:
+	int GetStatus() { return status; }
+	void ChangeScene(int scene);
 	map<int, int> _map;
 	CImage();
 	void Bind(int id);
 	void render(GLuint);
 	void initTex();
 	void initBuf();
+private:
+	int status{ 0 };
 };
 

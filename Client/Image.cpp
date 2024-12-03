@@ -4,6 +4,12 @@
 #include "Image.h"
 #include "TextManager.h"
 
+void CImage::ChangeScene(int scene)
+{
+	Bind(scene);
+	status = scene;
+}
+
 CImage::CImage()
 {
 	const vector<float> first{ {

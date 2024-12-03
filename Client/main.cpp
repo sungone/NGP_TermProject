@@ -91,8 +91,7 @@ void main(int argc, char** argv)
 	TextManager::GetInstance()->Init();
 	init();
 
-	screen.status = E::Main;
-	screen.Bind(E::Main);
+	screen.ChangeScene(E::Main);
 
 	glutDisplayFunc(drawScene);
 	glutReshapeFunc(Reshape);
@@ -123,7 +122,7 @@ GLvoid drawScene()
 	screen.render(shaderProgramID);
 
 	// Object Draw
-	if (E::HP100 == screen.status or E::HP33 == screen.status or E::HP66 == screen.status) {
+	if (E::HP100 == screen.GetStatus() or E::HP33 == screen.GetStatus() or E::HP66 == screen.GetStatus()) {
 
 		// 마우스 커서 숨기기
 	/*	ShowCursor(FALSE);*/
@@ -139,8 +138,8 @@ GLvoid drawScene()
 
 	}
 
-		glutSwapBuffers();
-		glutPostRedisplay();
+	glutSwapBuffers();
+	glutPostRedisplay();
 
 	
 };
@@ -185,12 +184,11 @@ GLvoid keyboard(unsigned char key, int x, int y)
 		break;
 
 	case 13:
-		if (screen.status == E::GAMEOVER)
+		if (screen.GetStatus() == E::GAMEOVER)
 		{
-			screen.status = E::Main;
+			screen.ChangeScene(E::Main);
 			client.GameOver();
 			hp = 0;
-			screen.Bind(E::Main);
 			break;
 		}
 
@@ -198,32 +196,6 @@ GLvoid keyboard(unsigned char key, int x, int y)
 		gameExit();
 		break;
 
-	case '[': // Game start, Game over test
-		if (screen.status == E::HP66 || screen.status == E::HP100 || screen.status == E::HP33)
-		{
-			screen.status = E::WIN;
-			PlaySound(L"sound/win.wav", NULL, SND_ASYNC | SND_LOOP);
-		}
-		else if (screen.status == E::WIN)
-		{
-			screen.status = E::GAMEOVER;
-			PlaySound(L"sound/closing.wav", NULL, SND_ASYNC | SND_LOOP);
-		}
-		else if (screen.status == E::GAMEOVER)
-		{
-			screen.status = E::MATCHING;
-		}
-		else if (screen.status == E::MATCHING)
-		{
-			screen.status = E::HP100;
-			PlaySound(L"sound/inGame.wav", NULL, SND_ASYNC | SND_LOOP);
-		}
-
-		player.init();
-		camera.setCamera(shaderProgramID, 0, cameraMode, player.getPos());
-		//screen.initTex();
-
-		break;
 	}
 
 }
@@ -262,13 +234,12 @@ GLvoid Mouse(int button, int state, int x, int y)
 
 	if (button == GLUT_LEFT_BUTTON)
 	{
-		if (screen.status == E::Main)
+		if (screen.GetStatus() == E::Main)
 		{
 			if (normalizedX >= 0.65 && normalizedX <= 0.77 &&
 				normalizedY >= 0.66 && normalizedY <= 0.74)
 			{
-				screen.status = E::HP100;
-				screen.Bind(E::HP100);
+				screen.ChangeScene(E::HP100);
 				PlaySound(L"sound/inGame.wav", NULL, SND_ASYNC | SND_LOOP);
 			}
 
@@ -281,22 +252,20 @@ GLvoid Mouse(int button, int state, int x, int y)
 			else if (normalizedX >= 0.62 && normalizedX <= 0.85 &&
 				normalizedY >= 0.83 && normalizedY <= 0.9)
 			{
-				screen.status = E::MATCHING;
+				screen.ChangeScene(E::MATCHING);
 				std::cout << "Lobby Enter" << std::endl;
 				client.SendStartGame();
-				screen.Bind(E::MATCHING);
 				PlaySound(L"sound/inGame.wav", NULL, SND_ASYNC | SND_LOOP);
 			}
 		}
 
-		else if (screen.status == E::MATCHING)
+		else if (screen.GetStatus() == E::MATCHING)
 		{
 			if (normalizedX >= 0.313 && normalizedX <= 0.75 &&
 				normalizedY >= 0.889 && normalizedY <= 0.999)
 			{
 				client.SendMatchingCancel();
-				screen.status = E::Main;
-				screen.Bind(E::Main);
+				screen.ChangeScene(E::Main);
 				PlaySound(L"sound/opening.wav", NULL, SND_ASYNC | SND_LOOP);
 			}
 		}
@@ -355,7 +324,7 @@ void gameExit()
 
 	std::cout << "Game Exit" << std::endl;
 
-	if (screen.status == E::MATCHING)
+	if (screen.GetStatus() == E::MATCHING)
 	{
 		client.SendMatchingCancel();
 	}
@@ -391,13 +360,12 @@ void initCamera()
 
 GLvoid update()
 {
-	if (1 == screen.status or 4 == screen.status or 5 == screen.status)
+	if (1 == screen.GetStatus() or 4 == screen.GetStatus() or 5 == screen.GetStatus())
 		wallUpdate();
 
 	if (hp >= 3) // hp >= 3 이면 hp 가 모두 소진되었으므로 게임 종료
 	{
-		screen.status = E::GAMEOVER;
-		screen.Bind(E::GAMEOVER);
+		screen.ChangeScene(E::GAMEOVER);
 	}
 
 
@@ -409,29 +377,25 @@ void wallUpdate()
 
 	if (hp == 0) // Client 프로젝트의 main 에서만 씬 이동이 되는것 같아서 여기서 hp 로 씬 전환을 함 , hp >= 3 이면 update 에서!
 	{
-		screen.status = E::HP100;
-		screen.Bind(E::HP100);
+		screen.ChangeScene(E::HP100);
 	}
 	else if (hp == 1)
 	{
-		screen.status = E::HP66;
-		screen.Bind(E::HP66);
+		screen.ChangeScene(E::HP66);
 	}
 	else if (hp == 2)
 	{
-		screen.status = E::HP33;
-		screen.Bind(E::HP33);
+		screen.ChangeScene(E::HP33);
 	}
 
 
 	if (wall.cur_idx == 30) // Game win
 	{
-		screen.status = E::WIN;
+		screen.ChangeScene(E::WIN);
 		PlaySound(L"sound/win.wav", NULL, SND_ASYNC | SND_LOOP);
 
 		player.init();
 		camera.setCamera(shaderProgramID, 0, cameraMode, player.getPos());
-		screen.Bind(E::WIN);
 	}
 
 	if (not wall.emptyIdx.empty()) // 충돌처리 하는 로직이 들어있음

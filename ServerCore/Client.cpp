@@ -130,8 +130,7 @@ void Client::SendStartGame()
 void Client::RecvStartGame()
 {
 	std::cout << "매칭 준비가 완료되었습니다!" << "\n";
-
-	screen.status = E::HP100;
+	screen.ChangeScene(E::HP100);
 }
 
 void Client::SendChattingData()
