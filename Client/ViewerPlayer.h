@@ -16,6 +16,7 @@ public :
 	ViewerPlayer() : Object() {}
 
 	void init() override;
+	void clear();
 
 	// 서버에서 받은 뷰어 객체 위치 , 색 , 크기 정보를 업데이트 하는 함수
 	void updateViewerPlayerPos(float newPosX);

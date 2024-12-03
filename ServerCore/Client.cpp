@@ -109,10 +109,6 @@ void Client::SendConnect()
 void Client::RecvConnect(MYCMD& cmd)
 {
 	_clientID = cmd.ClientID;
-	if (_clientID == 1)
-		_clientMaster = true;
-	else
-		_clientMaster = false;
 
 	cout << "서버로부터 " << _clientID << " 부여 받음" << "\n";
 }
@@ -123,6 +119,11 @@ void Client::SendStartGame()
 	cmd.Code = ENUM::StartGame;
 	cmd.Size = 0;
 	cmd.ClientID = _clientID;
+
+	if (_clientID == 1)
+		_clientMaster = true;
+	else
+		_clientMaster = false;
 
 	::send(_connectedSocket, (char*)&cmd, sizeof(cmd), 0);
 }
@@ -345,7 +346,6 @@ void Client::RemoveClientPlayer(int ClientID)
 	if (it != viewerPlayer.end())
 	{
 		it->second->isRender = false;
-		viewerPlayer.erase(it);
 	}
 }
 
@@ -379,9 +379,12 @@ void Client::DisConnectClientInfo(int ClientID, bool isMaster)
 
 	if (isMaster)
 	{
-		if (viewerPlayer.size() != 0)
+		auto iter = std::find_if(viewerPlayer.begin(), viewerPlayer.end(), [](const std::pair<int, ViewerPlayer*>& player) {
+			return player.second->isRender == true;
+		});
+		if (iter != viewerPlayer.end())
 		{
-			if ((viewerPlayer.begin()->first) > client._clientID)
+			if (iter->first > client._clientID)
 			{
 				client._clientMaster = true;
 				cout << client._clientID << "번인 내가 마스터클라이언트를 위임받았다" << endl;

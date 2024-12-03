@@ -23,6 +23,7 @@ public:
 	void init() override;
 	void render(GLuint shaderProgramID) override;
 	void initBuf();
+	void clear();
 
 	// 플레이어 이동
 	void moveLeft();

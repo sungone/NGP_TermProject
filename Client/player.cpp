@@ -87,6 +87,13 @@ void Player::initBuf()
 	glEnableVertexAttribArray(1);
 }
 
+void Player::clear()
+{
+	setPos(vec3(0, 0, 0));
+	setColor(vec3(1, 0, 0));
+	setScale(vec3(1, 1, 1));
+	crashOnce = false;
+}
 
 void Player::render(GLuint shaderProgramID)
 {

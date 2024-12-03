@@ -139,6 +139,14 @@ void ViewerPlayer::drawP(GLuint shaderProgramID)
 	glDrawArrays(GL_TRIANGLES, 0, vertices.size());
 }
 
+void ViewerPlayer::clear()
+{
+	setPos(vec3(0, 0, 0));
+	setColor(vec3(1, 0, 0));
+	setScale(vec3(1, 1, 1));
+	isRender = true;
+}
+
 void ViewerPlayer::initBuf()
 {
 	glGenVertexArrays(1, &vao);

@@ -30,6 +30,7 @@
 
 // 초기화
 void init();
+void reset();
 void gameExit();
 // gl 함수
 GLvoid drawScene(GLvoid);
@@ -188,6 +189,7 @@ GLvoid keyboard(unsigned char key, int x, int y)
 		{
 			screen.ChangeScene(E::Main);
 			client.GameOver();
+			reset();
 			hp = 0;
 			break;
 		}
@@ -319,6 +321,20 @@ void init()
 	light.InitBuffer(shaderProgramID, camera);
 }
 
+void reset()
+{
+	initCamera();
+	player.clear();
+	wall.WallReset();
+	hp = 0;
+	hpBarSet[0] = hpBarSet[1] = false;
+	
+	for (auto view : viewerPlayer)
+		view.second->clear();
+}
+
+
+
 void gameExit()
 {
 
@@ -394,7 +410,7 @@ void wallUpdate()
 		screen.ChangeScene(E::WIN);
 		PlaySound(L"sound/win.wav", NULL, SND_ASYNC | SND_LOOP);
 
-		player.init();
+		reset();
 		camera.setCamera(shaderProgramID, 0, cameraMode, player.getPos());
 	}
 
@@ -451,6 +467,7 @@ void wallUpdate()
 		//wall.emptyIdx.clear();
 	}
 }
+
 
 
 
