@@ -74,6 +74,7 @@ void Player::clear()
 	setPos(vec3(0, 0, 0));
 	setColor(vec3(1, 0, 0));
 	setScale(vec3(1, 1, 1));
+	TextPos = -0.05f;
 	crashOnce = false;
 }
 
