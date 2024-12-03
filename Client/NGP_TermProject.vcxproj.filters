@@ -113,10 +113,10 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="fragment.glsl">
+    <None Include="shader\vertex.glsl">
       <Filter>TextManager\Shader</Filter>
     </None>
-    <None Include="vertex.glsl">
+    <None Include="shader\fragment.glsl">
       <Filter>TextManager\Shader</Filter>
     </None>
   </ItemGroup>

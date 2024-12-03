@@ -1,6 +1,7 @@
 #pragma once
 #include "object.h"
 
+
 class CImage : public Object
 {
 public:
@@ -9,11 +10,13 @@ public:
 	vector<vec3> norm;
 	vector<vec2> uv;
 
-	GLuint texId;
+	GLuint texId=0;
 	int status{ 0 };
 
 public:
+	map<int, int> _map;
 	CImage();
+	void Bind(int id);
 	void render(GLuint);
 	void initTex();
 	void initBuf();

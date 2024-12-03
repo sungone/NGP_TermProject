@@ -64,7 +64,6 @@ void CMap::render(GLuint shaderProgramID)
 
 	model = glm::mat4(1.f);
 
-
 	glBindTexture(GL_TEXTURE_2D, texId);
 	glDrawArrays(GL_TRIANGLES, 0, vertices.size());
 

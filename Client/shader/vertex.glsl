@@ -10,8 +10,6 @@ out vec3 fNormal; //--- 노멀값을 프래그먼트 세이더로 보낸다.
 out vec2 fTexture;
 out vec3 fColor;
 
-
-
 uniform mat4 model;
 uniform mat4 view;
 uniform mat4 projection;

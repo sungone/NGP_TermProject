@@ -42,7 +42,6 @@ public:
 	int crashCnt{};
 public:
 	void init();
-	void reset();
 	void render(GLuint shaderProgramID) override;
 	Cube getCube(int i, int j);
 

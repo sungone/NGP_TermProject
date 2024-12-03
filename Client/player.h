@@ -21,7 +21,6 @@ public:
 public:
 
 	void init() override;
-	void clear();
 	void render(GLuint shaderProgramID) override;
 	void initBuf();
 

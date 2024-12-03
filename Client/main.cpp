@@ -1,6 +1,7 @@
 
 
 
+
 #include "pch.h"
 #include "shaders.h"
 #include "base.h"
@@ -29,7 +30,6 @@
 
 // 초기화
 void init();
-void reset();
 void gameExit();
 // gl 함수
 GLvoid drawScene(GLvoid);
@@ -91,6 +91,9 @@ void main(int argc, char** argv)
 	TextManager::GetInstance()->Init();
 	init();
 
+	screen.status = E::Main;
+	screen.Bind(E::Main);
+
 	glutDisplayFunc(drawScene);
 	glutReshapeFunc(Reshape);
 	glutKeyboardFunc(keyboard);
@@ -108,44 +111,38 @@ GLvoid drawScene()
 
 	TimeManager::GetInstance()->Update();
 
-	if (currentTick - lastTick > 8)
-	{
-		lastTick = currentTick;
+	glClearColor(g_color[0], g_color[1], g_color[2], g_color[3]);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	glUseProgram(shaderProgramID);
 
-		glClearColor(g_color[0], g_color[1], g_color[2], g_color[3]);
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		glUseProgram(shaderProgramID);
+	glViewport(0, 0, windowWidth, windowHeight);
 
-		glViewport(0, 0, windowWidth, windowHeight);
+	update();
+	// Camera
+	camera.setCamera(shaderProgramID, 0, cameraMode, player.getPos());
+	screen.render(shaderProgramID);
 
-		update();
-		// Camera
-		camera.setCamera(shaderProgramID, 0, cameraMode, player.getPos());
-		screen.render(shaderProgramID);
+	// Object Draw
+	if (E::HP100 == screen.status or E::HP33 == screen.status or E::HP66 == screen.status) {
 
-		// Object Draw
-		if (E::HP100 == screen.status or E::HP33 == screen.status or E::HP66 == screen.status) {
+		// 마우스 커서 숨기기
+	/*	ShowCursor(FALSE);*/
 
-			// 마우스 커서 숨기기
-		/*	ShowCursor(FALSE);*/
+		backgroundmap.render(shaderProgramID);
 
-			backgroundmap.render(shaderProgramID);
+		for (int i = 0; i < objects.size(); ++i)
+			(*objects[i]).render(shaderProgramID);
 
-			for (int i = 0; i < objects.size(); ++i)
-				(*objects[i]).render(shaderProgramID);
-
-			float x = player.GetTextPos();
-			glUseProgram(0); //unbind
-			TextManager::GetInstance()->Render(x, -0.4f, "me");
-		}
-
-
-		glutSwapBuffers();
+		float x = player.GetTextPos();
+		glUseProgram(0); //unbind
+		TextManager::GetInstance()->Render(x, -0.4f, "me");
 
 	}
 
-	glutPostRedisplay();
+		glutSwapBuffers();
+		glutPostRedisplay();
 
+	
 };
 
 GLvoid Reshape(int w, int h)
@@ -193,7 +190,7 @@ GLvoid keyboard(unsigned char key, int x, int y)
 			screen.status = E::Main;
 			client.GameOver();
 			hp = 0;
-			reset();
+			init();
 			break;
 		}
 
@@ -224,7 +221,7 @@ GLvoid keyboard(unsigned char key, int x, int y)
 
 		player.init();
 		camera.setCamera(shaderProgramID, 0, cameraMode, player.getPos());
-		screen.initTex();
+		//screen.initTex();
 
 		break;
 	}
@@ -271,7 +268,7 @@ GLvoid Mouse(int button, int state, int x, int y)
 				normalizedY >= 0.66 && normalizedY <= 0.74)
 			{
 				screen.status = E::HP100;
-				screen.initTex();
+				screen.Bind(E::HP100);
 				PlaySound(L"sound/inGame.wav", NULL, SND_ASYNC | SND_LOOP);
 			}
 
@@ -287,7 +284,7 @@ GLvoid Mouse(int button, int state, int x, int y)
 				screen.status = E::MATCHING;
 				std::cout << "Lobby Enter" << std::endl;
 				client.SendStartGame();
-				screen.initTex();
+				screen.Bind(E::MATCHING);
 				PlaySound(L"sound/inGame.wav", NULL, SND_ASYNC | SND_LOOP);
 			}
 		}
@@ -299,7 +296,7 @@ GLvoid Mouse(int button, int state, int x, int y)
 			{
 				client.SendMatchingCancel();
 				screen.status = E::Main;
-				screen.initTex();
+				screen.Bind(E::Main);
 				PlaySound(L"sound/opening.wav", NULL, SND_ASYNC | SND_LOOP);
 			}
 		}
@@ -353,19 +350,6 @@ void init()
 	light.InitBuffer(shaderProgramID, camera);
 }
 
-void reset()
-{
-	initCamera();
-	hp = 0;
-	hpBarSet[1] = hpBarSet[2] = false;
-	player.clear();
-	wall.reset();
-	for (auto view : viewerPlayer)
-		view.second->clear();
-	screen.initTex();
-}
-
-
 void gameExit()
 {
 
@@ -413,7 +397,7 @@ GLvoid update()
 	if (hp >= 3) // hp >= 3 이면 hp 가 모두 소진되었으므로 게임 종료
 	{
 		screen.status = E::GAMEOVER;
-		screen.initTex();
+		screen.Bind(E::GAMEOVER);
 	}
 
 
@@ -426,17 +410,17 @@ void wallUpdate()
 	if (hp == 0) // Client 프로젝트의 main 에서만 씬 이동이 되는것 같아서 여기서 hp 로 씬 전환을 함 , hp >= 3 이면 update 에서!
 	{
 		screen.status = E::HP100;
-		screen.initTex();
+		screen.Bind(E::HP100);
 	}
 	else if (hp == 1)
 	{
 		screen.status = E::HP66;
-		screen.initTex();
+		screen.Bind(E::HP66);
 	}
 	else if (hp == 2)
 	{
 		screen.status = E::HP33;
-		screen.initTex();
+		screen.Bind(E::HP33);
 	}
 
 
@@ -445,8 +429,9 @@ void wallUpdate()
 		screen.status = E::WIN;
 		PlaySound(L"sound/win.wav", NULL, SND_ASYNC | SND_LOOP);
 
+		player.init();
 		camera.setCamera(shaderProgramID, 0, cameraMode, player.getPos());
-		screen.initTex();
+		screen.Bind(E::WIN);
 	}
 
 	if (not wall.emptyIdx.empty()) // 충돌처리 하는 로직이 들어있음

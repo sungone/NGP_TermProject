@@ -109,6 +109,10 @@ void Client::SendConnect()
 void Client::RecvConnect(MYCMD& cmd)
 {
 	_clientID = cmd.ClientID;
+	if (_clientID == 1)
+		_clientMaster = true;
+	else
+		_clientMaster = false;
 
 	cout << "서버로부터 " << _clientID << " 부여 받음" << "\n";
 }
@@ -126,11 +130,6 @@ void Client::SendStartGame()
 void Client::RecvStartGame()
 {
 	std::cout << "매칭 준비가 완료되었습니다!" << "\n";
-
-	if (_clientID == 1)
-		_clientMaster = true;
-	else
-		_clientMaster = false;
 
 	screen.status = E::HP100;
 }

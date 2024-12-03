@@ -1,8 +1,6 @@
 #include "pch.h"
 #include "ServerManager.h"
 
-#include "ClientData.h"
-
 ServerManager::ServerManager()
 {
 	_IDGenator.resize(4, -1);
@@ -146,7 +144,6 @@ void ServerManager::RecvSendStartGame(SOCKET socket)
 			::send(*it, (char*)&cmd, sizeof(cmd), 0);
 		}
 		_readyCount = 0;
-		hp = 0;
 	}
 }
 
