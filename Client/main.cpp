@@ -190,7 +190,7 @@ GLvoid keyboard(unsigned char key, int x, int y)
 			screen.status = E::Main;
 			client.GameOver();
 			hp = 0;
-			init();
+			screen.Bind(E::Main);
 			break;
 		}
 
