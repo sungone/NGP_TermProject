@@ -358,7 +358,8 @@ void reset()
 	initCamera();
 	player.clear();
 	wall.init();
-	viewerPlayer.clear();
+	for (auto view : viewerPlayer)
+		view.second->clear();
 	screen.initTex();
 }
 

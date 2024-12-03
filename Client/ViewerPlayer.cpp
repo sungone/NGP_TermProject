@@ -130,6 +130,13 @@ void ViewerPlayer::init()
 	initModel(pv, playerColors, pi);
 	initBuf();
 }
+void ViewerPlayer::clear()
+{
+	setPos(vec3(0, 0, 0));
+	setColor(vec3(1, 0, 0));
+	setScale(vec3(1, 1, 1));
+	isRender = true;
+}
 
 void ViewerPlayer::drawP(GLuint shaderProgramID)
 {
