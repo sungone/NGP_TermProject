@@ -161,6 +161,30 @@ void Wall::init()
 	emptyIdx.clear();
 }
 
+void Wall::reset()
+{
+	for (int i = 0; i < 3; ++i)
+	{
+		for (int j = 0; j < 3; ++j)
+		{
+			cube[i][j].reset();
+			cube[i][j].setPosX(0.3f * j);
+			cube[i][j].setPosY(0.3f * i);
+		}
+	}
+
+	for (int i = 0; i < 36; ++i)
+	{
+		for (int j = 0; j < 3; ++j)
+		{
+			random_num[i][j] = dis(gen);
+		}
+	}
+	emptyIdx.clear();
+	cur_idx = 0;
+	crashCnt = false;
+}
+
 void Wall::render(GLuint shaderProgramID)
 {
 	for (int i = 0; i < 3; ++i)
