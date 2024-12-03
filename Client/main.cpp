@@ -431,7 +431,6 @@ void wallUpdate()
 		screen.status = E::WIN;
 		PlaySound(L"sound/win.wav", NULL, SND_ASYNC | SND_LOOP);
 
-		player.init();
 		camera.setCamera(shaderProgramID, 0, cameraMode, player.getPos());
 		screen.initTex();
 	}

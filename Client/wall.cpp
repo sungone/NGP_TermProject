@@ -145,6 +145,7 @@ void Wall::init()
 		for (int j = 0; j < 3; ++j)
 		{
 			cube[i][j].init();
+			cube[i][j].reset();
 			cube[i][j].setPosX(0.3f * j);
 			cube[i][j].setPosY(0.3f * i);
 		}
