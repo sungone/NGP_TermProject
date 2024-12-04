@@ -269,7 +269,5 @@ void ServerManager::RecvSendDisconnect(SOCKET socket , int clientID, bool isClie
 
 void ServerManager::GameOver()
 {
-
 	_hp = 0;
-	_readyCount--;
 }
