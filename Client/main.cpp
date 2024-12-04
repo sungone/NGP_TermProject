@@ -2,6 +2,8 @@
 
 
 
+
+
 #include "pch.h"
 #include "shaders.h"
 #include "base.h"
@@ -142,7 +144,7 @@ GLvoid drawScene()
 	glutSwapBuffers();
 	glutPostRedisplay();
 
-	
+
 };
 
 GLvoid Reshape(int w, int h)
@@ -185,15 +187,14 @@ GLvoid keyboard(unsigned char key, int x, int y)
 		break;
 
 	case 13:
-		if (screen.GetStatus() == E::GAMEOVER)
+		if (screen.GetStatus() == E::GAMEOVER || screen.GetStatus() == E::WIN)
 		{
 			screen.ChangeScene(E::Main);
 			client.GameOver();
 			reset();
 			hp = 0;
-			break;
 		}
-
+		break;
 	case 27://esc : 프로그램 종료
 		gameExit();
 		break;
@@ -329,7 +330,7 @@ void reset()
 
 	hp = 0;
 	hpBarSet[0] = hpBarSet[1] = false;
-	
+
 	for (auto& view : viewerPlayer)
 	{
 		view.second->clear();
