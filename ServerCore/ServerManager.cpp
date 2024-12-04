@@ -267,7 +267,7 @@ void ServerManager::RecvSendDisconnect(SOCKET socket , int clientID, bool isClie
 
 }
 
-void ServerManager::GameOver(MYCMD& cmd)
+void ServerManager::GameOver()
 {
 
 	_hp = 0;
