@@ -355,6 +355,7 @@ void Client::Reset()
 	cmd.Code = ENUM::GAMEOVER;
 	cmd.Size = 0;
 	cmd.ClientID = _clientID;
+	cmd.IsClientMaster = _clientMaster;
 	::send(_connectedSocket, (char*)&cmd, sizeof(cmd), 0);
 }
 
