@@ -86,7 +86,7 @@ void Client::PacketDecode()
 			HpUpdate();
 			break;
 		default:
-			ErrorHandler("알수없는 명령어 수신했습니다.");
+			/*ErrorHandler("알수없는 명령어 수신했습니다.");*/
 			break;
 		}
 
@@ -349,7 +349,7 @@ void Client::RemoveClientPlayer(int ClientID)
 	}
 }
 
-void Client::GameOver()
+void Client::Reset()
 {
 	MYCMD cmd;
 	cmd.Code = ENUM::GAMEOVER;

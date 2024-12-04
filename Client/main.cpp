@@ -190,7 +190,7 @@ GLvoid keyboard(unsigned char key, int x, int y)
 		if (screen.GetStatus() == E::GAMEOVER || screen.GetStatus() == E::WIN)
 		{
 			screen.ChangeScene(E::Main);
-			client.GameOver();
+			client.Reset();
 			reset();
 			hp = 0;
 		}

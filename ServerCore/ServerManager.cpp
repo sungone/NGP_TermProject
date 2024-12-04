@@ -92,7 +92,7 @@ void ServerManager::PacketDecode(SOCKET socket)
 			DeleteClient(socket);
 			break;
 		default:
-			ErrorHandler("알수없는 명령어 수신했습니다.");
+		/*	ErrorHandler("알수없는 명령어 수신했습니다.");*/
 			break;
 		}
 	}
@@ -267,8 +267,12 @@ void ServerManager::RecvSendDisconnect(SOCKET socket , int clientID, bool isClie
 
 }
 
-void ServerManager::GameOver()
+void ServerManager::GameOver(MYCMD& cmd)
 {
+	if (cmd.IsClientMaster == false)
+		return;
+
+
 	_hp = 0;
 	_readyCount = 0;
 }

@@ -36,7 +36,7 @@ public:
 	void CreateClientPlayer(int ClientID); // 뷰어 클라이언트를 생성하는 함수
 	ViewerPlayer* FindClientPlayer(int ClientID); // 뷰어 클라이언트를 찾는 함수
 	void RemoveClientPlayer(int ClientID); // 뷰어 클라이언트를 없애는 함수
-	void GameOver();
+	void Reset();
 
 	//아래는 구현해야함
 	void BlockCollision();
