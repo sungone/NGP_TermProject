@@ -269,10 +269,7 @@ void ServerManager::RecvSendDisconnect(SOCKET socket , int clientID, bool isClie
 
 void ServerManager::GameOver(MYCMD& cmd)
 {
-	if (cmd.IsClientMaster == false)
-		return;
-
 
 	_hp = 0;
-	_readyCount = 0;
+	_readyCount--;
 }
