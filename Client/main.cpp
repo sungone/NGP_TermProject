@@ -320,7 +320,7 @@ void reset()
 	initCamera();
 	player.clear();
 	wall.WallReset();
-
+	plSizeChange = false;
 	hp = 0;
 	hpBarSet[0] = hpBarSet[1] = false;
 

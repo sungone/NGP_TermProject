@@ -83,7 +83,7 @@ void Cube::reset()
 bool Cube::moveCube()
 {
 	float  dt = TimeManager::GetInstance()->GetDeltaTime();
-	pos.z += 0.4f * dt; // deltaTime // 1초동안 실행하는 횟수가 달라도, 그 1초동안의 모든 총 합산은 같아지게./
+	pos.z += 0.7f * dt; // deltaTime // 1초동안 실행하는 횟수가 달라도, 그 1초동안의 모든 총 합산은 같아지게./
 	return false;
 }
 
