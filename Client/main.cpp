@@ -4,6 +4,7 @@
 
 
 
+
 #include "pch.h"
 #include "shaders.h"
 #include "base.h"
@@ -321,6 +322,7 @@ void reset()
 	player.clear();
 	wall.WallReset();
 	plSizeChange = false;
+
 	hp = 0;
 	hpBarSet[0] = hpBarSet[1] = false;
 
