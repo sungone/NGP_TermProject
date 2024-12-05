@@ -16,8 +16,6 @@ public:
 	void RecvConnect(MYCMD& cmd);
 	void RecvStartGame();
 	void SendConnect(); //서버에게 접속할떄 ID 부여 받을떄 메세지보냄
-	void RecvChattingData(int size); //채팅
-	void SendChattingData(); //채팅
 	void SendStartGame(); //서버에게 Maching 요청
 	void SendMatchingCancel();//서버에게 Maching 취소요청
 

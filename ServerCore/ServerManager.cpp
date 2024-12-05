@@ -41,7 +41,6 @@ void ServerManager::DeleteClient(SOCKET socket)
 	auto it = std::find(_tempListClient.begin(), _tempListClient.end(), socket);
 	if (it != _tempListClient.end())
 	{
-		::closesocket(socket);
 		_tempListClient.erase(it);
 	}
 	for (auto& a : _tempListClient)
@@ -77,9 +76,6 @@ void ServerManager::PacketDecode(SOCKET socket)
 			break;
 		case ENUM::ClientInfoData:
 			PlayerInfo(socket , cmd);
-			break;
-		case ENUM::ChattingData:
-			RecvSendChattingData(socket,cmd.Size); 
 			break;
 		case ENUM::BlockDataRecv:
 			MakeBlockSend(socket);
@@ -155,30 +151,6 @@ void ServerManager::RecvMathcingCancle(SOCKET socket)
 	cout << "_readyCount :" << _readyCount << "\n";
 }
 
-void ServerManager::RecvSendChattingData(SOCKET socket,int size)
-{
-
-	PrintClinetInfo(socket,"으로부터 Chat요청 입력받음");
-
-	char Message[256] = { 0 };
-
-	MYCMD cmd;
-
-	cmd.Code = ENUM::ChattingData;
-	cmd.Size = size; 
-
-	::recv(socket, Message, cmd.Size, MSG_WAITALL);
-
-	for (auto it = _listClient.unsafe_begin(); it != _listClient.unsafe_end(); ++it)
-	{
-		//자기자신에게 쏠필요가없음
-		if (*it == socket)
-			continue;
-		
-		::send(*it, (char*)&cmd, sizeof(cmd),0);
-		::send(*it, Message, cmd.Size, 0);
-	}
-}
 
 void ServerManager::BlockCollision(SOCKET socket)
 {
@@ -203,7 +175,7 @@ void ServerManager::BlockCollision(SOCKET socket)
 void ServerManager::MakeBlockSend(SOCKET socket)
 {
 	MYCMD cmd;
-
+	lock_guard<mutex> guard(_mutex);
 	cmd.Code = ENUM::BlockDataRecv;
 	cmd.Size = 0;
 
@@ -227,7 +199,7 @@ void ServerManager::MakeBlockSend(SOCKET socket)
 void ServerManager::PlayerInfo(SOCKET socket  ,MYCMD& cmd)
 {
 	ClientInfoPacket packet;
-
+	lock_guard<mutex> guard(_mutex);
 	::recv(socket, (char*)&packet, sizeof(ClientInfoPacket), MSG_WAITALL);
 	
 	for (auto it = _listClient.unsafe_begin(); it != _listClient.unsafe_end(); ++it)

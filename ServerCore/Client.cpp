@@ -70,9 +70,6 @@ void Client::PacketDecode()
 		case ENUM::StartGame: //3명이 모임
 			RecvStartGame();
 			break;
-		case ENUM::ChattingData:
-			RecvChattingData(cmd.Size);
-			break;
 		case ENUM::DisConnectClientInfo:
 			DisConnectClientInfo(cmd.ClientID, cmd.IsClientMaster);
 			break;
@@ -133,37 +130,6 @@ void Client::RecvStartGame()
 	std::cout << "매칭 준비가 완료되었습니다!" << "\n";
 	screen.ChangeScene(E::HP100);
 }
-
-void Client::SendChattingData()
-{
-	while (1)
-	{
-		char Message[256] = { 0 };
-
-		memset(Message, 0, sizeof(Message));
-		cin >> Message;
-
-		MYCMD cmd;
-
-		cmd.Code = ENUM::ChattingData;
-		cmd.Size = strlen(Message);
-		cmd.ClientID = _clientID;
-		//명령어 입력.
-
-		::send(_connectedSocket, (char*)&cmd, sizeof(cmd), 0);
-		//사용자가 입력한 문자열을 서버에 전송한다.
-		::send(_connectedSocket, Message, cmd.Size, 0);
-	}
-}
-
-
-void Client::RecvChattingData(int size)
-{
-	char Message[256] = { 0 };
-	int len = ::recv(_connectedSocket, Message, size, MSG_WAITALL);
-	cout << Message << "\n";
-}
-
 
 
 void Client::SendMatchingCancel()
