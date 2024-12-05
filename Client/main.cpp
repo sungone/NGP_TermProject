@@ -242,7 +242,9 @@ GLvoid Mouse(int button, int state, int x, int y)
 			if (normalizedX >= 0.65 && normalizedX <= 0.77 &&
 				normalizedY >= 0.66 && normalizedY <= 0.74)
 			{
-				screen.ChangeScene(E::HP100);
+				screen.ChangeScene(E::MATCHING);
+				std::cout << "Lobby Enter" << std::endl;
+				client.SendStartGame();
 				PlaySound(L"sound/inGame.wav", NULL, SND_ASYNC | SND_LOOP);
 			}
 
@@ -250,15 +252,6 @@ GLvoid Mouse(int button, int state, int x, int y)
 				normalizedY >= 0.744 && normalizedY <= 0.81)
 			{
 				exit(-1);
-			}
-
-			else if (normalizedX >= 0.62 && normalizedX <= 0.85 &&
-				normalizedY >= 0.83 && normalizedY <= 0.9)
-			{
-				screen.ChangeScene(E::MATCHING);
-				std::cout << "Lobby Enter" << std::endl;
-				client.SendStartGame();
-				PlaySound(L"sound/inGame.wav", NULL, SND_ASYNC | SND_LOOP);
 			}
 		}
 
